@@ -1,0 +1,20 @@
+﻿FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+WORKDIR /src
+COPY ["Rinkudesu.Gateways.Webui/Rinkudesu.Gateways.Webui.csproj", "Rinkudesu.Gateways.Webui/"]
+RUN dotnet restore "Rinkudesu.Gateways.Webui/Rinkudesu.Gateways.Webui.csproj"
+COPY . .
+WORKDIR "/src/Rinkudesu.Gateways.Webui"
+RUN dotnet build "Rinkudesu.Gateways.Webui.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "Rinkudesu.Gateways.Webui.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "Rinkudesu.Gateways.Webui.dll"]
