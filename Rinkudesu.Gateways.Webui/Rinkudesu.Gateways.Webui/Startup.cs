@@ -1,18 +1,15 @@
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Rinkudesu.Gateways.Webui.Models;
 
 namespace Rinkudesu.Gateways.Webui
 {
@@ -37,18 +34,22 @@ namespace Rinkudesu.Gateways.Webui
 #endif
                 ;
 
+            Program.KeycloakSettings = new KeycloakSettings();
+
             services.AddAuthentication(options => {
                     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
                 }).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options => {
                     options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                    options.Authority = "http://localhost:8080/auth/realms/rinkudesu"; //TODO: read from config
-                    options.ClientId = "rinkudesu";
+                    options.Authority = Program.KeycloakSettings.Authority;
+                    options.ClientId = Program.KeycloakSettings.ClientId;
                     options.ResponseType = "code";
                     options.SaveTokens = true;
                     options.GetClaimsFromUserInfoEndpoint = true;
+#if DEBUG
                     options.RequireHttpsMetadata = false;
+#endif
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         NameClaimType = "name"

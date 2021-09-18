@@ -1,9 +1,6 @@
-﻿using System;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Rinkudesu.Gateways.Webui.Utils;
 
@@ -22,7 +19,7 @@ namespace Rinkudesu.Gateways.Webui.Controllers
         {
             if (!User.Identity.IsAuthenticated) return Redirect("/");
             await HttpContext.SignOutAsync();
-            return Redirect($"http://localhost:8080/auth/realms/rinkudesu/protocol/openid-connect/logout?redirect_uri={HttpContext.GetEncodedBasePath()}"); //TODO: read from file
+            return Redirect($"{Program.KeycloakSettings.Authority}/protocol/openid-connect/logout?redirect_uri={HttpContext.GetEncodedBasePath()}");
         }
     }
 }

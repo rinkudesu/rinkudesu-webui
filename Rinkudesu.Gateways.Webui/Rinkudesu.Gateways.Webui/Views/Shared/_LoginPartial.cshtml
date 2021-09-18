@@ -2,7 +2,7 @@
 <ul class="navbar-nav">
     @if (User.Identity.IsAuthenticated)
     {
-        <a href="http://localhost:8080/auth/realms/rinkudesu/account" target="_blank" class="btn btn-primary">Hello @User.Identity.Name</a> @*TODO: read from file*@
+        <a href="@Program.KeycloakSettings.Authority/account" target="_blank" class="btn btn-primary">Hello @User.Identity.Name</a>
         <form asp-controller="UserSession" asp-action="Logout" asp-antiforgery="true">
             <input type="submit" value="Logout" class="btn btn-secondary"/>
         </form>
