@@ -11,7 +11,11 @@ namespace Rinkudesu.Gateways.Webui.Controllers
         [HttpGet]
         [HttpPost]
         [Authorize] //This function only redirects, but since the authorize attribute is set, a login flow will be triggered if user is not logged in
-        public IActionResult Login(string? returnUrl) => Redirect(returnUrl ?? "/");
+        public IActionResult Login(string? returnUrl)
+        {
+            if (returnUrl is null) return Redirect("/");
+            return Redirect(!Url.IsLocalUrl(returnUrl) ? "/" : returnUrl);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
