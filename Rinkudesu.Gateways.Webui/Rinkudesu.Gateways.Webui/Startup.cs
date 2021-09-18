@@ -43,7 +43,7 @@ namespace Rinkudesu.Gateways.Webui
                 }).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options => {
                     options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                    options.Authority = "http://localhost:8080/auth/realms/rinkudesu";
+                    options.Authority = "http://localhost:8080/auth/realms/rinkudesu"; //TODO: read from config
                     options.ClientId = "rinkudesu";
                     options.ResponseType = "code";
                     options.SaveTokens = true;
