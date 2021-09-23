@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rinkudesu.Gateways.Webui", "Rinkudesu.Gateways.Webui\Rinkudesu.Gateways.Webui.csproj", "{48F3E66A-FBEB-45BE-BE3E-3180D6D06D2D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rinkudesu.Gateways.Clients", "Rinkudesu.Gateways.Clients\Rinkudesu.Gateways.Clients.csproj", "{D9694609-1551-4861-AB88-93876FD35D45}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{48F3E66A-FBEB-45BE-BE3E-3180D6D06D2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48F3E66A-FBEB-45BE-BE3E-3180D6D06D2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48F3E66A-FBEB-45BE-BE3E-3180D6D06D2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9694609-1551-4861-AB88-93876FD35D45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9694609-1551-4861-AB88-93876FD35D45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9694609-1551-4861-AB88-93876FD35D45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9694609-1551-4861-AB88-93876FD35D45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
