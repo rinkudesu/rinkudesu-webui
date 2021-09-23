@@ -1,4 +1,7 @@
+using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
@@ -8,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Polly;
+using Polly.Extensions.Http;
+using Rinkudesu.Gateways.Clients.Links;
 using Rinkudesu.Gateways.Webui.Models;
 
 namespace Rinkudesu.Gateways.Webui
@@ -27,11 +33,15 @@ namespace Rinkudesu.Gateways.Webui
 #if DEBUG
             IdentityModelEventSource.ShowPII = true;
 #endif
-            services.AddControllersWithViews()
+            services.AddControllersWithViews().AddJsonOptions(o => o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()))
 #if DEBUG
                 .AddRazorRuntimeCompilation()
 #endif
                 ;
+
+            services.AddAutoMapper(typeof(MappingProfiles));
+
+            SetupClients(services);
 
             Program.KeycloakSettings = new KeycloakSettings();
 
@@ -84,6 +94,22 @@ namespace Rinkudesu.Gateways.Webui
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        private void SetupClients(IServiceCollection services)
+        {
+            var linksUrl = Environment.GetEnvironmentVariable("RINKUDESU_LINKS") ??
+                           throw new InvalidOperationException(
+                               "RINKUDESU_LINKS env variable pointing to links microservice must be set");
+            services.AddHttpClient<LinksClient>(o => {
+                o.BaseAddress = new Uri(linksUrl);
+            }).AddPolicyHandler(GetRetryPolicy());
+        }
+
+        private IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
+        {
+            return HttpPolicyExtensions.HandleTransientHttpError().OrResult(r => !r.IsSuccessStatusCode)
+                .WaitAndRetryAsync(5, attempt => TimeSpan.FromSeconds(attempt));
         }
     }
 }

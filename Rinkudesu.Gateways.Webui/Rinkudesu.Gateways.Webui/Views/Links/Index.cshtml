@@ -1,0 +1,13 @@
+﻿@model System.Collections.Generic.List<Rinkudesu.Gateways.Clients.Links.LinkDto>
+
+@{
+    ViewBag.Title = "Links";
+    Layout = "_Layout";
+}
+
+<h2>Links</h2>
+
+@foreach (var link in Model)
+{
+    <div>@link.LinkUrl</div>
+}
