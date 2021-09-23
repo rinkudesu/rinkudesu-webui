@@ -39,6 +39,8 @@ namespace Rinkudesu.Gateways.Webui
 #endif
                 ;
 
+            services.AddAutoMapper(typeof(MappingProfiles));
+
             SetupClients(services);
 
             Program.KeycloakSettings = new KeycloakSettings();
