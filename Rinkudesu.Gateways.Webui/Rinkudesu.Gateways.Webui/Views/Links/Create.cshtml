@@ -1,0 +1,12 @@
+@model Rinkudesu.Gateways.Clients.Links.LinkDto
+
+@{
+    ViewBag.Title = "Create link";
+    Layout = "_Layout";
+}
+
+<h2>Create link</h2>
+
+@await Html.PartialAsync("_CreatePartial")
+
+<a asp-action="Index" class="btn btn-dark">Cancel</a>

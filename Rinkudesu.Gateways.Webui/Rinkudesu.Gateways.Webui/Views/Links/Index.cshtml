@@ -1,4 +1,5 @@
-﻿@model System.Collections.Generic.List<Rinkudesu.Gateways.Clients.Links.LinkDto>
+﻿@using Rinkudesu.Gateways.Clients.Links
+@model System.Collections.Generic.List<Rinkudesu.Gateways.Clients.Links.LinkDto>
 
 @{
     ViewBag.Title = "Links";
@@ -6,6 +7,9 @@
 }
 
 <h2>Links</h2>
+
+@await Html.PartialAsync("_QuickCreatePartial", new LinkDto())
+<a asp-action="Create" class="btn btn-dark">Create</a>
 
 @foreach (var link in Model)
 {
