@@ -68,7 +68,8 @@ namespace Rinkudesu.Gateways.Webui.Controllers
 
             if (!await _client.Delete(guid)) return BadRequest();
 
-            return Redirect(returnUrl ?? Url.Action(nameof(Index)));
+            if (returnUrl is null || !returnUrl.StartsWith('/')) returnUrl = Url.Action(nameof(Index));
+            return Redirect(returnUrl);
         }
     }
 }
