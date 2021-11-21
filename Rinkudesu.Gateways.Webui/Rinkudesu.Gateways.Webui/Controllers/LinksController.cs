@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -56,6 +57,19 @@ namespace Rinkudesu.Gateways.Webui.Controllers
             var isSuccess = await _client.CreateLink(newLink);
             if (!isSuccess) return BadRequest(); //TODO: some display for error would be nice here
             return Redirect(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(string? id, string? returnUrl)
+        {
+            if (string.IsNullOrEmpty(id)) return BadRequest();
+            if (!Guid.TryParse(id, out var guid)) return BadRequest();
+
+            if (!await _client.Delete(guid)) return BadRequest();
+
+            if (returnUrl is null || !returnUrl.StartsWith('/')) returnUrl = Url.Action(nameof(Index));
+            return Redirect(returnUrl);
         }
     }
 }

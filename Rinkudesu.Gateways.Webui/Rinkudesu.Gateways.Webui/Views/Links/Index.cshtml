@@ -13,5 +13,12 @@
 
 @foreach (var link in Model)
 {
-    <div>@link.LinkUrl</div>
+    <div class="row mb-2">
+        <div class="col">
+            @link.LinkUrl
+        </div>
+        <div class="col">
+            @await Html.PartialAsync("_DeletePartial", link)
+        </div>
+    </div>
 }
