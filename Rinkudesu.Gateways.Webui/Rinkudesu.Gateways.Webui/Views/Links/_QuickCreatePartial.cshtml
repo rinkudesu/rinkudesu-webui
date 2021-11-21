@@ -1,0 +1,15 @@
+@model Rinkudesu.Gateways.Clients.Links.LinkDto
+
+<form asp-action="QuickCreate" asp-antiforgery="true">
+    <div class="mb-3 row">
+        <div class="col-1">
+            <label asp-for="LinkUrl" class="form-label"></label>
+        </div>
+        <div class="col-8">
+            <input class="form-control" name="url" asp-for="LinkUrl"/>
+        </div>
+        <div class="col-3">
+            <input type="submit" class="btn btn-primary" value="Quick add"/>
+        </div>
+    </div>
+</form>

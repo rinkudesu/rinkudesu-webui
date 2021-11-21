@@ -8,8 +8,8 @@
 
 <h2>Links</h2>
 
-@*TODO: this should be hidden in a modal or otherwise not take up a lot of screen space in here*@
-@await Html.PartialAsync("_CreatePartial", new LinkDto())
+@await Html.PartialAsync("_QuickCreatePartial", new LinkDto())
+<a asp-action="Create" class="btn btn-dark">Create</a>
 
 @foreach (var link in Model)
 {
