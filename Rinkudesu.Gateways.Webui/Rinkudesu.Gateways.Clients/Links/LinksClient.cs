@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
@@ -20,6 +22,33 @@ namespace Rinkudesu.Gateways.Clients.Links
         {
             _client = client;
             _logger = logger;
+        }
+
+        public async Task<bool> CreateLink(LinkDto newLink, CancellationToken token = default)
+        {
+            string message;
+            try
+            {
+                message = JsonSerializer.Serialize(newLink, jsonOptions);
+            }
+            catch (JsonException e)
+            {
+                _logger.LogWarning(e, "Unable to serialise new link into json");
+                return false;
+            }
+            try
+            {
+                var content = new StringContent(message, Encoding.UTF8, "application/json");
+                var response = await _client.PostAsync("links", content, token).ConfigureAwait(false);
+                if (response.IsSuccessStatusCode) return true;
+                _logger.LogWarning($"Unable to create new link. Response code was '{response.StatusCode}'.");
+                return false;
+            }
+            catch (HttpRequestException e)
+            {
+                _logger.LogWarning(e, "Error while requesting new link creation.");
+                return false;
+            }
         }
 
         public async Task<IEnumerable<LinkDto>?> GetLinks(CancellationToken token = default)

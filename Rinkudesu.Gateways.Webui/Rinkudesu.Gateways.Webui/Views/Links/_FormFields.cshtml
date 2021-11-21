@@ -1,0 +1,18 @@
+@using Rinkudesu.Gateways.Clients.Links
+@model Rinkudesu.Gateways.Clients.Links.LinkDto
+<div class="mb-3">
+    <label class="form-label" asp-for="Title"></label>
+    <input class="form-control" asp-for="Title"/>
+</div>
+<div class="mb-3">
+    <label class="form-label" asp-for="LinkUrl"></label>
+    <input class="form-control" asp-for="LinkUrl"/>
+</div>
+<div class="mb-3">
+    <label class="form-label" asp-for="PrivacyOptions"></label>
+    <select class="form-control" asp-for="PrivacyOptions" asp-items="Html.GetEnumSelectList<LinkPrivacyOptions>()"></select>
+</div>
+<div class="mb-3">
+    <label class="form-label" asp-for="Description"></label>
+    <textarea class="form-control" asp-for="Description"></textarea>
+</div>

@@ -1,0 +1,8 @@
+@model Rinkudesu.Gateways.Clients.Links.LinkDto
+
+<form asp-action="Create" asp-antiforgery="true">
+    @await Html.PartialAsync("_FormFields")
+    <div class="mb-3">
+        <input class="btn btn-primary" type="submit" value="Add"/>
+    </div>
+</form>
