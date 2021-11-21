@@ -79,5 +79,19 @@ namespace Rinkudesu.Gateways.Clients.Links
                 return null;
             }
         }
+
+        public async Task<bool> Delete(Guid id, CancellationToken token = default)
+        {
+            try
+            {
+                var response = await _client.DeleteAsync($"links/{id}", token).ConfigureAwait(false);
+                return response.IsSuccessStatusCode;
+            }
+            catch (HttpRequestException e)
+            {
+                _logger.LogWarning(e, "Unable to delete link with id '{id}'", id);
+                return false;
+            }
+        }
     }
 }

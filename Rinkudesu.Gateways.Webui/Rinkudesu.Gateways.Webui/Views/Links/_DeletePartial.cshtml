@@ -1,0 +1,22 @@
+@model Rinkudesu.Gateways.Clients.Links.LinkDto
+
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-@Model.Id">
+  Delete
+</button>
+<div class="modal fade" id="delete-@Model.Id" tabindex="-1" aria-labelledby="delete-label-@Model.Id" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="delete-label-@Model.Id">Delete @Html.DisplayFor(m => m.Title)</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form asp-action="Delete" asp-antiforgery="true">
+            <input name="id" value="@Model.Id" type="hidden"/>
+            <input type="submit" class="btn btn-danger" value="Delete"/>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
