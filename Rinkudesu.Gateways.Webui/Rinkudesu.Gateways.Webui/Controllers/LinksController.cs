@@ -61,15 +61,14 @@ namespace Rinkudesu.Gateways.Webui.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(string? id, string? returnUrl)
+        public async Task<IActionResult> Delete(string? id, Uri returnUrl)
         {
             if (string.IsNullOrEmpty(id)) return BadRequest();
             if (!Guid.TryParse(id, out var guid)) return BadRequest();
 
             if (!await _client.Delete(guid)) return BadRequest();
 
-            if (returnUrl is null || !returnUrl.StartsWith('/')) returnUrl = Url.Action(nameof(Index));
-            return Redirect(returnUrl);
+            return LocalRedirect(returnUrl.ToString());
         }
     }
 }
