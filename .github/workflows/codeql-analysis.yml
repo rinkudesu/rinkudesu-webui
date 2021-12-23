@@ -44,7 +44,7 @@ jobs:
         dotnet-version: 6.0.x
 
     - run: |
-        dotnet build ./Rinkudesu.Services.Links -c Release
+        dotnet build ./Rinkudesu.Gateways.Webui -c Release
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
