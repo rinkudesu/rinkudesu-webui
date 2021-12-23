@@ -1,7 +1,7 @@
 @using Rinkudesu.Gateways.Webui.Utils
 @model Rinkudesu.Gateways.Clients.Links.LinkDto
 
-<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-@Model.Id">
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-@Model!.Id">
     Delete
 </button>
 <div class="modal fade" id="delete-@Model.Id" tabindex="-1" aria-labelledby="delete-label-@Model.Id" aria-hidden="true">

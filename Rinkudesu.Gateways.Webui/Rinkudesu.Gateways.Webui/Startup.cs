@@ -96,7 +96,7 @@ namespace Rinkudesu.Gateways.Webui
             });
         }
 
-        private void SetupClients(IServiceCollection services)
+        private static void SetupClients(IServiceCollection services)
         {
             var linksUrl = Environment.GetEnvironmentVariable("RINKUDESU_LINKS") ??
                            throw new InvalidOperationException(
@@ -106,7 +106,7 @@ namespace Rinkudesu.Gateways.Webui
             }).AddPolicyHandler(GetRetryPolicy());
         }
 
-        private IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
+        private static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
         {
             return HttpPolicyExtensions.HandleTransientHttpError().OrResult(r => !r.IsSuccessStatusCode)
                 .WaitAndRetryAsync(5, attempt => TimeSpan.FromSeconds(attempt));

@@ -4,7 +4,7 @@ using Rinkudesu.Gateways.Webui.Models;
 
 namespace Rinkudesu.Gateways.Webui
 {
-    public class Program
+    public static class Program
     {
         public static KeycloakSettings KeycloakSettings { get; set; } = null!;
         public static void Main(string[] args)

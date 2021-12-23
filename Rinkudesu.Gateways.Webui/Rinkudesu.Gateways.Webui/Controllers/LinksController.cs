@@ -48,11 +48,11 @@ namespace Rinkudesu.Gateways.Webui.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> QuickCreate(string? url)
+        public async Task<IActionResult> QuickCreate(Uri? url)
         {
-            if (string.IsNullOrEmpty(url)) return BadRequest(); //TODO: make this prettier
+            if (url is null) return BadRequest(); //TODO: make this prettier
 
-            var newLink = new LinkDto { Title = url, LinkUrl = url, PrivacyOptions = LinkPrivacyOptions.Private };
+            var newLink = new LinkDto { Title = url.ToString(), LinkUrl = url, PrivacyOptions = LinkPrivacyOptions.Private };
 
             var isSuccess = await _client.CreateLink(newLink);
             if (!isSuccess) return BadRequest(); //TODO: some display for error would be nice here

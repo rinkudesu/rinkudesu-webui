@@ -1,6 +1,6 @@
 ﻿@using Rinkudesu.Gateways.Webui.Utils
 <ul class="navbar-nav">
-    @if (User.Identity.IsAuthenticated)
+    @if (User.Identity!.IsAuthenticated)
     {
         <a href="@Program.KeycloakSettings.Authority/account" target="_blank" class="btn btn-primary">Hello @User.Identity.Name</a>
         <form asp-controller="UserSession" asp-action="Logout" asp-antiforgery="true">
