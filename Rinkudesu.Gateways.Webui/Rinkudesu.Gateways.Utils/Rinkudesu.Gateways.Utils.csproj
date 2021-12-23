@@ -8,4 +8,8 @@
         <AnalysisMode>All</AnalysisMode>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
 </Project>
