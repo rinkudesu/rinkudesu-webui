@@ -7,7 +7,7 @@ namespace Rinkudesu.Gateways.Clients.Links
     {
         public Guid Id { get; set; }
         [Display(Name = "Link url")]
-        public Uri LinkUrl { get; set; } = new Uri(string.Empty);
+        public Uri? LinkUrl { get; set; }
         public string Title { get; set; } = string.Empty;
         public string? Description { get; set; }
         [Display(Name = "Privacy options")]
