@@ -11,7 +11,7 @@
 @await Html.PartialAsync("_QuickCreatePartial", new LinkDto())
 <a asp-action="Create" class="btn btn-dark">Create</a>
 
-@foreach (var link in Model)
+@foreach (var link in Model!)
 {
     <div class="row mb-2">
         <div class="col">

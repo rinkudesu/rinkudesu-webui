@@ -18,10 +18,15 @@ namespace Rinkudesu.Gateways.Webui.Controllers
             return View();
         }
 
+// Disable antiforgery token check
+#pragma warning disable CA5391
+        [HttpGet]
+        [HttpPost]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+#pragma warning restore CA5391
     }
 }

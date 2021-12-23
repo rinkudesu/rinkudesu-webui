@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Rinkudesu.Gateways.Utils;
 
 namespace Rinkudesu.Gateways.Clients.Links
 {
@@ -38,8 +39,8 @@ namespace Rinkudesu.Gateways.Clients.Links
             }
             try
             {
-                var content = new StringContent(message, Encoding.UTF8, "application/json");
-                var response = await _client.PostAsync("links", content, token).ConfigureAwait(false);
+                using var content = new StringContent(message, Encoding.UTF8, "application/json");
+                var response = await _client.PostAsync("links".ToUri(), content, token).ConfigureAwait(false);
                 if (response.IsSuccessStatusCode) return true;
                 _logger.LogWarning($"Unable to create new link. Response code was '{response.StatusCode}'.");
                 return false;
@@ -55,7 +56,7 @@ namespace Rinkudesu.Gateways.Clients.Links
         {
             try
             {
-                var response = await _client.GetAsync("links", token).ConfigureAwait(false);
+                var response = await _client.GetAsync("links".ToUri(), token).ConfigureAwait(false);
                 if (!response.IsSuccessStatusCode)
                 {
                     _logger.LogWarning("Received non-success status code '{statusCode}' from links microservice", response.StatusCode);
@@ -64,7 +65,7 @@ namespace Rinkudesu.Gateways.Clients.Links
                 try
                 {
                     var links = await JsonSerializer.DeserializeAsync<IEnumerable<LinkDto>>(
-                        await response.Content.ReadAsStreamAsync().ConfigureAwait(false), jsonOptions, token).ConfigureAwait(false);
+                        await response.Content.ReadAsStreamAsync(token).ConfigureAwait(false), jsonOptions, token).ConfigureAwait(false);
                     return links;
                 }
                 catch (JsonException e)
@@ -84,7 +85,7 @@ namespace Rinkudesu.Gateways.Clients.Links
         {
             try
             {
-                var response = await _client.DeleteAsync($"links/{id}", token).ConfigureAwait(false);
+                var response = await _client.DeleteAsync($"links/{id}".ToUri(), token).ConfigureAwait(false);
                 return response.IsSuccessStatusCode;
             }
             catch (HttpRequestException e)

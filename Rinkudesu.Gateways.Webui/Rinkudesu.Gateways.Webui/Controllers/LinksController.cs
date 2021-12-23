@@ -48,11 +48,11 @@ namespace Rinkudesu.Gateways.Webui.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> QuickCreate(string? url)
+        public async Task<IActionResult> QuickCreate(Uri? url)
         {
-            if (string.IsNullOrEmpty(url)) return BadRequest(); //TODO: make this prettier
+            if (url is null) return BadRequest(); //TODO: make this prettier
 
-            var newLink = new LinkDto { Title = url, LinkUrl = url, PrivacyOptions = LinkPrivacyOptions.Private };
+            var newLink = new LinkDto { Title = url.ToString(), LinkUrl = url, PrivacyOptions = LinkPrivacyOptions.Private };
 
             var isSuccess = await _client.CreateLink(newLink);
             if (!isSuccess) return BadRequest(); //TODO: some display for error would be nice here
@@ -61,15 +61,14 @@ namespace Rinkudesu.Gateways.Webui.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(string? id, string? returnUrl)
+        public async Task<IActionResult> Delete(string? id, Uri returnUrl)
         {
             if (string.IsNullOrEmpty(id)) return BadRequest();
             if (!Guid.TryParse(id, out var guid)) return BadRequest();
 
             if (!await _client.Delete(guid)) return BadRequest();
 
-            if (returnUrl is null || !returnUrl.StartsWith('/')) returnUrl = Url.Action(nameof(Index));
-            return Redirect(returnUrl);
+            return LocalRedirect(returnUrl.ToString());
         }
     }
 }

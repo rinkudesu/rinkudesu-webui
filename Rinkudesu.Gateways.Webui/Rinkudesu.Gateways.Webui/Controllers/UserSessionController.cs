@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,20 +9,22 @@ namespace Rinkudesu.Gateways.Webui.Controllers
 {
     public class UserSessionController : Controller
     {
+// Disable antiforgery token check
+#pragma warning disable CA5391
         [HttpGet]
         [HttpPost]
         [Authorize] //This function only redirects, but since the authorize attribute is set, a login flow will be triggered if user is not logged in
-        public IActionResult Login(string? returnUrl)
+        public IActionResult Login(Uri? returnUrl)
         {
-            if (returnUrl is null) return Redirect("/");
-            return Redirect(!Url.IsLocalUrl(returnUrl) ? "/" : returnUrl);
+            return LocalRedirect(returnUrl?.ToString() ?? "/");
         }
+#pragma warning restore CA5391
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-            if (!User.Identity.IsAuthenticated) return Redirect("/");
+            if (!User.Identity!.IsAuthenticated) return Redirect("/");
             await HttpContext.SignOutAsync();
             return Redirect($"{Program.KeycloakSettings.Authority}/protocol/openid-connect/logout?redirect_uri={HttpContext.GetEncodedBasePath()}");
         }
