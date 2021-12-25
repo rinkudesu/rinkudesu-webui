@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -68,6 +69,30 @@ namespace Rinkudesu.Gateways.Webui.Controllers
 
             if (!await _client.Delete(guid)) return BadRequest();
 
+            return LocalRedirect(returnUrl.ToString());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string? id, Uri returnUrl, CancellationToken token)
+        {
+            if (string.IsNullOrEmpty(id) || !Guid.TryParse(id, out var guid)) return BadRequest();
+
+            var link = await _client.GetLink(guid, token);
+
+            if (link is null) return NotFound(); //todo: some display error
+            ViewData["ReturnUrl"] = returnUrl;
+            return View(link);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string? id, [Bind] LinkDto editLink, Uri returnUrl)
+        {
+            if (!Guid.TryParse(id, out var guid) || !ModelState.IsValid) return BadRequest(); //todo: prettier
+
+            var result = await _client.Edit(guid, editLink);
+
+            if (!result) return NotFound(); //todo: prettier
             return LocalRedirect(returnUrl.ToString());
         }
     }
