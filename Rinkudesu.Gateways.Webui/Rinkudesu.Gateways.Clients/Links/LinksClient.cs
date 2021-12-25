@@ -146,7 +146,6 @@ namespace Rinkudesu.Gateways.Clients.Links
                 return false;
             }
 
-
             try
             {
                 using var content = new StringContent(json, Encoding.UTF8, "application/json");
