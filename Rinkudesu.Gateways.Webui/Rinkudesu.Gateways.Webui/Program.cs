@@ -1,19 +1,13 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-using Rinkudesu.Gateways.Webui.Models;
+using Microsoft.AspNetCore.Builder;
+using Rinkudesu.Gateways.Webui;
+#pragma warning disable CA1812
 
-namespace Rinkudesu.Gateways.Webui
-{
-    public static class Program
-    {
-        public static KeycloakSettings KeycloakSettings { get; set; } = null!;
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+var webApp = WebApplication.CreateBuilder(args);
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
-    }
-}
+var startup = new Startup(webApp.Configuration);
+startup.ConfigureServices(webApp.Services);
+
+var app = webApp.Build();
+startup.Configure(app, app.Environment);
+
+await app.RunAsync();
