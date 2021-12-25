@@ -1,13 +1,67 @@
+using System;
+using CommandLine;
 using Microsoft.AspNetCore.Builder;
 using Rinkudesu.Gateways.Webui;
+using Serilog;
+using Serilog.Exceptions;
+using Serilog.Formatting.Compact;
+
 #pragma warning disable CA1812
 
-var webApp = WebApplication.CreateBuilder(args);
+var result = Parser.Default.ParseArguments<InputArguments>(args)
+    .WithParsed(o => {
+        o.SaveAsCurrent();
+    });
+if (result.Tag == ParserResultType.NotParsed)
+{
+    return 1;
+}
+var logConfig = new LoggerConfiguration();
+if (!InputArguments.Current.MuteConsoleLog)
+{
+    logConfig.WriteTo.Console();
+}
+Log.Logger = logConfig.CreateBootstrapLogger();
 
-var startup = new Startup(webApp.Configuration);
-startup.ConfigureServices(webApp.Services);
+try
+{
+    var webApp = WebApplication.CreateBuilder(args);
 
-var app = webApp.Build();
-startup.Configure(app, app.Environment);
+    var startup = new Startup(webApp.Configuration);
+    startup.ConfigureServices(webApp.Services);
 
-await app.RunAsync();
+    webApp.Host.UseSerilog((context, services, configuration) => {
+        if (!InputArguments.Current.MuteConsoleLog)
+        {
+            configuration.WriteTo.Console();
+        }
+        if (InputArguments.Current.FileLogPath != null)
+        {
+            configuration.WriteTo.File(new RenderedCompactJsonFormatter(),
+                InputArguments.Current.FileLogPath);
+        }
+        InputArguments.Current.GetMinimumLogLevel(configuration);
+        configuration.ReadFrom.Services(services);
+        configuration.Enrich.FromLogContext()
+            .Enrich.WithProperty("ApplicationName", context.HostingEnvironment.ApplicationName)
+            .Enrich.WithExceptionDetails();
+    });
+
+    var app = webApp.Build();
+    startup.Configure(app, app.Environment);
+
+    await app.RunAsync();
+
+}
+#pragma warning disable CA1031
+catch (Exception e)
+#pragma warning restore CA1031
+{
+    Log.Fatal(e, "Application failed to start");
+    return 2;
+}
+finally
+{
+    Log.CloseAndFlush();
+}
+return 0;
