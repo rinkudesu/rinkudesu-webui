@@ -4,6 +4,22 @@ namespace Rinkudesu.Gateways.Webui.Models
 {
     public class KeycloakSettings
     {
+        private static KeycloakSettings? current;
+
+        public static KeycloakSettings Current
+        {
+            get => current ?? throw new InvalidOperationException("Keycloak settings have not been initialised yet");
+            set
+            {
+                if (current is not null)
+                {
+                    throw new InvalidOperationException("Keycloak settings have already been initialised");
+                }
+
+                current = value;
+            }
+        }
+
         public string Authority { get; }
         public string ClientId { get; }
 

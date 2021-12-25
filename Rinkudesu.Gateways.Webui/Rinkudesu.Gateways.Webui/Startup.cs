@@ -43,7 +43,7 @@ namespace Rinkudesu.Gateways.Webui
 
             SetupClients(services);
 
-            Program.KeycloakSettings = new KeycloakSettings();
+            KeycloakSettings.Current = new KeycloakSettings();
 
             services.AddAuthentication(options => {
                     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -51,8 +51,8 @@ namespace Rinkudesu.Gateways.Webui
                 }).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options => {
                     options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                    options.Authority = Program.KeycloakSettings.Authority;
-                    options.ClientId = Program.KeycloakSettings.ClientId;
+                    options.Authority = KeycloakSettings.Current.Authority;
+                    options.ClientId = KeycloakSettings.Current.ClientId;
                     options.ResponseType = "code";
                     options.SaveTokens = true;
                     options.GetClaimsFromUserInfoEndpoint = true;
