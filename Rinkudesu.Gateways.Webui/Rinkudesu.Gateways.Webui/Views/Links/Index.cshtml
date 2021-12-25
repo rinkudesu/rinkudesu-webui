@@ -1,4 +1,5 @@
 ﻿@using Rinkudesu.Gateways.Clients.Links
+@using Rinkudesu.Gateways.Webui.Utils
 @model System.Collections.Generic.List<Rinkudesu.Gateways.Clients.Links.LinkDto>
 
 @{
@@ -17,7 +18,10 @@
         <div class="col">
             @link.LinkUrl
         </div>
-        <div class="col">
+        <div class="col-1">
+            <a class="btn btn-info" asp-action="Edit" asp-route-id="@link.Id" asp-route-returnUrl="@Context.GetCurrentUrl()">Edit</a>
+        </div>
+        <div class="col-1">
             @await Html.PartialAsync("_DeletePartial", link)
         </div>
     </div>
