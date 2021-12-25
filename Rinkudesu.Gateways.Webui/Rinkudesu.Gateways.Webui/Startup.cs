@@ -108,7 +108,7 @@ namespace Rinkudesu.Gateways.Webui
 
         private static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
         {
-            return HttpPolicyExtensions.HandleTransientHttpError().OrResult(r => !r.IsSuccessStatusCode)
+            return HttpPolicyExtensions.HandleTransientHttpError()
                 .WaitAndRetryAsync(5, attempt => TimeSpan.FromSeconds(attempt));
         }
     }
