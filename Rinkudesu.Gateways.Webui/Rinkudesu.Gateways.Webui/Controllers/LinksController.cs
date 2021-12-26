@@ -7,6 +7,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Rinkudesu.Gateways.Clients.Links;
+using Rinkudesu.Gateways.Webui.Utils;
 
 namespace Rinkudesu.Gateways.Webui.Controllers
 {
@@ -25,7 +26,8 @@ namespace Rinkudesu.Gateways.Webui.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var links = await _client.GetLinks();
+            var accessToken = await HttpContext.GetJwt();
+            var links = await _client.SetAccessToken(accessToken).GetLinks();
             if (links is null)
             {
                 return NotFound(); //TODO: make this prettier

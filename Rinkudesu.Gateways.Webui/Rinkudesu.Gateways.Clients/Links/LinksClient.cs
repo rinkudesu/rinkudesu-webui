@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -12,7 +13,7 @@ using Rinkudesu.Gateways.Utils;
 
 namespace Rinkudesu.Gateways.Clients.Links
 {
-    public class LinksClient
+    public class LinksClient : IAuthorisedMicroserviceClient<LinksClient>
     {
         private static readonly JsonSerializerOptions jsonOptions = new JsonSerializerOptions
             { PropertyNameCaseInsensitive = true, Converters = { new JsonStringEnumConverter() }};
@@ -24,6 +25,12 @@ namespace Rinkudesu.Gateways.Clients.Links
         {
             _client = client;
             _logger = logger;
+        }
+
+        public LinksClient SetAccessToken(string token)
+        {
+            _client.DefaultRequestHeaders.Authorization = new ("Bearer", token);
+            return this;
         }
 
         public async Task<LinkDto?> GetLink(Guid id, CancellationToken token = default)
