@@ -101,7 +101,7 @@ namespace Rinkudesu.Gateways.Clients.Links
         {
             try
             {
-                var response = await _client.GetAsync("links".ToUri(), token).ConfigureAwait(false);
+                var response = await _client.GetAsync("links?showPrivate=true".ToUri(), token).ConfigureAwait(false);
                 if (!response.IsSuccessStatusCode)
                 {
                     _logger.LogWarning("Received non-success status code '{statusCode}' from links microservice", response.StatusCode);
