@@ -55,6 +55,7 @@ namespace Rinkudesu.Gateways.Webui
                     options.ClientId = KeycloakSettings.Current.ClientId;
                     options.ResponseType = "code";
                     options.SaveTokens = true;
+                    options.UseTokenLifetime = true;
                     options.GetClaimsFromUserInfoEndpoint = true;
 #if DEBUG
                     options.RequireHttpsMetadata = false;

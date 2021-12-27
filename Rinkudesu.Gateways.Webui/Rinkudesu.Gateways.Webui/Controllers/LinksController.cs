@@ -7,6 +7,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Rinkudesu.Gateways.Clients.Links;
+using Rinkudesu.Gateways.Webui.Utils;
 
 namespace Rinkudesu.Gateways.Webui.Controllers
 {
@@ -25,7 +26,8 @@ namespace Rinkudesu.Gateways.Webui.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var links = await _client.GetLinks();
+            var accessToken = await HttpContext.GetJwt();
+            var links = await _client.SetAccessToken(accessToken).GetLinks();
             if (links is null)
             {
                 return NotFound(); //TODO: make this prettier
@@ -42,7 +44,8 @@ namespace Rinkudesu.Gateways.Webui.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(); //TODO: make this prettier
 
-            var isSuccess = await _client.CreateLink(newLink);
+            var jwt = await HttpContext.GetJwt();
+            var isSuccess = await _client.SetAccessToken(jwt).CreateLink(newLink);
             if (!isSuccess) return BadRequest(); //TODO: some display for error would be nice here
             return Redirect(nameof(Index));
         }
@@ -55,7 +58,8 @@ namespace Rinkudesu.Gateways.Webui.Controllers
 
             var newLink = new LinkDto { Title = url.ToString(), LinkUrl = url, PrivacyOptions = LinkPrivacyOptions.Private };
 
-            var isSuccess = await _client.CreateLink(newLink);
+            var jwt = await HttpContext.GetJwt();
+            var isSuccess = await _client.SetAccessToken(jwt).CreateLink(newLink);
             if (!isSuccess) return BadRequest(); //TODO: some display for error would be nice here
             return Redirect(nameof(Index));
         }
@@ -67,7 +71,8 @@ namespace Rinkudesu.Gateways.Webui.Controllers
             if (string.IsNullOrEmpty(id)) return BadRequest();
             if (!Guid.TryParse(id, out var guid)) return BadRequest();
 
-            if (!await _client.Delete(guid)) return BadRequest();
+            var jwt = await HttpContext.GetJwt();
+            if (!await _client.SetAccessToken(jwt).Delete(guid)) return BadRequest();
 
             return LocalRedirect(returnUrl.ToString());
         }
@@ -77,7 +82,8 @@ namespace Rinkudesu.Gateways.Webui.Controllers
         {
             if (string.IsNullOrEmpty(id) || !Guid.TryParse(id, out var guid)) return BadRequest();
 
-            var link = await _client.GetLink(guid, token);
+            var jwt = await HttpContext.GetJwt();
+            var link = await _client.SetAccessToken(jwt).GetLink(guid, token);
 
             if (link is null) return NotFound(); //todo: some display error
             ViewData["ReturnUrl"] = returnUrl;
@@ -90,7 +96,8 @@ namespace Rinkudesu.Gateways.Webui.Controllers
         {
             if (!Guid.TryParse(id, out var guid) || !ModelState.IsValid) return BadRequest(); //todo: prettier
 
-            var result = await _client.Edit(guid, editLink);
+            var jwt = await HttpContext.GetJwt();
+            var result = await _client.SetAccessToken(jwt).Edit(guid, editLink);
 
             if (!result) return NotFound(); //todo: prettier
             return LocalRedirect(returnUrl.ToString());
