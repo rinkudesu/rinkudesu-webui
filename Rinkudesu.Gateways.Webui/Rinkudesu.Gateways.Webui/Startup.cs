@@ -105,6 +105,9 @@ namespace Rinkudesu.Gateways.Webui
             services.AddHttpClient<LinksClient>(o => {
                 o.BaseAddress = new Uri(linksUrl);
             }).AddPolicyHandler(GetRetryPolicy());
+            services.AddHttpClient<SharedLinksClient>(o => {
+                o.BaseAddress = new Uri(linksUrl);
+            }).AddPolicyHandler(GetRetryPolicy());
         }
 
         private static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
