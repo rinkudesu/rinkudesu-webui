@@ -4,7 +4,6 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -14,8 +13,7 @@ namespace Rinkudesu.Gateways.Clients.Links
 {
     public class LinksClient : IAuthorisedMicroserviceClient<LinksClient>
     {
-        private static readonly JsonSerializerOptions jsonOptions = new JsonSerializerOptions
-            { PropertyNameCaseInsensitive = true, Converters = { new JsonStringEnumConverter() }};
+        private static JsonSerializerOptions JsonOptions => CommonSettings.JsonOptions;
 
         private readonly HttpClient _client;
         private readonly ILogger<LinksClient> _logger;
@@ -54,7 +52,7 @@ namespace Rinkudesu.Gateways.Clients.Links
                 try
                 {
                     var stream = await message.Content.ReadAsStreamAsync(token).ConfigureAwait(false);
-                    return await JsonSerializer.DeserializeAsync<LinkDto>(stream, jsonOptions, token).ConfigureAwait(false);
+                    return await JsonSerializer.DeserializeAsync<LinkDto>(stream, JsonOptions, token).ConfigureAwait(false);
                 }
                 catch (JsonException e)
                 {
@@ -74,7 +72,7 @@ namespace Rinkudesu.Gateways.Clients.Links
             string message;
             try
             {
-                message = JsonSerializer.Serialize(newLink, jsonOptions);
+                message = JsonSerializer.Serialize(newLink, JsonOptions);
             }
             catch (JsonException e)
             {
@@ -109,7 +107,7 @@ namespace Rinkudesu.Gateways.Clients.Links
                 try
                 {
                     var links = await JsonSerializer.DeserializeAsync<IEnumerable<LinkDto>>(
-                        await response.Content.ReadAsStreamAsync(token).ConfigureAwait(false), jsonOptions, token).ConfigureAwait(false);
+                        await response.Content.ReadAsStreamAsync(token).ConfigureAwait(false), JsonOptions, token).ConfigureAwait(false);
                     return links;
                 }
                 catch (JsonException e)
@@ -144,7 +142,7 @@ namespace Rinkudesu.Gateways.Clients.Links
             string json;
             try
             {
-                json = JsonSerializer.Serialize(link, jsonOptions);
+                json = JsonSerializer.Serialize(link, JsonOptions);
             }
             catch (JsonException e)
             {
