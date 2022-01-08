@@ -1,0 +1,31 @@
+﻿@model Rinkudesu.Gateways.Clients.Links.LinkDto
+
+@{
+    var colTitle = "col-2";
+    var colValue = "col-10";
+}
+
+<div class="row">
+    <div class="@colTitle">
+        @Html.DisplayNameFor(m => m.Title)
+    </div>
+    <div class="@colValue">
+        @Html.DisplayFor(m => m.Title)
+    </div>
+</div>
+<div class="row">
+    <div class="@colTitle">
+        @Html.DisplayNameFor(m => m.Description)
+    </div>
+    <div class="@colValue">
+        @Html.DisplayFor(m => m.Description)
+    </div>
+</div>
+<div class="row">
+    <div class="@colTitle">
+        @Html.DisplayNameFor(m => m.LinkUrl)
+    </div>
+    <div class="@colValue">
+        <a href="@Model!.LinkUrl">@Html.DisplayFor(m => m.LinkUrl)</a>
+    </div>
+</div>

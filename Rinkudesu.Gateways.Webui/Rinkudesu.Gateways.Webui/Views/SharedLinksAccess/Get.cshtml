@@ -1,0 +1,13 @@
+﻿@model Rinkudesu.Gateways.Clients.Links.LinkDto
+
+@{
+    ViewBag.Title = "Link";
+    Layout = "_Layout";
+}
+
+<div class="row">
+    <p>This is a shared link. You can bookmark this page os otherwise save this url and it will always point you here, as long as the sharing key is not regenerated.</p>
+</div>
+
+<hr/>
+@await Html.PartialAsync("_LinkDetails", Model)

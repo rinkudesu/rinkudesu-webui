@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -15,8 +13,7 @@ namespace Rinkudesu.Gateways.Clients.Links
 {
     public class LinksClient : IAuthorisedMicroserviceClient<LinksClient>
     {
-        private static readonly JsonSerializerOptions jsonOptions = new JsonSerializerOptions
-            { PropertyNameCaseInsensitive = true, Converters = { new JsonStringEnumConverter() }};
+        private static JsonSerializerOptions JsonOptions => CommonSettings.JsonOptions;
 
         private readonly HttpClient _client;
         private readonly ILogger<LinksClient> _logger;
@@ -37,35 +34,53 @@ namespace Rinkudesu.Gateways.Clients.Links
         {
             try
             {
-                var message = await _client.GetAsync($"links/{id}".ToUri(), token).ConfigureAwait(false);
-
-                if (!message.IsSuccessStatusCode)
-                {
-                    if (message.StatusCode == HttpStatusCode.NotFound)
-                    {
-                        _logger.LogInformation($"Link with id {id} not found");
-                    }
-                    else
-                    {
-                        _logger.LogWarning($"Unexpected response code while querying for link with it {id}: '{message.StatusCode}'");
-                    }
-                    return null;
-                }
-
-                try
-                {
-                    var stream = await message.Content.ReadAsStreamAsync(token).ConfigureAwait(false);
-                    return await JsonSerializer.DeserializeAsync<LinkDto>(stream, jsonOptions, token).ConfigureAwait(false);
-                }
-                catch (JsonException e)
-                {
-                    _logger.LogWarning(e, "Unable to parse link with id {id}", id);
-                    return null;
-                }
+                using var message = await _client.GetAsync($"links/{id}".ToUri(), token).ConfigureAwait(false);
+                return await HandleMessageAndParseLink(message, $"id {id}", token).ConfigureAwait(false);
             }
             catch (HttpRequestException e)
             {
                 _logger.LogWarning(e, "Error while requesting link with id '{id}'", id);
+                return null;
+            }
+        }
+
+        public async Task<LinkDto?> GetLink(string key, CancellationToken token = default)
+        {
+            try
+            {
+                using var message = await _client.GetAsync($"links/{key}".ToUri(), token).ConfigureAwait(false);
+                return await HandleMessageAndParseLink(message, "shareable key", token).ConfigureAwait(false);
+            }
+            catch (HttpRequestException e)
+            {
+                _logger.LogWarning(e, "Error while requesting link with shareable key");
+                return null;
+            }
+        }
+
+        private async Task<LinkDto?> HandleMessageAndParseLink(HttpResponseMessage message, string linkLogId, CancellationToken token)
+        {
+            if (!message.IsSuccessStatusCode)
+            {
+                if (message.StatusCode == HttpStatusCode.NotFound)
+                {
+                    _logger.LogInformation($"Link with {linkLogId} not found");
+                }
+                else
+                {
+                    _logger.LogWarning($"Unexpected response code while querying for link with {linkLogId}: '{message.StatusCode}'");
+                }
+                return null;
+            }
+
+            try
+            {
+                var stream = await message.Content.ReadAsStreamAsync(token).ConfigureAwait(false);
+                return await JsonSerializer.DeserializeAsync<LinkDto>(stream, JsonOptions, token).ConfigureAwait(false);
+            }
+            catch (JsonException e)
+            {
+                _logger.LogWarning(e, $"Unable to parse link with {linkLogId}");
                 return null;
             }
         }
@@ -75,7 +90,7 @@ namespace Rinkudesu.Gateways.Clients.Links
             string message;
             try
             {
-                message = JsonSerializer.Serialize(newLink, jsonOptions);
+                message = JsonSerializer.Serialize(newLink, JsonOptions);
             }
             catch (JsonException e)
             {
@@ -110,7 +125,7 @@ namespace Rinkudesu.Gateways.Clients.Links
                 try
                 {
                     var links = await JsonSerializer.DeserializeAsync<IEnumerable<LinkDto>>(
-                        await response.Content.ReadAsStreamAsync(token).ConfigureAwait(false), jsonOptions, token).ConfigureAwait(false);
+                        await response.Content.ReadAsStreamAsync(token).ConfigureAwait(false), JsonOptions, token).ConfigureAwait(false);
                     return links;
                 }
                 catch (JsonException e)
@@ -145,7 +160,7 @@ namespace Rinkudesu.Gateways.Clients.Links
             string json;
             try
             {
-                json = JsonSerializer.Serialize(link, jsonOptions);
+                json = JsonSerializer.Serialize(link, JsonOptions);
             }
             catch (JsonException e)
             {

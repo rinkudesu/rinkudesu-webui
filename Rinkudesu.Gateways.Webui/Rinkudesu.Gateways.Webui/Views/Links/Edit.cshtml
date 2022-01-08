@@ -1,12 +1,24 @@
+@using Microsoft.AspNetCore.Antiforgery
 @model Rinkudesu.Gateways.Clients.Links.LinkDto
+@inject IAntiforgery antiforgery
 
 @{
     ViewBag.Title = "Edit link";
     Layout = "_Layout";
     Uri returnUrl = ViewBag.ReturnUrl;
+    var token = antiforgery.GetTokens(Context).RequestToken;
 }
+<input type="hidden" id="token" value="@token"/>
 
 <h2>Edit @Html.DisplayFor(l => l.Title)</h2>
+
+<div class="row">
+    <div class="col-2">
+        <button type="button" class="btn btn-info" data-bs-toggle="modal" id="showSharingOptions" data-bs-target="#sharingOptions">
+            Sharing options
+        </button>
+    </div>
+</div>
 
 <form asp-action="Edit" asp-antiforgery="true">
     <input type="hidden" name="returnUrl" value="@returnUrl"/>
@@ -17,3 +29,24 @@
         <a class="btn btn-secondary" href="@returnUrl">Cancel</a>
     </div>
 </form>
+
+<div class="modal fade" id="sharingOptions" tabindex="-1" aria-labelledby="#sharingOptionsLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="sharingOptionsLabel">Sharing options</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <input class="form-control" type="text" disabled id="shareKey" data-link-id="@Model!.Id"/>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-dark" id="shareKeyAction">...</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/linkSharing.js" asp-append-version="true"></script>
