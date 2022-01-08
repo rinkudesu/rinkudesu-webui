@@ -48,7 +48,7 @@ namespace Rinkudesu.Gateways.Clients.Links
         {
             try
             {
-                using var message = await _client.GetAsync($"links/{key.ToBase64()}".ToUri(), token).ConfigureAwait(false);
+                using var message = await _client.GetAsync($"links/{key}".ToUri(), token).ConfigureAwait(false);
                 return await HandleMessageAndParseLink(message, "shareable key", token).ConfigureAwait(false);
             }
             catch (HttpRequestException e)
