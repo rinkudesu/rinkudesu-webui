@@ -12,6 +12,7 @@ document.getElementById('showSharingOptions').addEventListener('click', checkSha
 actionBtn.addEventListener('click', performAction)
 
 function setCurrentState() {
+    actionBtn.disabled = true;
     if (isShared) {
         let request = new XMLHttpRequest();
         request.onreadystatechange = function () {
@@ -23,6 +24,7 @@ function setCurrentState() {
                 else {
                     genericError();
                 }
+                actionBtn.disabled = false;
             }
         }
 
@@ -32,6 +34,7 @@ function setCurrentState() {
     else {
         keyBox.value = '';
         actionBtn.innerText = startSharingText;
+        actionBtn.disabled = false;
     }
 }
 
@@ -40,6 +43,7 @@ function checkShared() {
         return;
     }
 
+    actionBtn.disabled = true;
     let request = new XMLHttpRequest();
     request.onreadystatechange = function () {
         if (request.readyState === XMLHttpRequest.DONE) {
@@ -51,6 +55,7 @@ function checkShared() {
             else {
                 genericError();
             }
+            actionBtn.disabled = false;
         }
     }
 
@@ -62,6 +67,7 @@ function performAction() {
     if (!sharedCheckDone) {
         return;
     }
+    actionBtn.disabled = true;
     if (isShared) {
         unshare();
     }
@@ -82,6 +88,7 @@ function share() {
             else {
                 genericError();
             }
+            actionBtn.disabled = false;
         }
     }
 
@@ -102,6 +109,7 @@ function unshare() {
             else {
                 genericError();
             }
+            actionBtn.disabled = false;
         }
     }
 
