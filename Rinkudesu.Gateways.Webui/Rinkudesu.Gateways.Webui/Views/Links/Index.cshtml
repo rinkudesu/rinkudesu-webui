@@ -9,6 +9,20 @@
 
 <h2>Links</h2>
 
+<form asp-controller="SharedLinksAccess" asp-action="Get" method="GET">
+    <div class="row mb-2">
+        <div class="col-1 d-flex text-center">
+            Sharing key
+        </div>
+        <div class="col-8">
+            <input type="text" maxlength="51" name="key" required class="form-control"/>
+        </div>
+        <div class="col-3">
+            <input type="submit" class="btn btn-dark" value="Find"/>
+        </div>
+    </div>
+</form>
+
 @await Html.PartialAsync("_QuickCreatePartial", new LinkDto())
 <a asp-action="Create" class="btn btn-dark">Create</a>
 
