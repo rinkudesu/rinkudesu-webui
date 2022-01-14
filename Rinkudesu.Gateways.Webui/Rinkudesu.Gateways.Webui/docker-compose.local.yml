@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  rinkudesu-webui:
+    image: ghcr.io/rinkudesu/rinkudesu-webui:latest
+    build:
+      context: ..
+      dockerfile: Rinkudesu.Gateways.Webui/Dockerfile
+    ports:
+      - "127.0.0.1:9876:80"
+    environment:
+      RINKUDESU_AUTHORITY: "http://<hostname-of-keycloak>:8080/auth/realms/rinkudesu"
+      RINKUDESU_CLIENTID: "rinkudesu"
+      RINKUDESU_LINKS: "https://<hostname-of-links-microservice>/api/"
