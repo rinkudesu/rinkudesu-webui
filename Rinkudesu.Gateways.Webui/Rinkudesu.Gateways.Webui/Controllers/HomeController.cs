@@ -1,6 +1,10 @@
 ﻿using System.Diagnostics;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Rinkudesu.Gateways.Clients.Tags;
 using Rinkudesu.Gateways.Webui.Models;
+using Rinkudesu.Gateways.Webui.Utils;
 
 namespace Rinkudesu.Gateways.Webui.Controllers
 {
@@ -13,8 +17,9 @@ namespace Rinkudesu.Gateways.Webui.Controllers
         }
 
         [HttpGet]
-        public IActionResult Privacy()
+        public async Task<IActionResult> Privacy([FromServices] TagsClient client)
         {
+            await client.SetAccessToken(await HttpContext.GetJwt()).ThisIsATestPleaseIgnore();
             return View();
         }
 
