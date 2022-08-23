@@ -4,6 +4,9 @@ updates:
     directory: "/Rinkudesu.Services.Links" # Location of package manifests
     schedule:
       interval: "daily"
-    ignore:
-    - dependency-name: Microsoft.AspNetCore.Authentication.OpenIdConnect
-    - dependency-name: Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
+      
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      # Check for updates to GitHub Actions every weekday
+      interval: "daily"
