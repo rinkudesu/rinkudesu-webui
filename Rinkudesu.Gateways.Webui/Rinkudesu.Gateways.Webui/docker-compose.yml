@@ -9,3 +9,6 @@ services:
       RINKUDESU_AUTHORITY: "http://<hostname-of-keycloak>:8080/auth/realms/rinkudesu"
       RINKUDESU_CLIENTID: "rinkudesu"
       RINKUDESU_LINKS: "https://<hostname-of-links-microservice>/api/"
+      RINKU_KAFKA_ADDRESS: "<hostname-of-kafka>:9092"
+      RINKU_KAFKA_CLIENT_ID: "rinkudesu-webui"
+      RINKU_KAFKA_CONSUMER_GROUP_ID: "rinkudesu-webui"

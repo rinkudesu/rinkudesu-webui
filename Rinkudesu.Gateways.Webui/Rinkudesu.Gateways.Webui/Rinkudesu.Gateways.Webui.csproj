@@ -30,6 +30,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Rinkudesu.Gateways.Clients\Rinkudesu.Gateways.Clients.csproj" />
+      <ProjectReference Include="..\Rinkudesu.Gateways.MessageQueues\Rinkudesu.Gateways.MessageQueues.csproj" />
     </ItemGroup>
 
 </Project>
