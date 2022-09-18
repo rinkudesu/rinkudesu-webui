@@ -15,6 +15,8 @@ using Polly;
 using Polly.Extensions.Http;
 using Rinkudesu.Gateways.Clients.Links;
 using Rinkudesu.Gateways.Webui.Models;
+using Rinkudesu.Kafka.Dotnet;
+using Rinkudesu.Kafka.Dotnet.Base;
 
 namespace Rinkudesu.Gateways.Webui
 {
@@ -42,6 +44,7 @@ namespace Rinkudesu.Gateways.Webui
             services.AddAutoMapper(typeof(MappingProfiles));
 
             SetupClients(services);
+            SetupKafka(services);
 
             KeycloakSettings.Current = new KeycloakSettings();
 
@@ -114,6 +117,13 @@ namespace Rinkudesu.Gateways.Webui
         {
             return HttpPolicyExtensions.HandleTransientHttpError()
                 .WaitAndRetryAsync(5, attempt => TimeSpan.FromSeconds(attempt));
+        }
+
+        private static void SetupKafka(IServiceCollection serviceCollection)
+        {
+            var kafkaConfig = KafkaConfigurationProvider.ReadFromEnv();
+            serviceCollection.AddSingleton(kafkaConfig);
+            serviceCollection.AddSingleton<IKafkaProducer, KafkaProducer>();
         }
     }
 }

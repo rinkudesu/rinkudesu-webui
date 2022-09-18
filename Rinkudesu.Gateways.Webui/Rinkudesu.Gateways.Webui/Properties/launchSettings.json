@@ -7,7 +7,10 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "RINKUDESU_AUTHORITY": "http://localhost:8080/auth/realms/rinkudesu",
         "RINKUDESU_CLIENTID": "rinkudesu",
-        "RINKUDESU_LINKS": "https://localhost:5005/api/"
+        "RINKUDESU_LINKS": "https://localhost:5005/api/",
+        "RINKU_KAFKA_ADDRESS": "localhost:9092",
+        "RINKU_KAFKA_CLIENT_ID": "rinkudesu-webui",
+        "RINKU_KAFKA_CONSUMER_GROUP_ID": "rinkudesu-webui"
       }
     }
   }
