@@ -7,6 +7,7 @@ using Serilog.Exceptions;
 using Serilog.Formatting.Compact;
 
 #pragma warning disable CA1812
+#pragma warning disable CA1305
 
 var result = Parser.Default.ParseArguments<InputArguments>(args)
     .WithParsed(o => {
