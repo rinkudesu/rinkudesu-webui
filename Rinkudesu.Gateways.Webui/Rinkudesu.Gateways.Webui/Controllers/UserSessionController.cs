@@ -37,7 +37,7 @@ namespace Rinkudesu.Gateways.Webui.Controllers
         {
             if (!User.Identity!.IsAuthenticated) return Redirect("/");
             await HttpContext.SignOutAsync();
-            return Redirect($"{KeycloakSettings.Current.Authority}/protocol/openid-connect/logout?redirect_uri={HttpContext.GetEncodedBasePath()}");
+            return Redirect($"{KeycloakSettings.Current.Authority}/protocol/openid-connect/logout?client_id={KeycloakSettings.Current.ClientId}&post_logout_redirect_uri={HttpContext.GetEncodedBasePath()}");
         }
 
         [HttpPost]
