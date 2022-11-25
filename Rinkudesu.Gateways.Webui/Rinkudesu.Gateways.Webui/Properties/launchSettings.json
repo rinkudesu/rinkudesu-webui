@@ -6,6 +6,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "RINKUDESU_AUTHORITY": "http://localhost:8080/auth/realms/rinkudesu",
+        "RINKUDESU_AUTHORITY_ALLOW_HTTP": "1",
         "RINKUDESU_CLIENTID": "rinkudesu",
         "RINKUDESU_LINKS": "https://localhost:5005/api/",
         "RINKU_KAFKA_ADDRESS": "localhost:9092",
