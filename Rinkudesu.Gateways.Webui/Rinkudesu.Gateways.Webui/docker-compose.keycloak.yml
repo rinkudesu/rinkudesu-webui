@@ -3,6 +3,7 @@ version: '3'
 services:
   postgres:
       image: postgres
+      restart: unless-stopped
       volumes:
         - ./postgres_data:/var/lib/postgresql/data
       environment:
@@ -10,22 +11,20 @@ services:
         POSTGRES_USER: keycloak
         POSTGRES_PASSWORD: password
   keycloak:
-      image: quay.io/keycloak/keycloak:legacy
+      image: quay.io/keycloak/keycloak
+      restart: unless-stopped
       environment:
-        DB_VENDOR: POSTGRES
-        DB_ADDR: postgres
-        DB_DATABASE: keycloak
-        DB_USER: keycloak
-        DB_SCHEMA: public
-        DB_PASSWORD: password
-        KEYCLOAK_USER: admin
-        KEYCLOAK_PASSWORD: Pa55w0rd
-        KEYCLOAK_IMPORT: /tmp/import/realm-export.json
-        # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
-        #JDBC_PARAMS: "ssl=true"
+        KC_HOSTNAME: localhost
+        KC_DB: postgres
+        KC_DB_PASSWORD: password
+        KC_DB_URL: jdbc:postgresql://postgres/keycloak
+        KC_DB_USERNAME: keycloak
+        KEYCLOAK_ADMIN: admin
+        KEYCLOAK_ADMIN_PASSWORD: Pa55w0rd
       volumes:
-        - ./keycloakImports:/tmp/import
+        - ./keycloakImports:/opt/keycloak/data/import
       ports:
         - 8080:8080
       depends_on:
         - postgres
+      command: start-dev --import-realm
