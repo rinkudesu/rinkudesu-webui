@@ -60,9 +60,7 @@ namespace Rinkudesu.Gateways.Webui
                     options.SaveTokens = true;
                     options.UseTokenLifetime = true;
                     options.GetClaimsFromUserInfoEndpoint = true;
-#if DEBUG
-                    options.RequireHttpsMetadata = false;
-#endif
+                    options.RequireHttpsMetadata = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("RINKUDESU_AUTHORITY_ALLOW_HTTP"));
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         NameClaimType = "name"
