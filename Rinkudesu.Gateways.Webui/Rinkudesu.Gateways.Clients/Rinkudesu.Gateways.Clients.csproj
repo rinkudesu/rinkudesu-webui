@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <LangVersion>default</LangVersion>
         <AnalysisMode>All</AnalysisMode>
+        <NeutralLanguage>en-GB</NeutralLanguage>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
