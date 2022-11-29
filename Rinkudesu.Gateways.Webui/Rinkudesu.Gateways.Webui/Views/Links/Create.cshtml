@@ -1,12 +1,18 @@
+@inject IViewLocalizer Localizer
 @model Rinkudesu.Gateways.Clients.Links.LinkDto
 
 @{
-    ViewBag.Title = "Create link";
+    ViewBag.Title = Localizer["title"];
     Layout = "_Layout";
 }
 
-<h2>Create link</h2>
+<h2>@Localizer["title"]</h2>
 
-@await Html.PartialAsync("_CreatePartial")
+<form asp-action="Create" asp-antiforgery="true">
+    @await Html.PartialAsync("_FormFields")
+    <div class="mb-3">
+        <input class="btn btn-primary" type="submit" value="@Localizer["add"]"/>
+    </div>
+</form>
 
-<a asp-action="Index" class="btn btn-dark">Cancel</a>
+<a asp-action="Index" class="btn btn-dark">@Localizer["cancel"]</a>

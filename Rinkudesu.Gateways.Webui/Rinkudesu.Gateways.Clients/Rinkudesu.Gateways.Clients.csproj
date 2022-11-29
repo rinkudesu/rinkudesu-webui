@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <LangVersion>default</LangVersion>
         <AnalysisMode>All</AnalysisMode>
+        <NeutralLanguage>en-GB</NeutralLanguage>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -17,6 +18,21 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Rinkudesu.Gateways.Utils\Rinkudesu.Gateways.Utils.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\Links\LinkDto.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>LinkDto.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Resources\Links\LinkDto.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>LinkDto.resx</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>
