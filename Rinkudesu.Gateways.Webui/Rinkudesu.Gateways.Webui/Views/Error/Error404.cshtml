@@ -1,0 +1,13 @@
+﻿@using Rinkudesu.Gateways.Utils
+@inject IViewLocalizer Localizer
+
+@{
+    Layout = "_Layout";
+    ViewData["title"] = Localizer["title"];
+    var returnUrl = Context.Items["ReturnUrl"] as Uri ?? "/".ToUri();
+}
+
+<h1>@Localizer["title"]</h1>
+
+<p>@Localizer["description"]</p>
+<a class="btn btn-primary" href="@returnUrl">@Localizer["back"]</a>
