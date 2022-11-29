@@ -123,6 +123,14 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Error400.pl.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Controllers\LinksController.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>LinksController.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Controllers\LinksController.pl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>LinksController.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -235,6 +243,16 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>Error400.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Controllers\LinksController.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>LinksController.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Controllers\LinksController.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>LinksController.pl.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 
