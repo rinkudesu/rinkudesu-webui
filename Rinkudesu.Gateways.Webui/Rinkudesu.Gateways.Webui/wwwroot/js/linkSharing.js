@@ -5,8 +5,8 @@ let sharedCheckDone = false;
 let isShared = false;
 let token = document.getElementById('token').value;
 
-const startSharingText = "Share";
-const stopSharingText = "Stop";
+const startSharingText = actionBtn.getAttribute('data-text-share');
+const stopSharingText = actionBtn.getAttribute('data-text-stop');
 
 document.getElementById('showSharingOptions').addEventListener('click', checkShared);
 actionBtn.addEventListener('click', performAction)

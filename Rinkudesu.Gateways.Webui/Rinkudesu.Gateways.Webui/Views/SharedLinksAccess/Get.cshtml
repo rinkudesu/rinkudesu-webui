@@ -1,4 +1,5 @@
 ﻿@model Rinkudesu.Gateways.Clients.Links.LinkDto
+@inject IViewLocalizer Localizer
 
 @{
     ViewBag.Title = "Link";
@@ -6,7 +7,7 @@
 }
 
 <div class="row">
-    <p>This is a shared link. You can bookmark this page os otherwise save this url and it will always point you here, as long as the sharing key is not regenerated.</p>
+    <p>@Localizer["sharedLinkInfo"]</p>
 </div>
 
 <hr/>

@@ -1,30 +1,31 @@
 ﻿@using Rinkudesu.Gateways.Clients.Links
 @using Rinkudesu.Gateways.Webui.Utils
+@inject IViewLocalizer Localizer
 @model System.Collections.Generic.List<Rinkudesu.Gateways.Clients.Links.LinkDto>
 
 @{
-    ViewBag.Title = "Links";
+    ViewBag.Title = Localizer["title"];
     Layout = "_Layout";
 }
 
-<h2>Links</h2>
+<h2>@Localizer["title"]</h2>
 
 <form asp-controller="SharedLinksAccess" asp-action="Get" method="GET">
     <div class="row mb-2">
-        <div class="col-1 d-flex text-center">
-            Sharing key
+        <div class="col-2 d-flex text-center">
+            @Localizer["share-key"]
         </div>
-        <div class="col-8">
+        <div class="col-7">
             <input type="text" maxlength="51" name="key" required class="form-control"/>
         </div>
         <div class="col-3">
-            <input type="submit" class="btn btn-dark" value="Find"/>
+            <input type="submit" class="btn btn-dark" value="@Localizer["find"]"/>
         </div>
     </div>
 </form>
 
 @await Html.PartialAsync("_QuickCreatePartial", new LinkDto())
-<a asp-action="Create" class="btn btn-dark">Create</a>
+<a asp-action="Create" class="btn btn-dark">@Localizer["create"]</a>
 
 @foreach (var link in Model!)
 {
@@ -33,7 +34,7 @@
             @link.LinkUrl
         </div>
         <div class="col-1">
-            <a class="btn btn-info" asp-action="Edit" asp-route-id="@link.Id" asp-route-returnUrl="@Context.GetCurrentUrl()">Edit</a>
+            <a class="btn btn-info" asp-action="Edit" asp-route-id="@link.Id.ToString()" asp-route-returnUrl="@Context.GetCurrentUrl()">@Localizer["edit"]</a>
         </div>
         <div class="col-1">
             @await Html.PartialAsync("_DeletePartial", link)
