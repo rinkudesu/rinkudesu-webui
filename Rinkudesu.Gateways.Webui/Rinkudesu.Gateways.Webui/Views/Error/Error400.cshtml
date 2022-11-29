@@ -1,0 +1,7 @@
+﻿@inject IViewLocalizer Localizer
+@{
+    Layout = "_Layout";
+    ViewData["Localizer"] = Localizer;
+}
+
+@await Html.PartialAsync("_ErrorDisplay")

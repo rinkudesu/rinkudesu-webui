@@ -1,0 +1,19 @@
+﻿@using Rinkudesu.Gateways.Webui.Controllers
+@using Rinkudesu.Gateways.Utils
+@{
+    var localizer = (ViewBag.Localizer as IViewLocalizer)!;
+    ViewData["title"] = localizer["title"];
+    var returnUrl = Context.Items[ErrorController.RETURN_URL_ITEM_NAME] as Uri ?? "/".ToUri();
+    var details = Context.Items[ErrorController.ERROR_DETAILS_ITEM_NAME] as string;
+}
+
+<h1>@localizer["title"]</h1>
+
+<p>@localizer["description"]</p>
+
+@if (!string.IsNullOrEmpty(details))
+{
+    <p>@details</p>
+}
+
+<a class="btn btn-primary" href="@returnUrl">@localizer["back"]</a>

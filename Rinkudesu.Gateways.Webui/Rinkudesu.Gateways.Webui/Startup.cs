@@ -15,6 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using Polly;
 using Polly.Extensions.Http;
 using Rinkudesu.Gateways.Clients.Links;
+using Rinkudesu.Gateways.Webui.Middleware;
 using Rinkudesu.Gateways.Webui.Models;
 using Rinkudesu.Kafka.Dotnet;
 using Rinkudesu.Kafka.Dotnet.Base;
@@ -93,6 +94,7 @@ namespace Rinkudesu.Gateways.Webui
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseMiddleware<CustomErrorsHandlerMiddleware>();
 
             app.UseRouting();
 
