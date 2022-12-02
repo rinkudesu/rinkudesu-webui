@@ -92,6 +92,7 @@ namespace Rinkudesu.Gateways.Webui
             var supportedCultures = new[] { "en-GB", "pl" };
             app.UseRequestLocalization(new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0]).AddSupportedCultures(supportedCultures).AddSupportedUICultures(supportedCultures));
 
+            app.UseMiddleware<ReturnUrlValidationMiddleware>();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseMiddleware<CustomErrorsHandlerMiddleware>();

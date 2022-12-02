@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rinkudesu.Gateways.Utils", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rinkudesu.Gateways.MessageQueues", "Rinkudesu.Gateways.MessageQueues\Rinkudesu.Gateways.MessageQueues.csproj", "{1F963D7A-DE40-4E78-BF35-4AB4F91CC512}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rinkudesu.Gateways.Webui.Tests", "Rinkudesu.Gateways.Webui.Tests\Rinkudesu.Gateways.Webui.Tests.csproj", "{D7B372E0-7211-4F3A-91FC-193662B96B01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{1F963D7A-DE40-4E78-BF35-4AB4F91CC512}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F963D7A-DE40-4E78-BF35-4AB4F91CC512}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F963D7A-DE40-4E78-BF35-4AB4F91CC512}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7B372E0-7211-4F3A-91FC-193662B96B01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7B372E0-7211-4F3A-91FC-193662B96B01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7B372E0-7211-4F3A-91FC-193662B96B01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7B372E0-7211-4F3A-91FC-193662B96B01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
