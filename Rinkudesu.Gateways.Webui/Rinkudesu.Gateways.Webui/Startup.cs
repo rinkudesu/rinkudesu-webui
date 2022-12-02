@@ -65,7 +65,7 @@ namespace Rinkudesu.Gateways.Webui
                     options.RequireHttpsMetadata = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("RINKUDESU_AUTHORITY_ALLOW_HTTP"));
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        NameClaimType = "name"
+                        NameClaimType = "preferred_username"
                     };
                 });
 
