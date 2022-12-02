@@ -1,8 +1,10 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Rinkudesu.Gateways.Clients;
 
+[ExcludeFromCodeCoverage]
 public static class CommonSettings
 {
     public static readonly JsonSerializerOptions JsonOptions = new()

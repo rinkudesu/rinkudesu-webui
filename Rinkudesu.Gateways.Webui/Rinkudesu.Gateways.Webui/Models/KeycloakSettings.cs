@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Rinkudesu.Gateways.Webui.Models
 {
+    [ExcludeFromCodeCoverage]
     public class KeycloakSettings
     {
         private static KeycloakSettings? current;
