@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Runtime.Serialization;
 
 namespace Rinkudesu.Gateways.Clients.Exceptions;
 
 [Serializable]
+[ExcludeFromCodeCoverage]
 public class UnexpectedResponseException : ResponseException
 {
     public UnexpectedResponseException()
