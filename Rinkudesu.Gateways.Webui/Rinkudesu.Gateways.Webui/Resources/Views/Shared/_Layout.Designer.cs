@@ -69,6 +69,15 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Links.
+        /// </summary>
+        internal static string links {
+            get {
+                return ResourceManager.GetString("links", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Privacy.
         /// </summary>
         internal static string privacy {
