@@ -12,12 +12,6 @@ namespace Rinkudesu.Gateways.Webui.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
 // Disable antiforgery token check
 #pragma warning disable CA5391
         [HttpGet]
