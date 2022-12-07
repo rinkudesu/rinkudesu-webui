@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Rinkudesu.Gateways.Utils;
 using Rinkudesu.Gateways.Webui.Controllers;
@@ -30,9 +28,9 @@ namespace Rinkudesu.Gateways.Webui.Utils
         }
 
         [ExcludeFromCodeCoverage]
-        public static async Task<string> GetJwt(this HttpContext context)
+        public static string GetJwt(this HttpContext context)
         {
-            return await context.GetTokenAsync("access_token") ?? string.Empty;
+            return context.Items.TryGetValue("JwtToken", out var token) ? (token as string)! : string.Empty;
         }
 
         [ExcludeFromCodeCoverage]

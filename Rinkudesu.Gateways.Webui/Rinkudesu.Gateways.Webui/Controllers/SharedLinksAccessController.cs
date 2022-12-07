@@ -10,20 +10,16 @@ using Rinkudesu.Gateways.Webui.Utils;
 namespace Rinkudesu.Gateways.Webui.Controllers;
 
 [Authorize]
-public class SharedLinksAccessController : Controller
+public class SharedLinksAccessController : AccessTokenClientController<LinksClient>
 {
-    private readonly LinksClient _client;
-
-    public SharedLinksAccessController(LinksClient client)
+    public SharedLinksAccessController(LinksClient client) : base(client)
     {
-        _client = client;
     }
 
     [HttpGet]
     public async Task<IActionResult> Get(string key, CancellationToken cancellationToken)
     {
-        var jwt = await HttpContext.GetJwt();
-        var link = await _client.SetAccessToken(jwt).GetLink(key, cancellationToken);
+        var link = await Client.GetLink(key, cancellationToken);
 
         if (link is null)
             return this.ReturnNotFound(Url.ActionLink(nameof(Index), "Links")!.ToUri());

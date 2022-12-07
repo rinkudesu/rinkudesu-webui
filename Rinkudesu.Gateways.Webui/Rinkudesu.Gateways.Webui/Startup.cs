@@ -103,6 +103,7 @@ namespace Rinkudesu.Gateways.Webui
 
             app.UseAuthorization();
 
+            app.UseMiddleware<AccessTokenReaderMiddleware>();
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllerRoute(
                     name: "default",
