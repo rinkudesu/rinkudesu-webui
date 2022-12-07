@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -13,12 +12,8 @@ namespace Rinkudesu.Gateways.Clients.Links
 {
     public class LinksClient : AccessTokenClient
     {
-        private readonly ILogger<LinksClient> _logger;
-        private static JsonSerializerOptions JsonOptions => CommonSettings.JsonOptions;
-
-        public LinksClient(HttpClient client, ILogger<LinksClient> logger) : base(client)
+        public LinksClient(HttpClient client, ILogger<LinksClient> logger) : base(client, logger)
         {
-            _logger = logger;
         }
 
         public async Task<LinkDto?> GetLink(Guid id, CancellationToken token = default)
@@ -26,11 +21,11 @@ namespace Rinkudesu.Gateways.Clients.Links
             try
             {
                 using var message = await Client.GetAsync($"links/{id}".ToUri(), token).ConfigureAwait(false);
-                return await HandleMessageAndParseLink(message, $"id {id}", token).ConfigureAwait(false);
+                return await HandleMessageAndParseDto<LinkDto>(message, $"id {id}", token).ConfigureAwait(false);
             }
             catch (HttpRequestException e)
             {
-                _logger.LogWarning(e, "Error while requesting link with id '{id}'", id);
+                Logger.LogWarning(e, "Error while requesting link with id '{id}'", id);
                 return null;
             }
         }
@@ -40,38 +35,11 @@ namespace Rinkudesu.Gateways.Clients.Links
             try
             {
                 using var message = await Client.GetAsync($"links/{key}".ToUri(), token).ConfigureAwait(false);
-                return await HandleMessageAndParseLink(message, "shareable key", token).ConfigureAwait(false);
+                return await HandleMessageAndParseDto<LinkDto>(message, "shareable key", token).ConfigureAwait(false);
             }
             catch (HttpRequestException e)
             {
-                _logger.LogWarning(e, "Error while requesting link with shareable key");
-                return null;
-            }
-        }
-
-        private async Task<LinkDto?> HandleMessageAndParseLink(HttpResponseMessage message, string linkLogId, CancellationToken token)
-        {
-            if (!message.IsSuccessStatusCode)
-            {
-                if (message.StatusCode == HttpStatusCode.NotFound)
-                {
-                    _logger.LogInformation($"Link with {linkLogId} not found");
-                }
-                else
-                {
-                    _logger.LogWarning($"Unexpected response code while querying for link with {linkLogId}: '{message.StatusCode}'");
-                }
-                return null;
-            }
-
-            try
-            {
-                var stream = await message.Content.ReadAsStreamAsync(token).ConfigureAwait(false);
-                return await JsonSerializer.DeserializeAsync<LinkDto>(stream, JsonOptions, token).ConfigureAwait(false);
-            }
-            catch (JsonException e)
-            {
-                _logger.LogWarning(e, $"Unable to parse link with {linkLogId}");
+                Logger.LogWarning(e, "Error while requesting link with shareable key");
                 return null;
             }
         }
@@ -81,11 +49,11 @@ namespace Rinkudesu.Gateways.Clients.Links
             string message;
             try
             {
-                message = JsonSerializer.Serialize(newLink, JsonOptions);
+                message = JsonSerializer.Serialize(newLink, CommonSettings.JsonOptions);
             }
             catch (JsonException e)
             {
-                _logger.LogWarning(e, "Unable to serialise new link into json");
+                Logger.LogWarning(e, "Unable to serialise new link into json");
                 return false;
             }
             try
@@ -93,12 +61,12 @@ namespace Rinkudesu.Gateways.Clients.Links
                 using var content = new StringContent(message, Encoding.UTF8, "application/json");
                 var response = await Client.PostAsync("links".ToUri(), content, token).ConfigureAwait(false);
                 if (response.IsSuccessStatusCode) return true;
-                _logger.LogWarning($"Unable to create new link. Response code was '{response.StatusCode}'.");
+                Logger.LogWarning($"Unable to create new link. Response code was '{response.StatusCode}'.");
                 return false;
             }
             catch (HttpRequestException e)
             {
-                _logger.LogWarning(e, "Error while requesting new link creation.");
+                Logger.LogWarning(e, "Error while requesting new link creation.");
                 return false;
             }
         }
@@ -110,24 +78,24 @@ namespace Rinkudesu.Gateways.Clients.Links
                 var response = await Client.GetAsync("links?showPrivate=true".ToUri(), token).ConfigureAwait(false);
                 if (!response.IsSuccessStatusCode)
                 {
-                    _logger.LogWarning("Received non-success status code '{statusCode}' from links microservice", response.StatusCode);
+                    Logger.LogWarning("Received non-success status code '{statusCode}' from links microservice", response.StatusCode);
                     return null;
                 }
                 try
                 {
                     var links = await JsonSerializer.DeserializeAsync<IEnumerable<LinkDto>>(
-                        await response.Content.ReadAsStreamAsync(token).ConfigureAwait(false), JsonOptions, token).ConfigureAwait(false);
+                        await response.Content.ReadAsStreamAsync(token).ConfigureAwait(false), CommonSettings.JsonOptions, token).ConfigureAwait(false);
                     return links;
                 }
                 catch (JsonException e)
                 {
-                    _logger.LogWarning(e, "Unable to parse links");
+                    Logger.LogWarning(e, "Unable to parse links");
                     return null;
                 }
             }
             catch (HttpRequestException e)
             {
-                _logger.LogWarning(e, "Unable to receive links from microservice");
+                Logger.LogWarning(e, "Unable to receive links from microservice");
                 return null;
             }
         }
@@ -141,7 +109,7 @@ namespace Rinkudesu.Gateways.Clients.Links
             }
             catch (HttpRequestException e)
             {
-                _logger.LogWarning(e, "Unable to delete link with id '{id}'", id);
+                Logger.LogWarning(e, "Unable to delete link with id '{id}'", id);
                 return false;
             }
         }
@@ -151,11 +119,11 @@ namespace Rinkudesu.Gateways.Clients.Links
             string json;
             try
             {
-                json = JsonSerializer.Serialize(link, JsonOptions);
+                json = JsonSerializer.Serialize(link, CommonSettings.JsonOptions);
             }
             catch (JsonException e)
             {
-                _logger.LogWarning(e, "Unable to serialise link into json");
+                Logger.LogWarning(e, "Unable to serialise link into json");
                 return false;
             }
 
@@ -165,12 +133,12 @@ namespace Rinkudesu.Gateways.Clients.Links
                 var response = await Client.PostAsync($"links/{id}".ToUri(), content, token).ConfigureAwait(false);
                 if (response.IsSuccessStatusCode) return true;
 
-                _logger.LogWarning($"Unable to edit link with id {id}. Response code was '{response.StatusCode}'.");
+                Logger.LogWarning($"Unable to edit link with id {id}. Response code was '{response.StatusCode}'.");
                 return false;
             }
             catch (HttpRequestException e)
             {
-                _logger.LogWarning(e, "Error while requesting new link creation.");
+                Logger.LogWarning(e, "Error while requesting new link creation.");
                 return false;
             }
         }
