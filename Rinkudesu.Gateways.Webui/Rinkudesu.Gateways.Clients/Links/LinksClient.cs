@@ -11,30 +11,21 @@ using Rinkudesu.Gateways.Utils;
 
 namespace Rinkudesu.Gateways.Clients.Links
 {
-    public class LinksClient : IAuthorisedMicroserviceClient<LinksClient>
+    public class LinksClient : AccessTokenClient
     {
+        private readonly ILogger<LinksClient> _logger;
         private static JsonSerializerOptions JsonOptions => CommonSettings.JsonOptions;
 
-        private readonly HttpClient _client;
-        private readonly ILogger<LinksClient> _logger;
-
-        public LinksClient(HttpClient client, ILogger<LinksClient> logger)
+        public LinksClient(HttpClient client, ILogger<LinksClient> logger) : base(client)
         {
-            _client = client;
             _logger = logger;
-        }
-
-        public LinksClient SetAccessToken(string token)
-        {
-            _client.DefaultRequestHeaders.Authorization = new ("Bearer", token);
-            return this;
         }
 
         public async Task<LinkDto?> GetLink(Guid id, CancellationToken token = default)
         {
             try
             {
-                using var message = await _client.GetAsync($"links/{id}".ToUri(), token).ConfigureAwait(false);
+                using var message = await Client.GetAsync($"links/{id}".ToUri(), token).ConfigureAwait(false);
                 return await HandleMessageAndParseLink(message, $"id {id}", token).ConfigureAwait(false);
             }
             catch (HttpRequestException e)
@@ -48,7 +39,7 @@ namespace Rinkudesu.Gateways.Clients.Links
         {
             try
             {
-                using var message = await _client.GetAsync($"links/{key}".ToUri(), token).ConfigureAwait(false);
+                using var message = await Client.GetAsync($"links/{key}".ToUri(), token).ConfigureAwait(false);
                 return await HandleMessageAndParseLink(message, "shareable key", token).ConfigureAwait(false);
             }
             catch (HttpRequestException e)
@@ -100,7 +91,7 @@ namespace Rinkudesu.Gateways.Clients.Links
             try
             {
                 using var content = new StringContent(message, Encoding.UTF8, "application/json");
-                var response = await _client.PostAsync("links".ToUri(), content, token).ConfigureAwait(false);
+                var response = await Client.PostAsync("links".ToUri(), content, token).ConfigureAwait(false);
                 if (response.IsSuccessStatusCode) return true;
                 _logger.LogWarning($"Unable to create new link. Response code was '{response.StatusCode}'.");
                 return false;
@@ -116,7 +107,7 @@ namespace Rinkudesu.Gateways.Clients.Links
         {
             try
             {
-                var response = await _client.GetAsync("links?showPrivate=true".ToUri(), token).ConfigureAwait(false);
+                var response = await Client.GetAsync("links?showPrivate=true".ToUri(), token).ConfigureAwait(false);
                 if (!response.IsSuccessStatusCode)
                 {
                     _logger.LogWarning("Received non-success status code '{statusCode}' from links microservice", response.StatusCode);
@@ -145,7 +136,7 @@ namespace Rinkudesu.Gateways.Clients.Links
         {
             try
             {
-                var response = await _client.DeleteAsync($"links/{id}".ToUri(), token).ConfigureAwait(false);
+                var response = await Client.DeleteAsync($"links/{id}".ToUri(), token).ConfigureAwait(false);
                 return response.IsSuccessStatusCode;
             }
             catch (HttpRequestException e)
@@ -171,7 +162,7 @@ namespace Rinkudesu.Gateways.Clients.Links
             try
             {
                 using var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await _client.PostAsync($"links/{id}".ToUri(), content, token).ConfigureAwait(false);
+                var response = await Client.PostAsync($"links/{id}".ToUri(), content, token).ConfigureAwait(false);
                 if (response.IsSuccessStatusCode) return true;
 
                 _logger.LogWarning($"Unable to edit link with id {id}. Response code was '{response.StatusCode}'.");

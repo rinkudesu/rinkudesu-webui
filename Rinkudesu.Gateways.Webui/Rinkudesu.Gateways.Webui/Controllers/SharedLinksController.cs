@@ -13,43 +13,36 @@ namespace Rinkudesu.Gateways.Webui.Controllers;
 [Route("api/[controller]")]
 [Authorize]
 [ExcludeFromCodeCoverage]
-public class SharedLinksController : ControllerBase
+public class SharedLinksController : AccessTokenClientControllerBase<SharedLinksClient>
 {
-    private readonly SharedLinksClient _client;
-
-    public SharedLinksController(SharedLinksClient client)
+    public SharedLinksController(SharedLinksClient client) : base(client)
     {
-        _client = client;
     }
 
     [HttpGet("shared/{id:guid}")]
     public async Task<ActionResult<bool>> IsShared(Guid id, CancellationToken cancellationToken)
     {
-        var token = await HttpContext.GetJwt();
-        return Ok(await _client.SetAccessToken(token).IsShared(id, cancellationToken));
+        return Ok(await Client.IsShared(id, cancellationToken));
     }
 
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<string>> GetKey(Guid id, CancellationToken cancellationToken)
     {
-        var token = await HttpContext.GetJwt();
-        return Ok(await _client.SetAccessToken(token).GetKey(id, cancellationToken));
+        return Ok(await Client.GetKey(id, cancellationToken));
     }
 
     [HttpPost("{id:guid}")]
     [ValidateAntiForgeryToken]
     public async Task<ActionResult<string>> Share(Guid id, CancellationToken cancellationToken)
     {
-        var token = await HttpContext.GetJwt();
-        return Ok(await _client.SetAccessToken(token).Share(id, cancellationToken));
+        return Ok(await Client.Share(id, cancellationToken));
     }
 
     [HttpDelete("{id:guid}")]
     [ValidateAntiForgeryToken]
     public async Task<ActionResult> Unshare(Guid id, CancellationToken cancellationToken)
     {
-        var token = await HttpContext.GetJwt();
-        await _client.SetAccessToken(token).Unshare(id, cancellationToken);
+        await Client.Unshare(id, cancellationToken);
         return Ok();
     }
 }

@@ -14,24 +14,21 @@ using Rinkudesu.Gateways.Webui.Utils;
 namespace Rinkudesu.Gateways.Webui.Controllers
 {
     [Authorize]
-    public class LinksController : Controller
+    public class LinksController : AccessTokenClientController<LinksClient>
     {
         private readonly IStringLocalizer<LinksController> _localizer;
-        private readonly LinksClient _client;
         private readonly IMapper _mapper;
 
-        public LinksController(IMapper mapper, LinksClient client, IStringLocalizer<LinksController> localizer)
+        public LinksController(IMapper mapper, LinksClient client, IStringLocalizer<LinksController> localizer) : base(client)
         {
             _mapper = mapper;
-            _client = client;
             _localizer = localizer;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var accessToken = await HttpContext.GetJwt();
-            var links = await _client.SetAccessToken(accessToken).GetLinks();
+            var links = await Client.GetLinks();
             if (links is null)
                 return this.ReturnNotFound("/".ToUri());
             return View(_mapper.Map<List<LinkDto>>(links.ToList()));
@@ -47,8 +44,7 @@ namespace Rinkudesu.Gateways.Webui.Controllers
             if (!ModelState.IsValid)
                 return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri());
 
-            var jwt = await HttpContext.GetJwt();
-            var isSuccess = await _client.SetAccessToken(jwt).CreateLink(newLink);
+            var isSuccess = await Client.CreateLink(newLink);
             if (!isSuccess)
                 this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri(), _localizer["unableToCreate"]);
             return Redirect(nameof(Index));
@@ -63,8 +59,7 @@ namespace Rinkudesu.Gateways.Webui.Controllers
 
             var newLink = new LinkDto { Title = url.ToString(), LinkUrl = url, PrivacyOptions = LinkPrivacyOptions.Private };
 
-            var jwt = await HttpContext.GetJwt();
-            var isSuccess = await _client.SetAccessToken(jwt).CreateLink(newLink);
+            var isSuccess = await Client.CreateLink(newLink);
             if (!isSuccess)
                 this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri(), _localizer["unableToCreate"]);
             return Redirect(nameof(Index));
@@ -79,8 +74,7 @@ namespace Rinkudesu.Gateways.Webui.Controllers
             if (!Guid.TryParse(id, out var guid))
                 return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri(), _localizer["invalidId"]);
 
-            var jwt = await HttpContext.GetJwt();
-            if (!await _client.SetAccessToken(jwt).Delete(guid))
+            if (!await Client.Delete(guid))
                 return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri(), _localizer["unableToDelete"]);
 
             return LocalRedirect(returnUrl.ToString());
@@ -92,8 +86,7 @@ namespace Rinkudesu.Gateways.Webui.Controllers
             if (string.IsNullOrEmpty(id) || !Guid.TryParse(id, out var guid))
                 return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri(), _localizer["invalidId"]);
 
-            var jwt = await HttpContext.GetJwt();
-            var link = await _client.SetAccessToken(jwt).GetLink(guid, token);
+            var link = await Client.GetLink(guid, token);
 
             if (link is null)
                 return this.ReturnNotFound(Url.ActionLink(nameof(Index))!.ToUri());
@@ -108,8 +101,7 @@ namespace Rinkudesu.Gateways.Webui.Controllers
             if (!Guid.TryParse(id, out var guid) || !ModelState.IsValid)
                 return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri(), _localizer["invalidId"]);
 
-            var jwt = await HttpContext.GetJwt();
-            var result = await _client.SetAccessToken(jwt).Edit(guid, editLink);
+            var result = await Client.Edit(guid, editLink);
 
             if (!result)
                 return this.ReturnNotFound(Url.ActionLink(nameof(Index))!.ToUri());
