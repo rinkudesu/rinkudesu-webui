@@ -46,22 +46,17 @@ namespace Rinkudesu.Gateways.Clients.Links
 
         public async Task<bool> CreateLink(LinkDto newLink, CancellationToken token = default)
         {
-            string message;
             try
             {
-                message = JsonSerializer.Serialize(newLink, CommonSettings.JsonOptions);
+                using var content = GetJsonContent(newLink);
+                var response = await Client.PostAsync("links".ToUri(), content, token).ConfigureAwait(false);
+                if (response.IsSuccessStatusCode) return true;
+                Logger.LogWarning($"Unable to create new link. Response code was '{response.StatusCode}'.");
+                return false;
             }
             catch (JsonException e)
             {
                 Logger.LogWarning(e, "Unable to serialise new link into json");
-                return false;
-            }
-            try
-            {
-                using var content = new StringContent(message, Encoding.UTF8, "application/json");
-                var response = await Client.PostAsync("links".ToUri(), content, token).ConfigureAwait(false);
-                if (response.IsSuccessStatusCode) return true;
-                Logger.LogWarning($"Unable to create new link. Response code was '{response.StatusCode}'.");
                 return false;
             }
             catch (HttpRequestException e)
