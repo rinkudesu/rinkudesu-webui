@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -49,5 +50,11 @@ public abstract class AccessTokenClient
             Logger.LogWarning(e, "Unable to parse object in client {ClientType} with id {LogId}", GetType().Name, logId);
             return null;
         }
+    }
+
+    protected static StringContent GetJsonContent<TDto>(TDto dto)
+    {
+        var message = JsonSerializer.Serialize(dto, CommonSettings.JsonOptions);
+        return new StringContent(message, Encoding.UTF8, "application/json");
     }
 }
