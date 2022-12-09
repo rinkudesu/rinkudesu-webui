@@ -4,7 +4,7 @@ using Rinkudesu.Gateways.Webui.Utils;
 
 namespace Rinkudesu.Gateways.Webui.Controllers;
 
-public abstract class AccessTokenClientController<TClient> : Controller where TClient : AccessTokenClient
+public abstract class AccessTokenClientControllerBase<TClient> : ControllerBase where TClient : AccessTokenClient
 {
     private readonly TClient _client;
     private bool tokenSet;
@@ -22,7 +22,7 @@ public abstract class AccessTokenClientController<TClient> : Controller where TC
         }
     }
 
-    protected AccessTokenClientController(TClient client)
+    protected AccessTokenClientControllerBase(TClient client)
     {
         _client = client;
     }
