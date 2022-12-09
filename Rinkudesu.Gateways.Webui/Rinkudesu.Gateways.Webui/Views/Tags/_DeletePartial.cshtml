@@ -1,0 +1,24 @@
+@using Rinkudesu.Gateways.Webui.Utils
+@inject IViewLocalizer Localizer
+@model Rinkudesu.Gateways.Webui.Models.TagIndexViewModel
+
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-@Model.Id.ToString()">
+    @Localizer["delete"]
+</button>
+<div class="modal fade" id="delete-@Model.Id.ToString()" tabindex="-1" aria-labelledby="delete-label-@Model.Id.ToString()" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="delete-label-@Model.Id.ToString()">@Localizer["delete"] @Html.DisplayFor(m => m.Name)?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Delete" asp-antiforgery="true">
+                    <input type="hidden" name="returnUrl" value="@Context.GetCurrentUrl()"/>
+                    <input name="id" value="@Model.Id.ToString()" type="hidden"/>
+                    <input type="submit" class="btn btn-danger" value="@Localizer["delete"]"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

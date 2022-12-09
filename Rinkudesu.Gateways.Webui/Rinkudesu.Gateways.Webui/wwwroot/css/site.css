@@ -69,3 +69,19 @@ body {
   background: none!important;
   color: white!important;
 }
+
+.index-data-row {
+  margin-bottom: 0.5rem;
+}
+
+.index-data-row-col {
+
+}
+
+.index-data-row.user-data-display {
+  /*todo: add text wrapping and make sure this selector thing actually applies to what I want*/
+}
+
+.index-row-col-btn {
+  max-width: 20%;
+}

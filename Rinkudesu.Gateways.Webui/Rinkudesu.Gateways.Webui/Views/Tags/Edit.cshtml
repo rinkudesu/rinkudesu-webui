@@ -1,0 +1,19 @@
+﻿@model Rinkudesu.Gateways.Clients.Tags.TagDto
+@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = Localizer["title"];
+    Layout = "_Layout";
+    Uri returnUrl = ViewBag.ReturnUrl;
+}
+
+<h2>@Localizer["title"]</h2>
+<form asp-action="Edit" asp-antiforgery="true">
+    <input type="hidden" name="returnUrl" value="@returnUrl"/>
+    <input type="hidden" asp-for="Id" value="@Model.Id"/>
+    @await Html.PartialAsync("_FormFields", Model)
+    <div class="mb-3">
+        <input class="btn btn-primary" type="submit" value="@Localizer["save"]"/>
+        <a class="btn btn-secondary" href="@returnUrl">@Localizer["cancel"]</a>
+    </div>
+</form>

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Rinkudesu.Gateways.Webui.Resources.Views.Shared {
+namespace Rinkudesu.Gateways.Webui.Resources.Views.Tags {
     using System;
     
     
@@ -21,14 +21,14 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Shared {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class _Layout {
+    internal class Index {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal _Layout() {
+        internal Index() {
         }
         
         /// <summary>
@@ -38,7 +38,7 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Shared {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Views.Shared._Layout", typeof(_Layout).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Views.Tags.Index", typeof(Index).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -60,38 +60,20 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Home.
+        ///   Looks up a localized string similar to Edit.
         /// </summary>
-        internal static string home {
+        internal static string edit {
             get {
-                return ResourceManager.GetString("home", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Links.
-        /// </summary>
-        internal static string links {
-            get {
-                return ResourceManager.GetString("links", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Privacy.
-        /// </summary>
-        internal static string privacy {
-            get {
-                return ResourceManager.GetString("privacy", resourceCulture);
+                return ResourceManager.GetString("edit", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Tags.
         /// </summary>
-        internal static string tags {
+        internal static string title {
             get {
-                return ResourceManager.GetString("tags", resourceCulture);
+                return ResourceManager.GetString("title", resourceCulture);
             }
         }
     }

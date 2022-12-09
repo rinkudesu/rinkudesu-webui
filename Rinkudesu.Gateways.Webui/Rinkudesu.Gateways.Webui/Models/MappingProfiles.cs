@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using AutoMapper;
 using Rinkudesu.Gateways.Clients.Links;
+using Rinkudesu.Gateways.Clients.Tags;
 
 namespace Rinkudesu.Gateways.Webui.Models
 {
@@ -10,6 +11,7 @@ namespace Rinkudesu.Gateways.Webui.Models
         public MappingProfiles()
         {
             CreateMap<LinkDto, LinkIndexViewModel>();
+            CreateMap<TagDto, TagIndexViewModel>();
         }
     }
 }
