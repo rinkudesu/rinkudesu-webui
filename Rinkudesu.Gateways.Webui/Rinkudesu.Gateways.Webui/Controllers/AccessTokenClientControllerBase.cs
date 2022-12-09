@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Mvc;
 using Rinkudesu.Gateways.Clients;
 using Rinkudesu.Gateways.Webui.Utils;
 
 namespace Rinkudesu.Gateways.Webui.Controllers;
 
+[ExcludeFromCodeCoverage]
 public abstract class AccessTokenClientControllerBase<TClient> : ControllerBase where TClient : AccessTokenClient
 {
     private readonly TClient _client;
