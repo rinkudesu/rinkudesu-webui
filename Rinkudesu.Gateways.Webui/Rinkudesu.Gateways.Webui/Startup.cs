@@ -15,6 +15,8 @@ using Microsoft.IdentityModel.Tokens;
 using Polly;
 using Polly.Extensions.Http;
 using Rinkudesu.Gateways.Clients.Links;
+using Rinkudesu.Gateways.Clients.Tags;
+using Rinkudesu.Gateways.Utils;
 using Rinkudesu.Gateways.Webui.Middleware;
 using Rinkudesu.Gateways.Webui.Models;
 using Rinkudesu.Kafka.Dotnet;
@@ -116,11 +118,15 @@ namespace Rinkudesu.Gateways.Webui
             var linksUrl = Environment.GetEnvironmentVariable("RINKUDESU_LINKS") ??
                            throw new InvalidOperationException(
                                "RINKUDESU_LINKS env variable pointing to links microservice must be set");
+            var tagsUrl = Environment.GetEnvironmentVariable("RINKUDESU_TAGS") ?? throw new InvalidOperationException("RUNKUDESU_TAGS env variable pointing to tags microservice must be set");
             services.AddHttpClient<LinksClient>(o => {
                 o.BaseAddress = new Uri(linksUrl);
             }).AddPolicyHandler(GetRetryPolicy());
             services.AddHttpClient<SharedLinksClient>(o => {
                 o.BaseAddress = new Uri(linksUrl);
+            }).AddPolicyHandler(GetRetryPolicy());
+            services.AddHttpClient<TagsClient>(o => {
+                o.BaseAddress = tagsUrl.ToUri();
             }).AddPolicyHandler(GetRetryPolicy());
         }
 
