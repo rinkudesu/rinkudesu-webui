@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
 using Rinkudesu.Gateways.Clients.Tags;
 using Rinkudesu.Gateways.Utils;
 using Rinkudesu.Gateways.Webui.Models;
@@ -16,11 +15,9 @@ namespace Rinkudesu.Gateways.Webui.Controllers;
 [Authorize]
 public class TagsController : AccessTokenClientController<TagsClient>
 {
-    private readonly IStringLocalizer<TagsController> _localizer;
     private readonly IMapper _mapper;
-    public TagsController(TagsClient client, IStringLocalizer<TagsController> localizer, IMapper mapper) : base(client)
+    public TagsController(TagsClient client, IMapper mapper) : base(client)
     {
-        _localizer = localizer;
         _mapper = mapper;
     }
 
