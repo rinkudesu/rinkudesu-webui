@@ -85,5 +85,14 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Shared {
                 return ResourceManager.GetString("privacy", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tagi.
+        /// </summary>
+        internal static string tags {
+            get {
+                return ResourceManager.GetString("tags", resourceCulture);
+            }
+        }
     }
 }

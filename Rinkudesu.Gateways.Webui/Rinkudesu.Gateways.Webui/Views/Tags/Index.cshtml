@@ -1,0 +1,26 @@
+﻿@using Rinkudesu.Gateways.Clients.Tags
+@using Rinkudesu.Gateways.Webui.Utils
+@model System.Collections.Generic.List<Rinkudesu.Gateways.Webui.Models.TagIndexViewModel>
+@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = Localizer["title"];
+    Layout = "_Layout";
+}
+
+<h2>@Localizer["title"]</h2>
+
+@await Html.PartialAsync("_QuickCreatePartial", new TagDto())
+
+@foreach (var tag in Model)
+{
+    <div class="row index-data-row">
+        <div class="col index-data-row-col user-data-display">
+            @tag.Name
+        </div>
+        <div class="col index-data-row-col index-row-col-btn">
+            <a class="btn btn-info" asp-action="Edit" asp-route-id="@tag.Id.ToString()" asp-route-returnUrl="@Context.GetCurrentUrl()">@Localizer["edit"]</a>
+            @await Html.PartialAsync("_DeletePartial", tag)
+        </div>
+    </div>
+}

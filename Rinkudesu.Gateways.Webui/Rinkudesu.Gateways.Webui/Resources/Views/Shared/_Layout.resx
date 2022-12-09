@@ -28,4 +28,8 @@
         <value>Links</value>
         <comment>links</comment>
     </data>
+    <data name="tags" xml:space="preserve">
+        <value>Tags</value>
+        <comment>tags</comment>
+    </data>
 </root>

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Rinkudesu.Gateways.Webui.Resources.Views.Shared {
+namespace Rinkudesu.Gateways.Webui.Resources.Views.Tags {
     using System;
     
     
@@ -21,14 +21,14 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Shared {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class _Layout {
+    internal class Edit_pl {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal _Layout() {
+        internal Edit_pl() {
         }
         
         /// <summary>
@@ -38,7 +38,7 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Shared {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Views.Shared._Layout", typeof(_Layout).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Views.Tags.Edit.pl", typeof(Edit_pl).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -60,38 +60,29 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Home.
+        ///   Looks up a localized string similar to Anuluj.
         /// </summary>
-        internal static string home {
+        internal static string cancel {
             get {
-                return ResourceManager.GetString("home", resourceCulture);
+                return ResourceManager.GetString("cancel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Links.
+        ///   Looks up a localized string similar to Zapisz.
         /// </summary>
-        internal static string links {
+        internal static string save {
             get {
-                return ResourceManager.GetString("links", resourceCulture);
+                return ResourceManager.GetString("save", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Privacy.
+        ///   Looks up a localized string similar to Edytuj tag.
         /// </summary>
-        internal static string privacy {
+        internal static string title {
             get {
-                return ResourceManager.GetString("privacy", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tags.
-        /// </summary>
-        internal static string tags {
-            get {
-                return ResourceManager.GetString("tags", resourceCulture);
+                return ResourceManager.GetString("title", resourceCulture);
             }
         }
     }
