@@ -76,17 +76,12 @@ namespace Rinkudesu.Gateways.Clients.Links
                     Logger.LogWarning("Received non-success status code '{statusCode}' from links microservice", response.StatusCode);
                     return null;
                 }
-                try
-                {
-                    var links = await JsonSerializer.DeserializeAsync<IEnumerable<LinkDto>>(
-                        await response.Content.ReadAsStreamAsync(token).ConfigureAwait(false), CommonSettings.JsonOptions, token).ConfigureAwait(false);
-                    return links;
-                }
-                catch (JsonException e)
-                {
-                    Logger.LogWarning(e, "Unable to parse links");
-                    return null;
-                }
+                return await HandleMessageAndParseDto<IEnumerable<LinkDto>>(response, "all links", token).ConfigureAwait(false);
+            }
+            catch (JsonException e)
+            {
+                Logger.LogWarning(e, "Unable to parse links");
+                return null;
             }
             catch (HttpRequestException e)
             {
@@ -111,24 +106,18 @@ namespace Rinkudesu.Gateways.Clients.Links
 
         public async Task<bool> Edit(Guid id, LinkDto link, CancellationToken token = default)
         {
-            string json;
             try
             {
-                json = JsonSerializer.Serialize(link, CommonSettings.JsonOptions);
-            }
-            catch (JsonException e)
-            {
-                Logger.LogWarning(e, "Unable to serialise link into json");
-                return false;
-            }
-
-            try
-            {
-                using var content = new StringContent(json, Encoding.UTF8, "application/json");
+                using var content = GetJsonContent(link);
                 var response = await Client.PostAsync($"links/{id}".ToUri(), content, token).ConfigureAwait(false);
                 if (response.IsSuccessStatusCode) return true;
 
                 Logger.LogWarning($"Unable to edit link with id {id}. Response code was '{response.StatusCode}'.");
+                return false;
+            }
+            catch (JsonException e)
+            {
+                Logger.LogWarning(e, "Unable to serialise link into json");
                 return false;
             }
             catch (HttpRequestException e)
