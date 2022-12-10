@@ -15,6 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using Polly;
 using Polly.Extensions.Http;
 using Rinkudesu.Gateways.Clients.Links;
+using Rinkudesu.Gateways.Clients.LinkTags;
 using Rinkudesu.Gateways.Clients.Tags;
 using Rinkudesu.Gateways.Utils;
 using Rinkudesu.Gateways.Webui.Middleware;
@@ -126,6 +127,9 @@ namespace Rinkudesu.Gateways.Webui
                 o.BaseAddress = new Uri(linksUrl);
             }).AddPolicyHandler(GetRetryPolicy());
             services.AddHttpClient<TagsClient>(o => {
+                o.BaseAddress = tagsUrl.ToUri();
+            }).AddPolicyHandler(GetRetryPolicy());
+            services.AddHttpClient<LinkTagsClient>(o => {
                 o.BaseAddress = tagsUrl.ToUri();
             }).AddPolicyHandler(GetRetryPolicy());
         }

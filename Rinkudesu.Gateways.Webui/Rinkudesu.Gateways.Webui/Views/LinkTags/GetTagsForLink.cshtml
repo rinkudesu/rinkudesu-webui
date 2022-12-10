@@ -1,0 +1,7 @@
+﻿@model System.Collections.Generic.List<Rinkudesu.Gateways.Webui.Models.TagIndexViewModel>
+
+@*TODO: localise this*@
+<h3>Tags</h3>
+@string.Join(", ", Model.Select(t => t.Name))
+
+@*TODO: sending a request to add new tag should reload this whole view*@
