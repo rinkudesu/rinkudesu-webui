@@ -11,5 +11,11 @@ function performHttpRequest(url, method, body, onLoad, onFailure, onProgress) {
     request.onprogress = onProgress;
 
     request.open(method, url);
+
+    const antiforgery = document.getElementById('antiforgeryToken')?.getAttribute('token-value');
+    if (antiforgery) {
+        request.setRequestHeader('RequestVerificationToken', antiforgery);
+    }
+
     request.send(body);
 }

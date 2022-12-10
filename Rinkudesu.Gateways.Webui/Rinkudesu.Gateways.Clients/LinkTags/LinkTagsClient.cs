@@ -53,4 +53,28 @@ public class LinkTagsClient : AccessTokenClient
             return null;
         }
     }
+
+    public async Task<bool> Assign(LinkTagDto newAssignment, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            using var content = GetJsonContent(newAssignment);
+            var response = await Client.PostAsync("linkTags".ToUri(), content, cancellationToken).ConfigureAwait(false);
+            if (response.IsSuccessStatusCode)
+                return true;
+
+            Logger.LogWarning("Unable to create new link-tag assignment. Response code was {ResponseCode}", response.StatusCode);
+            return false;
+        }
+        catch (JsonException e)
+        {
+            Logger.LogWarning(e, "Unable to serialise new link-tag assignment into json");
+            return false;
+        }
+        catch (HttpRequestException e)
+        {
+            Logger.LogWarning(e, "Error while requesting new link-tag assignment creation.");
+            return false;
+        }
+    }
 }

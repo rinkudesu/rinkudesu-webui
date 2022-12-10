@@ -29,8 +29,20 @@ public class LinkTagsController : AccessTokenClientController<LinkTagsClient>
 
         var tags = await Client.GetTagsForLink(id, cancellationToken);
 
+        ViewData["LinkId"] = id;
         if (tags is null)
             return NotFound();
         return PartialView(_mapper.Map<List<TagIndexViewModel>>(tags));
+    }
+
+    [HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> Assign([FromForm] LinkTagDto newLinkTag, CancellationToken cancellationToken)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest();
+
+        var result = await Client.Assign(newLinkTag, cancellationToken);
+
+        return result ? Ok() : BadRequest();
     }
 }

@@ -1,7 +1,13 @@
-﻿@model System.Collections.Generic.List<Rinkudesu.Gateways.Webui.Models.TagIndexViewModel>
-
+﻿@using Microsoft.AspNetCore.Antiforgery
+@using Rinkudesu.Gateways.Clients.LinkTags
+@model System.Collections.Generic.List<Rinkudesu.Gateways.Webui.Models.TagIndexViewModel>
+@inject IAntiforgery Antiforgery
+<span hidden id="antiforgeryToken" token-value="@Antiforgery.GetTokens(Context).RequestToken"></span>
 @*TODO: localise this*@
+@{
+    Guid linkId = ViewBag.LinkId;
+}
 <h3>Tags</h3>
 @string.Join(", ", Model.Select(t => t.Name))
 
-@*TODO: sending a request to add new tag should reload this whole view*@
+@await Html.PartialAsync("_CreateAssignment", new LinkTagDto { LinkId = linkId })
