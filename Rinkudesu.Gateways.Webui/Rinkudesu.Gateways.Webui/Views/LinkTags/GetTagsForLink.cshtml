@@ -8,6 +8,9 @@
     Guid linkId = ViewBag.LinkId;
 }
 <h3>Tags</h3>
-@string.Join(", ", Model.Select(t => t.Name))
+@foreach (var tag in Model)
+{
+    <span class="tag-display">@Html.DisplayFor(m => tag.Name) <button class="delete-btn"><i class="fa-solid fa-trash"></i></button></span>
+}
 
 @await Html.PartialAsync("_CreateAssignment", new LinkTagDto { LinkId = linkId })

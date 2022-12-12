@@ -70,6 +70,12 @@ body {
   color: white!important;
 }
 
+:root {
+  --btn-radius: 10px;
+  --tag-outside-colour: blue;
+  --tag-delete-icon-colour: lightgray;
+}
+
 .index-data-row {
   margin-bottom: 0.5rem;
 }
@@ -84,4 +90,37 @@ body {
 
 .index-row-col-btn {
   max-width: 20%;
+}
+
+.tag-display {
+  border-color: var(--tag-outside-colour);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: var(--btn-radius);
+  padding: 2px 0 2px 7px;
+  margin-right: 4px;
+}
+
+.delete-btn {
+  padding: 1px;
+  border: 1px solid var(--tag-outside-colour);
+  border-left: none;
+  border-right: none;
+  background-color: var(--tag-outside-colour);
+  border-bottom-right-radius: var(--btn-radius);
+  border-top-right-radius: var(--btn-radius);
+  display: inline;
+}
+
+.delete-btn > i {
+  color: var(--tag-delete-icon-colour);
+  font-size: 80%;
+}
+
+.delete-btn:active {
+  background-color: var(--tag-delete-icon-colour);
+}
+
+.delete-btn:active > i {
+  color: var(--tag-outside-colour);
 }
