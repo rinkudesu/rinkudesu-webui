@@ -77,4 +77,22 @@ public class LinkTagsClient : AccessTokenClient
             return false;
         }
     }
+
+    public async Task<bool> Delete(Guid linkId, Guid tagId, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            var response = await Client.DeleteAsync($"linkTags?linkId={linkId}&tagId={tagId}".ToUri(), cancellationToken).ConfigureAwait(false);
+            if (response.IsSuccessStatusCode)
+                return true;
+
+            Logger.LogWarning("Unable to remove link-tag assignment. Response code was {ResponseCode}", response.StatusCode);
+            return false;
+        }
+        catch (HttpRequestException e)
+        {
+            Logger.LogWarning(e, "Error while deleting link-tag assignment.");
+            return false;
+        }
+    }
 }

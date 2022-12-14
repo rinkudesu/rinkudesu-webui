@@ -45,4 +45,15 @@ public class LinkTagsController : AccessTokenClientController<LinkTagsClient>
 
         return result ? Ok() : BadRequest();
     }
+
+    [HttpPost("delete"), ValidateAntiForgeryToken]
+    public async Task<IActionResult> Delete([FromForm] Guid linkId, [FromForm] Guid tagId, CancellationToken cancellationToken)
+    {
+        if (linkId == Guid.Empty || tagId == Guid.Empty)
+            return BadRequest();
+
+        var result = await Client.Delete(linkId, tagId, cancellationToken);
+
+        return result ? Ok() : BadRequest();
+    }
 }
