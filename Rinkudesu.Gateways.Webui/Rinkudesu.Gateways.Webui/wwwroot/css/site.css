@@ -74,6 +74,7 @@ body {
   --btn-radius: 10px;
   --tag-outside-colour: blue;
   --tag-delete-icon-colour: lightgray;
+  --btn-disabled-colour: darkslategray;
 }
 
 .index-data-row {
@@ -123,4 +124,12 @@ body {
 
 .delete-btn:active > i {
   color: var(--tag-outside-colour);
+}
+
+.delete-btn:disabled {
+  background-color: var(--tag-outside-colour);
+}
+
+.delete-btn:disabled > i {
+  color: var(--btn-disabled-colour);
 }
