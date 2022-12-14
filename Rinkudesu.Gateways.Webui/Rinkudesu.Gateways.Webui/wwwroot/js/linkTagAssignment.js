@@ -8,6 +8,7 @@ window.addEventListener('load', function () {
 
 
 function onTagsLoad(responseEvent) {
+    disableWithChildren(tagsDiv, true);
     if (responseEvent.currentTarget.status !== 200) {
         alert("Failed to load tags, please try again!");
         tagsDiv.innerText = "";
@@ -32,6 +33,7 @@ function onTagDelete(button) {
     formData.set('linkId', linkId);
     formData.set('tagId', tagId);
     performHttpRequest(`/api/LinkTags/delete`, "POST", formData, _ => loadTags(), _ => alert("Failed to load tags, please try again."));
+    disableWithChildren(tagsDiv);
 }
 
 function loadTags() {
@@ -43,4 +45,5 @@ function addTag(submitEvent) {
 
     let data = new FormData(document.getElementById('assignTag'));
     performHttpRequest('/api/LinkTags', "POST", data, _ => loadTags(), _ => alert("Failed to assign tag!"));
+    disableWithChildren(tagsDiv);
 }

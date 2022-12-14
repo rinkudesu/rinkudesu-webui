@@ -19,3 +19,10 @@ function performHttpRequest(url, method, body, onLoad, onFailure, onProgress) {
 
     request.send(body);
 }
+
+function disableWithChildren(node, status = false) {
+    node.disabled = !status;
+    for (const nodeChild of node.getElementsByTagName('*')) {
+        nodeChild.disabled = !status;
+    }
+}
