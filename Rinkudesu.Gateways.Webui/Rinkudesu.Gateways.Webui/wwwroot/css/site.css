@@ -102,6 +102,33 @@ body {
   margin-right: 4px;
 }
 
+.tag-name-entry-assign {
+  border-color: var(--tag-outside-colour);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: var(--btn-radius) 0 0 var(--btn-radius);
+  margin-right: 0;
+  padding-bottom: 2px;
+}
+
+.tag-assign-btn {
+  background-color: inherit;
+  border-color: var(--tag-outside-colour);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 0 var(--btn-radius) var(--btn-radius) 0;
+  margin-left: 0;
+  padding: 2px;
+}
+
+.tag-assign-btn:hover {
+  background-color: darkblue;
+}
+
+.tag-display.tag-assign-btn:active {
+  background-color: var(--tag-outside-colour);
+}
+
 .delete-btn {
   padding: 1px;
   border: 1px solid var(--tag-outside-colour);
