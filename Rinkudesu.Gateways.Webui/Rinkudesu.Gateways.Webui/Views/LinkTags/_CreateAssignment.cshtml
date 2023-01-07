@@ -1,8 +1,10 @@
 ﻿@model Rinkudesu.Gateways.Clients.LinkTags.LinkTagDto
 
-<form asp-action="Assign" id="assignTag">
-    <input type="hidden" asp-for="LinkId"/>
-    @*todo: this should support autocompletion*@
-    <input asp-for="TagId"/>
-    <input type="submit" value="Add"/>
-</form>
+<div class="mt-2">
+    <form asp-action="Assign" id="assignTag">
+        <input type="hidden" asp-for="LinkId"/>
+        @*todo: this should support autocompletion*@
+        <input asp-for="TagId" class="tag-name-entry-assign"/>
+        <button type="submit" class="tag-display tag-assign-btn"><i class="fa-regular fa-plus"></i></button>
+    </form>
+</div>
