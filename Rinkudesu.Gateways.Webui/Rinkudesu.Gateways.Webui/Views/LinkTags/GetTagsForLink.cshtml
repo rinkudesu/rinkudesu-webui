@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNetCore.Antiforgery
+@using Rinkudesu.Gateways.Clients.LinkTags
+@model System.Collections.Generic.List<Rinkudesu.Gateways.Webui.Models.TagIndexViewModel>
+@inject IAntiforgery Antiforgery
+<span hidden id="antiforgeryToken" token-value="@Antiforgery.GetTokens(Context).RequestToken"></span>
+@*TODO: localise this*@
+@{
+    Guid linkId = ViewBag.LinkId;
+}
+<h3>Tags</h3>
+@foreach (var tag in Model)
+{
+    <span class="tag-display">@Html.DisplayFor(m => tag.Name) <button class="delete-btn" data-action="link-tag-delete" data-tag="@tag.Id.ToString()" data-link="@linkId.ToString()"><i class="fa-solid fa-trash"></i></button></span>
+}
+
+@await Html.PartialAsync("_CreateAssignment", new LinkTagDto { LinkId = linkId })
