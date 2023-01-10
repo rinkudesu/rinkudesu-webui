@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Rinkudesu.Gateways.Clients.Links;
+using Rinkudesu.Gateways.Clients.LinkTags;
 using Rinkudesu.Gateways.Utils;
 using Rinkudesu.Gateways.Webui.Utils;
 
@@ -26,12 +27,23 @@ namespace Rinkudesu.Gateways.Webui.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromServices] LinkTagsClient linkTagsClient, CancellationToken cancellationToken)
         {
-            var links = await Client.GetLinks();
+            linkTagsClient.SetAccessToken(HttpContext.GetJwt());
+            var links = await Client.GetLinks(cancellationToken);
             if (links is null)
                 return this.ReturnNotFound("/".ToUri());
-            return View(_mapper.Map<List<LinkDto>>(links.ToList()));
+            var linkModels = _mapper.Map<List<LinkDto>>(links.ToList());
+
+            foreach (var link in linkModels)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                var tags = await linkTagsClient.GetTagsForLink(link.Id, cancellationToken);
+                if (tags is null) return this.ReturnBadRequest("/".ToUri(), "We were unable to process tags assigned to links.");
+                link.LinkTags = tags.ToList();
+            }
+
+            return View(linkModels);
         }
 
         [HttpGet]

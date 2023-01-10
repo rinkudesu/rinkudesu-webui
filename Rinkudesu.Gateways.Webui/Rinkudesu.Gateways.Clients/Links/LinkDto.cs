@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Rinkudesu.Gateways.Clients.Tags;
 
 namespace Rinkudesu.Gateways.Clients.Links
 {
@@ -16,6 +18,8 @@ namespace Rinkudesu.Gateways.Clients.Links
         public LinkPrivacyOptions PrivacyOptions { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime LastUpdate { get; set; }
+
+        public List<TagDto> LinkTags { get; set; }
     }
 
     public enum LinkPrivacyOptions
