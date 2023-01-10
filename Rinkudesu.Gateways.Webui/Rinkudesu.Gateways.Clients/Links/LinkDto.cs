@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using Rinkudesu.Gateways.Clients.Tags;
 
 namespace Rinkudesu.Gateways.Clients.Links
 {
-    public class LinkDto
+    public sealed class LinkDto
     {
         public Guid Id { get; set; }
         [Display(Name = nameof(Resources.Links.LinkDto.linkUrl), ResourceType = typeof(Resources.Links.LinkDto))]
@@ -19,7 +20,8 @@ namespace Rinkudesu.Gateways.Clients.Links
         public DateTime CreationDate { get; set; }
         public DateTime LastUpdate { get; set; }
 
-        public List<TagDto> LinkTags { get; set; }
+        [SuppressMessage("Design", "CA1002:Do not expose generic lists")]
+        public List<TagDto> LinkTags { get; } = new();
     }
 
     public enum LinkPrivacyOptions

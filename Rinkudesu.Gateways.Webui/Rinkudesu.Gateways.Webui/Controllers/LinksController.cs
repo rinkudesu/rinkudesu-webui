@@ -40,7 +40,7 @@ namespace Rinkudesu.Gateways.Webui.Controllers
                 cancellationToken.ThrowIfCancellationRequested();
                 var tags = await linkTagsClient.GetTagsForLink(link.Id, cancellationToken);
                 if (tags is null) return this.ReturnBadRequest("/".ToUri(), "We were unable to process tags assigned to links.");
-                link.LinkTags = tags.ToList();
+                link.LinkTags.AddRange(tags);
             }
 
             return View(linkModels);
