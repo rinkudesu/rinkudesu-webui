@@ -27,11 +27,17 @@
 @await Html.PartialAsync("_QuickCreatePartial", new LinkDto())
 <a asp-action="Create" class="btn btn-dark">@Localizer["create"]</a>
 
-@foreach (var link in Model!)
+@foreach (var link in Model)
 {
     <div class="row mb-2">
         <div class="col">
             @link.LinkUrl
+        </div>
+        <div class="col multiline-tags-container">
+            @foreach (var tag in link.LinkTags)
+            {
+                <span class="tag-display"><span class="user-data-display">@tag.Name</span></span>
+            }
         </div>
         <div class="col-1">
             <a class="btn btn-info" asp-action="Edit" asp-route-id="@link.Id.ToString()" asp-route-returnUrl="@Context.GetCurrentUrl()">@Localizer["edit"]</a>
