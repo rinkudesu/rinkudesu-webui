@@ -10,6 +10,7 @@
     var token = antiforgery.GetTokens(Context).RequestToken;
 }
 <input type="hidden" id="token" value="@token"/>
+<input type="hidden" id="translations" data-load-failed="@Localizer["loadFailed"]" data-assign-failed="@Localizer["assignFailed"]"/>
 
 <h2>@Localizer["edit"] @Html.DisplayFor(l => l.Title)</h2>
 
@@ -31,7 +32,7 @@
     </div>
 </form>
 
-<div id="tags" linkId="@Model.Id.ToString()">Loading tags...</div>
+<div id="tags" linkId="@Model.Id.ToString()">@Localizer["loadingTags"]</div>
 
 <div class="modal fade" id="sharingOptions" tabindex="-1" aria-labelledby="#sharingOptionsLabel" aria-hidden="true">
     <div class="modal-dialog">

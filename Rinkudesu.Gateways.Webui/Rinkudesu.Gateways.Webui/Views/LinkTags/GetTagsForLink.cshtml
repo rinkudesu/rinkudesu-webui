@@ -2,12 +2,12 @@
 @using Rinkudesu.Gateways.Clients.LinkTags
 @model System.Collections.Generic.List<Rinkudesu.Gateways.Webui.Models.TagIndexViewModel>
 @inject IAntiforgery Antiforgery
+@inject IViewLocalizer Localizer
 <span hidden id="antiforgeryToken" token-value="@Antiforgery.GetTokens(Context).RequestToken"></span>
-@*TODO: localise this*@
 @{
     Guid linkId = ViewBag.LinkId;
 }
-<h3>Tags</h3>
+<h3>@Localizer["tags"]</h3>
 @foreach (var tag in Model)
 {
     <span class="multiline-tags-container"><span class="tag-display tag-display-with-removal">@Html.DisplayFor(m => tag.Name) <button class="delete-btn" data-action="link-tag-delete" data-tag="@tag.Id.ToString()" data-link="@linkId.ToString()"><i class="fa-solid fa-trash"></i></button></span></span>

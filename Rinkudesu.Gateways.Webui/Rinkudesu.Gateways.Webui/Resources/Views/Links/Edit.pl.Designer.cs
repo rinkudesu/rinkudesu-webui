@@ -60,6 +60,15 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Links {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nie udało się przypisać tagu!.
+        /// </summary>
+        internal static string assignFailed {
+            get {
+                return ResourceManager.GetString("assignFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Anuluj.
         /// </summary>
         internal static string cancel {
@@ -74,6 +83,24 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Links {
         internal static string edit {
             get {
                 return ResourceManager.GetString("edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nie udało się wczytać tagów, prosimy spróbować ponownie.
+        /// </summary>
+        internal static string loadFailed {
+            get {
+                return ResourceManager.GetString("loadFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wczytywanie tagów....
+        /// </summary>
+        internal static string loadingTags {
+            get {
+                return ResourceManager.GetString("loadingTags", resourceCulture);
             }
         }
         
