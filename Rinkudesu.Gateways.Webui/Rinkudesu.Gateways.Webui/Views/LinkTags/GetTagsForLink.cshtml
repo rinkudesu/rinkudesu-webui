@@ -10,7 +10,7 @@
 <h3>Tags</h3>
 @foreach (var tag in Model)
 {
-    <span class="tag-display">@Html.DisplayFor(m => tag.Name) <button class="delete-btn" data-action="link-tag-delete" data-tag="@tag.Id.ToString()" data-link="@linkId.ToString()"><i class="fa-solid fa-trash"></i></button></span>
+    <span class="multiline-tags-container"><span class="tag-display tag-display-with-removal">@Html.DisplayFor(m => tag.Name) <button class="delete-btn" data-action="link-tag-delete" data-tag="@tag.Id.ToString()" data-link="@linkId.ToString()"><i class="fa-solid fa-trash"></i></button></span></span>
 }
 
 @await Html.PartialAsync("_CreateAssignment", new LinkTagDto { LinkId = linkId })
