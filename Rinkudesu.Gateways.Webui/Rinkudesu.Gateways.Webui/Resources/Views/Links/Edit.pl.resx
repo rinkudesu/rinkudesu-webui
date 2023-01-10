@@ -46,4 +46,16 @@
         <value>Zatrzymaj udostępnianie</value>
         <comment>stop</comment>
     </data>
+    <data name="loadFailed" xml:space="preserve">
+        <value>Nie udało się wczytać tagów, prosimy spróbować ponownie</value>
+        <comment>loadFailed</comment>
+    </data>
+    <data name="assignFailed" xml:space="preserve">
+        <value>Nie udało się przypisać tagu!</value>
+        <comment>assignFailed</comment>
+    </data>
+    <data name="loadingTags" xml:space="preserve">
+        <value>Wczytywanie tagów...</value>
+        <comment>loadingTags</comment>
+    </data>
 </root>

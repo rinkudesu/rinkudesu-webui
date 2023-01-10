@@ -46,4 +46,15 @@
         <value>Stop sharing</value>
         <comment>stop</comment>
     </data>
+    <data name="loadFailed" xml:space="preserve">
+        <value>Failed to load tags, please try again!</value>
+        <comment>loadFailed</comment>
+    </data>
+    <data name="assignFailed" xml:space="preserve">
+        <value>Failed to assign tag!</value>
+    </data>
+    <data name="loadingTags" xml:space="preserve">
+        <value>Loading tags...</value>
+        <comment>loadingTags</comment>
+    </data>
 </root>

@@ -1,5 +1,4 @@
 let tagsDiv;
-//todo: localise this file
 
 window.addEventListener('load', function () {
     tagsDiv = document.getElementById('tags');
@@ -10,7 +9,7 @@ window.addEventListener('load', function () {
 function onTagsLoad(responseEvent) {
     disableWithChildren(tagsDiv, true);
     if (responseEvent.currentTarget.status !== 200) {
-        alert("Failed to load tags, please try again!");
+        alert(document.getElementById('translations').getAttribute('data-load-failed'));
         tagsDiv.innerText = "";
         return;
     }
@@ -32,12 +31,12 @@ function onTagDelete(button) {
     let formData = new FormData();
     formData.set('linkId', linkId);
     formData.set('tagId', tagId);
-    performHttpRequest(`/api/LinkTags/delete`, "POST", formData, _ => loadTags(), _ => alert("Failed to load tags, please try again."));
+    performHttpRequest(`/api/LinkTags/delete`, "POST", formData, _ => loadTags(), _ => alert(document.getElementById('translations').getAttribute('data-load-failed')));
     disableWithChildren(tagsDiv);
 }
 
 function loadTags() {
-    performHttpRequest(`/api/LinkTags/getTagsForLink/${tagsDiv.getAttribute('linkId')}`, "GET", null, onTagsLoad, _ => alert("Failed to load tags, please try again."));
+    performHttpRequest(`/api/LinkTags/getTagsForLink/${tagsDiv.getAttribute('linkId')}`, "GET", null, onTagsLoad, _ => alert(document.getElementById('translations').getAttribute('data-load-failed')));
 }
 
 function addTag(submitEvent) {

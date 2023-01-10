@@ -163,6 +163,14 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>_DeletePartial.pl.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\LinkTags\GetTagsForLink.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>GetTagsForLink.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\LinkTags\GetTagsForLink.pl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>GetTagsForLink.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -325,6 +333,16 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>_DeletePartial.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\LinkTags\GetTagsForLink.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>GetTagsForLink.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\LinkTags\GetTagsForLink.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>GetTagsForLink.pl.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 
