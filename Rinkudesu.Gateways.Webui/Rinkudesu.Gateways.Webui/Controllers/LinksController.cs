@@ -10,6 +10,7 @@ using Microsoft.Extensions.Localization;
 using Rinkudesu.Gateways.Clients.Links;
 using Rinkudesu.Gateways.Clients.LinkTags;
 using Rinkudesu.Gateways.Utils;
+using Rinkudesu.Gateways.Webui.Models;
 using Rinkudesu.Gateways.Webui.Utils;
 
 namespace Rinkudesu.Gateways.Webui.Controllers
@@ -27,10 +28,12 @@ namespace Rinkudesu.Gateways.Webui.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index([FromServices] LinkTagsClient linkTagsClient, CancellationToken cancellationToken)
+        public async Task<IActionResult> Index([FromQuery] LinkIndexQueryModel query, [FromServices] LinkTagsClient linkTagsClient, CancellationToken cancellationToken)
         {
+            if (!ModelState.IsValid) return this.ReturnBadRequest("/".ToUri(), "Provided query is not valid");
+
             linkTagsClient.SetAccessToken(HttpContext.GetJwt());
-            var links = await Client.GetLinks(cancellationToken);
+            var links = await Client.GetLinks(_mapper.Map<LinkQueryDto>(query), cancellationToken);
             if (links is null)
                 return this.ReturnNotFound("/".ToUri());
             var linkModels = _mapper.Map<List<LinkDto>>(links.ToList());
