@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
 
 namespace Rinkudesu.Gateways.Clients.Links;
 
@@ -14,13 +14,13 @@ public class LinkQueryDto
     //todo: consider adding tests for this method once it becomes more complex than this or starts processing user-supplied bare strings
     internal string GenerateUriQueryString()
     {
-        var query = new StringBuilder("?showPrivate=true");
+        var queryArguments = new LinkedList<string>();
         // whenever any part of query string is generated using user-supplied data, make sure it's either safe to use (like GUID) or properly escaped before appending it to the query
         if (TagIds is { Length: > 0 })
         {
-            query.Append('&');
-            query.Append(string.Join('&', TagIds.Select(t => $"tagIds={t.ToString()}")));
+            queryArguments.AddLast(string.Join('&', TagIds.Select(t => $"tagIds={t.ToString()}")));
         }
-        return query.ToString();
+        queryArguments.AddLast("&showPrivate=true");
+        return $"?{string.Join('&', queryArguments)}";
     }
 }
