@@ -1,6 +1,6 @@
 @using Rinkudesu.Gateways.Webui.Utils
 @inject IViewLocalizer Localizer
-@model Rinkudesu.Gateways.Clients.Links.LinkDto
+@model Rinkudesu.Gateways.Webui.Models.LinkIndexViewModel
 
 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-@Model.Id.ToString()">
     @Localizer["delete"]

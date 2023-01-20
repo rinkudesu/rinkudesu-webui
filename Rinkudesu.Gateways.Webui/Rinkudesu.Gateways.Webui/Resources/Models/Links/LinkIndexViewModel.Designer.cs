@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Rinkudesu.Gateways.Clients.Resources.Links {
+namespace Rinkudesu.Gateways.Webui.Resources.Models.Links {
     using System;
     
     
@@ -21,14 +21,14 @@ namespace Rinkudesu.Gateways.Clients.Resources.Links {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class LinkDto {
+    public class LinkIndexViewModel {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal LinkDto() {
+        internal LinkIndexViewModel() {
         }
         
         /// <summary>
@@ -38,7 +38,7 @@ namespace Rinkudesu.Gateways.Clients.Resources.Links {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Rinkudesu.Gateways.Clients.Resources.Links.LinkDto", typeof(LinkDto).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Models.Links.LinkIndexViewModel", typeof(LinkIndexViewModel).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
