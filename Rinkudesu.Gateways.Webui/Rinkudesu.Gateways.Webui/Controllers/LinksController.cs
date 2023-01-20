@@ -46,6 +46,7 @@ namespace Rinkudesu.Gateways.Webui.Controllers
                 link.LinkTags.AddRange(tags);
             }
 
+            ViewData["Query"] = query;
             return View(linkModels);
         }
 

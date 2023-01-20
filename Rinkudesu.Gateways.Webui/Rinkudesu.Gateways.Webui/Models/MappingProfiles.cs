@@ -12,7 +12,9 @@ namespace Rinkudesu.Gateways.Webui.Models
         {
             CreateMap<LinkDto, LinkIndexViewModel>();
             CreateMap<TagDto, TagIndexViewModel>();
-            CreateMap<LinkIndexQueryModel, LinkQueryDto>();
+            CreateMap<LinkIndexQueryModel, LinkQueryDto>()
+                //todo: remove this mapping once multiple tags can be selected
+                .ForMember(dest => dest.TagIds, opt => opt.MapFrom(src => src.TagIds == null ? null : new []{ src.TagIds }));
         }
     }
 }
