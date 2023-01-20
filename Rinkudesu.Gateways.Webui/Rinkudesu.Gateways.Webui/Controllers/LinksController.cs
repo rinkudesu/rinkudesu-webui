@@ -36,7 +36,7 @@ namespace Rinkudesu.Gateways.Webui.Controllers
             var links = await Client.GetLinks(_mapper.Map<LinkQueryDto>(query), cancellationToken);
             if (links is null)
                 return this.ReturnNotFound("/".ToUri());
-            var linkModels = _mapper.Map<List<LinkDto>>(links.ToList());
+            var linkModels = _mapper.Map<List<LinkIndexViewModel>>(links.ToList());
 
             foreach (var link in linkModels)
             {
@@ -73,7 +73,7 @@ namespace Rinkudesu.Gateways.Webui.Controllers
             if (url is null)
                 return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri(), _localizer["missingUrl"]);
 
-            var newLink = new LinkDto { Title = url.ToString(), LinkUrl = url, PrivacyOptions = LinkPrivacyOptions.Private };
+            var newLink = new LinkDto { Title = url.ToString(), LinkUrl = url, PrivacyOptions = LinkPrivacyOptionsDto.Private };
 
             var isSuccess = await Client.CreateLink(newLink);
             if (!isSuccess)
@@ -107,7 +107,7 @@ namespace Rinkudesu.Gateways.Webui.Controllers
             if (link is null)
                 return this.ReturnNotFound(Url.ActionLink(nameof(Index))!.ToUri());
             ViewData["ReturnUrl"] = returnUrl;
-            return View(link);
+            return View(_mapper.Map<LinkIndexViewModel>(link));
         }
 
         [HttpPost]

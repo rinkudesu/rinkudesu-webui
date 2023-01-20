@@ -1,7 +1,7 @@
 ﻿@using Rinkudesu.Gateways.Clients.Links
 @using Rinkudesu.Gateways.Webui.Utils
 @inject IViewLocalizer Localizer
-@model System.Collections.Generic.List<Rinkudesu.Gateways.Clients.Links.LinkDto>
+@model System.Collections.Generic.List<Rinkudesu.Gateways.Webui.Models.LinkIndexViewModel>
 
 @{
     ViewBag.Title = Localizer["title"];
@@ -25,7 +25,7 @@
     </div>
 </form>
 
-@await Html.PartialAsync("_QuickCreatePartial", new LinkDto())
+@await Html.PartialAsync("_QuickCreatePartial", new LinkIndexViewModel())
 <a asp-action="Create" class="btn btn-dark">@Localizer["create"]</a>
 
 @await Html.PartialAsync("_FilterPartial", query)
