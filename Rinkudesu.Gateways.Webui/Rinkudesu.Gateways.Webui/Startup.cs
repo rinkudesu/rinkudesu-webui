@@ -1,7 +1,9 @@
 using System;
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
@@ -11,7 +13,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
-using Microsoft.IdentityModel.Tokens;
 using Polly;
 using Polly.Extensions.Http;
 using Rinkudesu.Gateways.Clients.Links;
@@ -56,7 +57,26 @@ namespace Rinkudesu.Gateways.Webui
             services.AddAuthentication(options => {
                     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-                }).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+                })
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options => {
+                    //forcefully revalidate cookie once jwt token is expired
+                    //
+                    // This is necessary as aspnet doesn't do this by itself for some reason when used together with a cookie.
+                    // That would lead to expired JWTs being passed to other microservices, that would (correctly) reject them.
+                    // What the line below does is it manually checks for the expiration date, and if it's passed, forces cookie revalidation, which in turn runs the challenge, thus refreshing the token.
+                    options.Events.OnValidatePrincipal = context => {
+                        if (context.Properties.Items.TryGetValue(".Token.expires_at", out var expireString))
+                        {
+                            var expiration = DateTime.Parse(expireString!, CultureInfo.InvariantCulture);
+                            if (expiration < DateTime.Now)
+                            {
+                                context.ShouldRenew = true;
+                                context.RejectPrincipal();
+                            }
+                        }
+                        return Task.CompletedTask;
+                    };
+                })
                 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options => {
                     options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     options.Authority = KeycloakSettings.Current.Authority;
@@ -66,10 +86,9 @@ namespace Rinkudesu.Gateways.Webui
                     options.UseTokenLifetime = true;
                     options.GetClaimsFromUserInfoEndpoint = true;
                     options.RequireHttpsMetadata = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("RINKUDESU_AUTHORITY_ALLOW_HTTP"));
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        NameClaimType = "preferred_username"
-                    };
+                    options.TokenValidationParameters.NameClaimType = "preferred_username";
+                    options.TokenValidationParameters.ClockSkew = TimeSpan.Zero;
+                    options.TokenValidationParameters.ValidateLifetime = true;
                 });
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
