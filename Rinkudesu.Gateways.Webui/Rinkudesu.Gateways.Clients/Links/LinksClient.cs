@@ -66,11 +66,11 @@ namespace Rinkudesu.Gateways.Clients.Links
             }
         }
 
-        public async Task<IEnumerable<LinkDto>?> GetLinks(CancellationToken token = default)
+        public async Task<IEnumerable<LinkDto>?> GetLinks(LinkQueryDto query, CancellationToken token = default)
         {
             try
             {
-                var response = await Client.GetAsync("links?showPrivate=true".ToUri(), token).ConfigureAwait(false);
+                var response = await Client.GetAsync($"links{query.GenerateUriQueryString()}".ToUri(), token).ConfigureAwait(false);
                 if (!response.IsSuccessStatusCode)
                 {
                     Logger.LogWarning("Received non-success status code '{statusCode}' from links microservice", response.StatusCode);

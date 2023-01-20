@@ -6,6 +6,7 @@
 @{
     ViewBag.Title = Localizer["title"];
     Layout = "_Layout";
+    var query = (LinkIndexQueryModel)ViewBag.Query;
 }
 
 <h2>@Localizer["title"]</h2>
@@ -26,6 +27,8 @@
 
 @await Html.PartialAsync("_QuickCreatePartial", new LinkDto())
 <a asp-action="Create" class="btn btn-dark">@Localizer["create"]</a>
+
+@await Html.PartialAsync("_FilterPartial", query)
 
 @foreach (var link in Model)
 {
