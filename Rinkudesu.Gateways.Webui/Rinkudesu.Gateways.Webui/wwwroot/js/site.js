@@ -33,7 +33,7 @@ window.addEventListener('load', _ => {
         labelField: 'data',
         searchField: 'data',
         load: function (query, callback) {
-            var url = '/api/autocompletion/TagsAutocompletionApi?name=' + encodeURIComponent(query);
+            const url = '/api/autocompletion/TagsAutocompletionApi?name=' + encodeURIComponent(query);
             fetch(url)
                 .then(response => response.json())
                 .then(json => {
