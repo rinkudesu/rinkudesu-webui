@@ -26,3 +26,21 @@ function disableWithChildren(node, status = false) {
         nodeChild.disabled = !status;
     }
 }
+
+window.addEventListener('load', _ => {
+    new TomSelect('#penis', {
+        valueField: 'id',
+        labelField: 'data',
+        searchField: 'data',
+        load: function (query, callback) {
+            var url = '/api/autocompletion/TagsAutocompletionApi?name=' + encodeURIComponent(query);
+            fetch(url)
+                .then(response => response.json())
+                .then(json => {
+                    callback(json);
+                }).catch(()=>{
+                callback();
+            });
+        }
+    });
+})
