@@ -28,7 +28,7 @@ function disableWithChildren(node, status = false) {
 }
 
 window.addEventListener('load', _ => {
-    new TomSelect('#penis', {
+    new TomSelect('.tags-autocompletion', {
         valueField: 'id',
         labelField: 'data',
         searchField: 'data',
@@ -38,7 +38,7 @@ window.addEventListener('load', _ => {
                 .then(response => response.json())
                 .then(json => {
                     callback(json);
-                }).catch(()=>{
+                }).catch(() => {
                 callback();
             });
         }

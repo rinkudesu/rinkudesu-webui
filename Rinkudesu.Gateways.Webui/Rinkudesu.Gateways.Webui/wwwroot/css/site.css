@@ -170,3 +170,7 @@ body {
 .delete-btn:disabled > i {
   color: var(--btn-disabled-colour);
 }
+
+.ts-control input {
+  color: white!important;
+}

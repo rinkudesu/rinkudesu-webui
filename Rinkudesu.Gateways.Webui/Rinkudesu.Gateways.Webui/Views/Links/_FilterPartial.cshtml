@@ -18,7 +18,7 @@
             <label asp-for="TagIds"></label>
         </div>
         <div class="col-10">
-            <select id="penis" class="tags-autocompletion" asp-for="TagIds">
+            <select class="tags-autocompletion" asp-for="TagIds">
                 @if (tag is not null)
                 {
                     <option selected value="@tag.Id">@tag.Name</option>
