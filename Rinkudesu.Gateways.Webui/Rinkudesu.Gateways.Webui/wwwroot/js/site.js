@@ -26,3 +26,21 @@ function disableWithChildren(node, status = false) {
         nodeChild.disabled = !status;
     }
 }
+
+window.addEventListener('load', _ => {
+    new TomSelect('.tags-autocompletion', {
+        valueField: 'id',
+        labelField: 'data',
+        searchField: 'data',
+        load: function (query, callback) {
+            const url = '/api/autocompletion/TagsAutocompletionApi?name=' + encodeURIComponent(query);
+            fetch(url)
+                .then(response => response.json())
+                .then(json => {
+                    callback(json);
+                }).catch(() => {
+                callback();
+            });
+        }
+    });
+})

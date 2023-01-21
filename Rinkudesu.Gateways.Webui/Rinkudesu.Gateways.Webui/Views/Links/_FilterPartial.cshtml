@@ -4,11 +4,12 @@
 @inject TagsClient TagsClient
 
 @{
-    //todo: this is temporary and needs better, dynamic lookup with autocompletion, but since that doesn't exist yet, I'll just put this thing here
-    //todo: for that same reason this view is for now limited to only a single tag filtering (as bootstrap doesn't play well with multiselects for some reason)
-    TagsClient.SetAccessToken(Context.GetJwt());
-    var tags = await TagsClient.GetTags();
-    var selectList = new SelectList(tags, nameof(TagDto.Id), nameof(TagDto.Name), Model.TagIds);
+    TagDto? tag = null;
+    if (Model.TagIds.HasValue)
+    {
+        TagsClient.SetAccessToken(Context.GetJwt());
+        tag = await TagsClient.GetTag(Model.TagIds.Value);
+    }
 }
 
 <form method="get" asp-action="Index" asp-antiforgery="false" class="mt-3 mb-3">
@@ -17,8 +18,15 @@
             <label asp-for="TagIds"></label>
         </div>
         <div class="col-10">
-            <select class="form-select" asp-items="selectList" asp-for="TagIds">
-                <option value=""></option>
+            <select class="tags-autocompletion" asp-for="TagIds">
+                @if (tag is not null)
+                {
+                    <option selected value="@tag.Id">@tag.Name</option>
+                }
+                else
+                {
+                    <option value=""></option>
+                }
             </select>
         </div>
     </div>
