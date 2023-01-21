@@ -23,6 +23,9 @@ public class TagsAutocompletionApiController : AccessTokenClientControllerBase<T
     {
         //todo: this should filter by name once that becomes available in the microservice
         var results = await Client.GetTags(cancellationToken);
+        if (results is null)
+            return NotFound();
+
         return Ok(results.Select(r => new AutocompletionItemViewModel { ItemId = r.Id.ToString(), ItemData = r.Name }).ToArray());
     }
 }
