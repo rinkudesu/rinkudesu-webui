@@ -179,6 +179,22 @@
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>LinkIndexViewModel.pl.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Models\Links\LinkIndexQueryModel.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>LinkIndexQueryModel.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Models\Links\LinkIndexQueryModel.pl.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>LinkIndexQueryModel.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Links\_FilterPartial.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_FilterPartial.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Links\_FilterPartial.pl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_FilterPartial.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -361,6 +377,21 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>LinkIndexViewModel.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Models\Links\LinkIndexQueryModel.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>LinkIndexQueryModel.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Links\_FilterPartial.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_FilterPartial.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Links\_FilterPartial.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_FilterPartial.pl.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

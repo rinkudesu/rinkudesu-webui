@@ -10,6 +10,6 @@ namespace Rinkudesu.Gateways.Webui.Models;
 [ExcludeFromCodeCoverage]
 public class LinkIndexQueryModel
 {
-    [Display(Name = "Tags")]
+    [Display(Name = nameof(Resources.Models.Links.LinkIndexQueryModel.tags), ResourceType = typeof(Resources.Models.Links.LinkIndexQueryModel))]
     public Guid[]? TagIds { get; set; }
 }
