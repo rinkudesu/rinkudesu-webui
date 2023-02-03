@@ -51,11 +51,11 @@ public class TagsClient : AccessTokenClient
         }
     }
 
-    public async Task<IEnumerable<TagDto>?> GetTags(CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<TagDto>?> GetTags(TagQueryDto tagQuery, CancellationToken cancellationToken = default)
     {
         try
         {
-            var response = await Client.GetAsync("tags".ToUri(), cancellationToken).ConfigureAwait(false);
+            var response = await Client.GetAsync($"tags{tagQuery.GenerateUriQueryString()}".ToUri(), cancellationToken).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
             {
                 Logger.LogWarning("Received non-success status code '{StatusCode}' from tags microservice", response.StatusCode);
