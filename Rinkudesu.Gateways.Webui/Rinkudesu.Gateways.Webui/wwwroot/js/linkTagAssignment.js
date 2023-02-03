@@ -23,6 +23,17 @@ function onTagsLoad(responseEvent) {
 
         deleteButton.addEventListener('click', _ => onTagDelete(deleteButton));
     }
+
+    initialiseTomselect();
+
+    // make sure tomselect inputs have proper class applied
+    for (const tagNameInput of document.getElementById('tag-assignment').children) {
+        for (const tsInputDiv of tagNameInput.getElementsByClassName('ts-control')) {
+            if (!tsInputDiv.classList.contains('tag-name-entry-assign')) {
+                tsInputDiv.classList.add('tag-name-entry-assign');
+            }
+        }
+    }
 }
 
 function onTagDelete(button) {

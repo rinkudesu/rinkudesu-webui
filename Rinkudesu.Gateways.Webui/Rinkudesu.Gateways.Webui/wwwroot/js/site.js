@@ -27,7 +27,9 @@ function disableWithChildren(node, status = false) {
     }
 }
 
-window.addEventListener('load', _ => {
+window.addEventListener('load', _ => initialiseTomselect())
+
+function initialiseTomselect() {
     new TomSelect('.tags-autocompletion', {
         valueField: 'id',
         labelField: 'data',
@@ -43,4 +45,4 @@ window.addEventListener('load', _ => {
             });
         }
     });
-})
+}
