@@ -60,11 +60,47 @@ namespace Rinkudesu.Gateways.Webui.Resources.Models.Links {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sort.
+        /// </summary>
+        public static string sort {
+            get {
+                return ResourceManager.GetString("sort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort descending.
+        /// </summary>
+        public static string sortDescending {
+            get {
+                return ResourceManager.GetString("sortDescending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tags.
         /// </summary>
         public static string tags {
             get {
                 return ResourceManager.GetString("tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string title {
+            get {
+                return ResourceManager.GetString("title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Url.
+        /// </summary>
+        public static string url {
+            get {
+                return ResourceManager.GetString("url", resourceCulture);
             }
         }
     }

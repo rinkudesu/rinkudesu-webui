@@ -21,4 +21,16 @@
     <data name="tags" xml:space="preserve">
         <value>Tagi</value>
     </data>
+    <data name="sort" xml:space="preserve">
+        <value>Sortowanie</value>
+    </data>
+    <data name="sortDescending" xml:space="preserve">
+        <value>Sortowanie malejące</value>
+    </data>
+    <data name="title" xml:space="preserve">
+        <value>Tytuł</value>
+    </data>
+    <data name="url" xml:space="preserve">
+        <value>Url</value>
+    </data>
 </root>
