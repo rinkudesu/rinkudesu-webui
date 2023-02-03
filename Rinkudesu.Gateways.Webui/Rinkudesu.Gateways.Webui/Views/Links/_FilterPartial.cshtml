@@ -4,11 +4,14 @@
 @inject TagsClient TagsClient
 
 @{
-    TagDto? tag = null;
-    if (Model.TagIds.HasValue)
+    TagsClient.SetAccessToken(Context.GetJwt());
+    var selectedTags = new List<TagDto>();
+    foreach (var tagId in Model.TagIds ?? Array.Empty<Guid>())
     {
-        TagsClient.SetAccessToken(Context.GetJwt());
-        tag = await TagsClient.GetTag(Model.TagIds.Value);
+        var tag = await TagsClient.GetTag(tagId);
+        if (tag is null)
+            continue;
+        selectedTags.Add(tag);
     }
 }
 
@@ -19,13 +22,9 @@
         </div>
         <div class="col-10">
             <select class="tags-autocompletion" asp-for="TagIds">
-                @if (tag is not null)
+                @foreach(var selectedTag in selectedTags)
                 {
-                    <option selected value="@tag.Id">@tag.Name</option>
-                }
-                else
-                {
-                    <option value=""></option>
+                    <option selected value="@selectedTag.Id">@selectedTag.Name</option>
                 }
             </select>
         </div>
