@@ -21,8 +21,8 @@ public class TagsAutocompletionApiController : AccessTokenClientControllerBase<T
 
     public async Task<ActionResult> GetTags([FromQuery] string name, CancellationToken cancellationToken)
     {
-        //todo: this should filter by name once that becomes available in the microservice
-        var results = await Client.GetTags(cancellationToken);
+        var query = new TagQueryDto { Name = name };
+        var results = await Client.GetTags(query, cancellationToken);
         if (results is null)
             return NotFound();
 

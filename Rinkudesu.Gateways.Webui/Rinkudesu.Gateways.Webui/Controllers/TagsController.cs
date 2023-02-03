@@ -24,7 +24,7 @@ public class TagsController : AccessTokenClientController<TagsClient>
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        var tags = await Client.GetTags();
+        var tags = await Client.GetTags(TagQueryDto.Empty);
         if (tags is null)
             return this.ReturnNotFound("/".ToUri());
         return View(_mapper.Map<List<TagIndexViewModel>>(tags));
