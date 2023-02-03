@@ -11,6 +11,5 @@ namespace Rinkudesu.Gateways.Webui.Models;
 public class LinkIndexQueryModel
 {
     [Display(Name = "Tags")]
-    //todo: this should be changed to an array as soon as multiple tags can be selected
-    public Guid? TagIds { get; set; }
+    public Guid[]? TagIds { get; set; }
 }
