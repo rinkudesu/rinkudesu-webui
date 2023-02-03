@@ -3,8 +3,8 @@
 <div class="mt-2">
     <form asp-action="Assign" id="assignTag">
         <input type="hidden" asp-for="LinkId"/>
-        <div class="col-6">
-            <div class="input-group" id="tag-assignment">
+        <div class="d-flex flex-column">
+            <div class="input-group flex-fill" id="tag-assignment">
                 <select class="tags-autocompletion tag-name-entry-assign" asp-for="TagId"></select>
                 <button type="submit" class="tag-display tag-assign-btn"><i class="fa-regular fa-plus"></i></button>
             </div>
