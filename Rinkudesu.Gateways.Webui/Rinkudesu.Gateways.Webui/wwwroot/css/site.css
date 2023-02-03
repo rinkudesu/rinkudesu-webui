@@ -68,6 +68,7 @@ body {
 .ts-control {
   background: none!important;
   color: white!important;
+  border-color: #515151; /* Matches the colour of standard control */
 }
 
 :root {
