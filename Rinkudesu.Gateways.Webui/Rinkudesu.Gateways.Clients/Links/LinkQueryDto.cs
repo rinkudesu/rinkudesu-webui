@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
@@ -47,9 +49,13 @@ public class LinkQueryDto
 
     public enum LinkListSortOptions
     {
+        [Display(Name = nameof(Resources.Links.LinkQueryDto.enumTitle), ResourceType = typeof(Resources.Links.LinkQueryDto))]
         Title,
+        [Display(Name = nameof(Resources.Links.LinkQueryDto.enumUrl), ResourceType = typeof(Resources.Links.LinkQueryDto))]
         Url,
+        [Display(Name = nameof(Resources.Links.LinkQueryDto.enumCreationDate), ResourceType = typeof(Resources.Links.LinkQueryDto))]
         CreationDate,
+        [Display(Name = nameof(Resources.Links.LinkQueryDto.enumUpdateDate), ResourceType = typeof(Resources.Links.LinkQueryDto))]
         UpdateDate
     }
 }
