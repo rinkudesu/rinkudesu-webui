@@ -27,9 +27,14 @@ function disableWithChildren(node, status = false) {
     }
 }
 
-window.addEventListener('load', _ => initialiseTomselect())
+window.addEventListener('load', _ => initialiseTagsAutocompletion());
+window.addEventListener('load', _ => initialiseGenericTomselect());
 
-function initialiseTomselect() {
+function initialiseGenericTomselect() {
+    new TomSelect('.tomselect', {});
+}
+
+function initialiseTagsAutocompletion() {
     new TomSelect('.tags-autocompletion', {
         valueField: 'id',
         labelField: 'data',

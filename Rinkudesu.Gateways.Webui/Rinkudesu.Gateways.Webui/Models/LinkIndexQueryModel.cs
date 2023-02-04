@@ -14,6 +14,7 @@ public class LinkIndexQueryModel
     [Display(Name = nameof(Resources.Models.Links.LinkIndexQueryModel.tags), ResourceType = typeof(Resources.Models.Links.LinkIndexQueryModel))]
     public Guid[]? TagIds { get; set; }
     [Display(Name = nameof(Resources.Models.Links.LinkIndexQueryModel.url), ResourceType = typeof(Resources.Models.Links.LinkIndexQueryModel))]
+    [SuppressMessage("Design", "CA1056:URI-like properties should not be strings", Justification = "See relevant justification for LinkQueryDto")]
     public string? Url { get; set; }
     [Display(Name = nameof(Resources.Models.Links.LinkIndexQueryModel.title), ResourceType = typeof(Resources.Models.Links.LinkIndexQueryModel))]
     public string? Title { get; set; }
