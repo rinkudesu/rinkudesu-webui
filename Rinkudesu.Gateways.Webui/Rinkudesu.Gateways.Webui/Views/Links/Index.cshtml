@@ -27,7 +27,16 @@
 @await Html.PartialAsync("_QuickCreatePartial", new LinkIndexViewModel())
 <a asp-action="Create" class="btn btn-dark">@Localizer["create"]</a>
 
-@await Html.PartialAsync("_FilterPartial", query)
+<hr/>
+
+<div class="mb-2 d-flex flex-column">
+    <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#filters" aria-expanded="false" aria-controls="filters">
+        @Localizer["filter"]
+    </button>
+</div>
+<div class="collapse mb-2" id="filters">
+    @await Html.PartialAsync("_FilterPartial", query)
+</div>
 
 @foreach (var link in Model)
 {

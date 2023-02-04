@@ -38,4 +38,7 @@
         <value>Edit</value>
         <comment>edit</comment>
     </data>
+    <data name="filter" xml:space="preserve">
+        <value>Filtering</value>
+    </data>
 </root>
