@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
@@ -10,6 +12,11 @@ namespace Rinkudesu.Gateways.Clients.Links;
 public class LinkQueryDto
 {
     public Guid[]? TagIds { get; set; }
+    [SuppressMessage("Design", "CA1056:URI-like properties should not be strings", Justification = "Does not need to be a complete url to be considered correct")]
+    public string? Url { get; set; }
+    public string? Title { get; set; }
+    public LinkListSortOptions? Sort { get; set; }
+    public bool SortDescending { get; set; }
 
     //todo: consider adding tests for this method once it becomes more complex than this or starts processing user-supplied bare strings
     internal string GenerateUriQueryString()
@@ -20,7 +27,35 @@ public class LinkQueryDto
         {
             queryArguments.AddLast(string.Join('&', TagIds.Select(t => $"tagIds={t.ToString()}")));
         }
+        if (!string.IsNullOrWhiteSpace(Url))
+        {
+            queryArguments.AddLast($"urlContains={Uri.EscapeDataString(Url)}");
+        }
+        if (!string.IsNullOrWhiteSpace(Title))
+        {
+            queryArguments.AddLast($"titleContains={Uri.EscapeDataString(Title)}");
+        }
+        if (Sort.HasValue)
+        {
+            queryArguments.AddLast($"sortOptions={Uri.EscapeDataString(Sort.ToString()!)}");
+        }
+        if (SortDescending)
+        {
+            queryArguments.AddLast("sortDescending=true");
+        }
         queryArguments.AddLast("&showPrivate=true");
         return $"?{string.Join('&', queryArguments)}";
+    }
+
+    public enum LinkListSortOptions
+    {
+        [Display(Name = nameof(Resources.Links.LinkQueryDto.enumTitle), ResourceType = typeof(Resources.Links.LinkQueryDto))]
+        Title,
+        [Display(Name = nameof(Resources.Links.LinkQueryDto.enumUrl), ResourceType = typeof(Resources.Links.LinkQueryDto))]
+        Url,
+        [Display(Name = nameof(Resources.Links.LinkQueryDto.enumCreationDate), ResourceType = typeof(Resources.Links.LinkQueryDto))]
+        CreationDate,
+        [Display(Name = nameof(Resources.Links.LinkQueryDto.enumUpdateDate), ResourceType = typeof(Resources.Links.LinkQueryDto))]
+        UpdateDate
     }
 }

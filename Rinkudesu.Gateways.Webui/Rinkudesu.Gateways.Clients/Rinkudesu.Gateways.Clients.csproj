@@ -33,6 +33,14 @@
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>TagDto.pl.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Links\LinkQueryDto.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>LinkQueryDto.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Links\LinkQueryDto.pl.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>LinkQueryDto.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -45,6 +53,16 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>TagDto.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Links\LinkQueryDto.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>LinkQueryDto.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Links\LinkQueryDto.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>LinkQueryDto.pl.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

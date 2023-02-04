@@ -24,7 +24,7 @@ function onTagsLoad(responseEvent) {
         deleteButton.addEventListener('click', _ => onTagDelete(deleteButton));
     }
 
-    initialiseTomselect();
+    initialiseTagsAutocompletion();
 
     // make sure tomselect inputs have proper class applied
     for (const tagNameInput of document.getElementById('tag-assignment').children) {

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Rinkudesu.Gateways.Webui.Resources.Views.Links {
+namespace Rinkudesu.Gateways.Clients.Resources.Links {
     using System;
     
     
@@ -21,24 +21,24 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Links {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Index_pl {
+    public class LinkQueryDto {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Index_pl() {
+        internal LinkQueryDto() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Views.Links.Index.pl", typeof(Index_pl).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Rinkudesu.Gateways.Clients.Resources.Links.LinkQueryDto", typeof(LinkQueryDto).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -50,7 +50,7 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Links {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -60,56 +60,38 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Links {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dodaj.
+        ///   Looks up a localized string similar to Creation date.
         /// </summary>
-        internal static string create {
+        public static string enumCreationDate {
             get {
-                return ResourceManager.GetString("create", resourceCulture);
+                return ResourceManager.GetString("enumCreationDate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edytuj.
+        ///   Looks up a localized string similar to Title.
         /// </summary>
-        internal static string edit {
+        public static string enumTitle {
             get {
-                return ResourceManager.GetString("edit", resourceCulture);
+                return ResourceManager.GetString("enumTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filtrowanie.
+        ///   Looks up a localized string similar to Update date.
         /// </summary>
-        internal static string filter {
+        public static string enumUpdateDate {
             get {
-                return ResourceManager.GetString("filter", resourceCulture);
+                return ResourceManager.GetString("enumUpdateDate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Szukaj.
+        ///   Looks up a localized string similar to Url.
         /// </summary>
-        internal static string find {
+        public static string enumUrl {
             get {
-                return ResourceManager.GetString("find", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Kod dostępu.
-        /// </summary>
-        internal static string share_key {
-            get {
-                return ResourceManager.GetString("share-key", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Linki.
-        /// </summary>
-        internal static string title {
-            get {
-                return ResourceManager.GetString("title", resourceCulture);
+                return ResourceManager.GetString("enumUrl", resourceCulture);
             }
         }
     }

@@ -18,27 +18,16 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="title" xml:space="preserve">
-        <value>Links</value>
-        <comment>title</comment>
+    <data name="enumTitle" xml:space="preserve">
+        <value>Title</value>
     </data>
-    <data name="share-key" xml:space="preserve">
-        <value>Sharing key</value>
-        <comment>share-key</comment>
+    <data name="enumUrl" xml:space="preserve">
+        <value>Url</value>
     </data>
-    <data name="find" xml:space="preserve">
-        <value>Find</value>
-        <comment>find</comment>
+    <data name="enumCreationDate" xml:space="preserve">
+        <value>Creation date</value>
     </data>
-    <data name="create" xml:space="preserve">
-        <value>Create</value>
-        <comment>create</comment>
-    </data>
-    <data name="edit" xml:space="preserve">
-        <value>Edit</value>
-        <comment>edit</comment>
-    </data>
-    <data name="filter" xml:space="preserve">
-        <value>Filtering</value>
+    <data name="enumUpdateDate" xml:space="preserve">
+        <value>Update date</value>
     </data>
 </root>
