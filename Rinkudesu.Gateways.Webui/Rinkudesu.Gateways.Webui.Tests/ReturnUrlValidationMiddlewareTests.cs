@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Text.Encodings.Web;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Primitives;
 using Moq;
 using Rinkudesu.Gateways.Webui.Middleware;
@@ -43,6 +44,7 @@ public class ReturnUrlValidationMiddlewareTests
     [InlineData("/test")]
     [InlineData("/test/another")]
     [InlineData("/test/another/WhyDoIDoThis")]
+    [InlineData("%2Flinks%3FSortDescending%3Dfalse%26Skip%3D20%26Take%3D20")]
     public async Task InvokeAsync_ReturnUrlNotParsableOrRelative_RemainsUnchanged(string value)
     {
         var dictionary = new Dictionary<string, StringValues>
@@ -59,7 +61,9 @@ public class ReturnUrlValidationMiddlewareTests
         Assert.NotNull(lastSetForm);
         Assert.True(lastSetQuery.HasValue);
         Assert.Equal(value, lastSetForm!["returnUrl"]);
-        Assert.Contains($"&returnUrl={value}&", lastSetQuery!.Value.Value!);
+        Assert.Contains($"&returnUrl={UrlEncoder.Default.Encode(value)}&", lastSetQuery!.Value.Value!);
+        Assert.Contains("argument=and-a-value", lastSetQuery!.Value.Value!);
+        Assert.Contains("another=not_to_remove", lastSetQuery!.Value.Value!);
     }
 
     [Theory]
@@ -83,7 +87,7 @@ public class ReturnUrlValidationMiddlewareTests
         Assert.NotNull(lastSetForm);
         Assert.True(lastSetQuery.HasValue);
         Assert.Equal(value, lastSetForm!["returnUrl"]);
-        Assert.Contains($"?returnUrl={value}&", lastSetQuery!.Value.Value!);
+        Assert.Contains($"?returnUrl={UrlEncoder.Default.Encode(value)}&", lastSetQuery!.Value.Value!);
     }
 
     [Theory]
@@ -107,7 +111,7 @@ public class ReturnUrlValidationMiddlewareTests
         Assert.NotNull(lastSetForm);
         Assert.True(lastSetQuery.HasValue);
         Assert.Equal(value, lastSetForm!["returnUrl"]);
-        Assert.Contains($"&returnUrl={value}", lastSetQuery!.Value.Value!);
+        Assert.Contains($"&returnUrl={UrlEncoder.Default.Encode(value)}", lastSetQuery!.Value.Value!);
     }
 
     [Theory]
@@ -130,7 +134,7 @@ public class ReturnUrlValidationMiddlewareTests
         Assert.NotNull(lastSetForm);
         Assert.True(lastSetQuery.HasValue);
         Assert.Equal(value, lastSetForm!["returnUrl"]);
-        Assert.Contains($"?returnUrl={value}&", lastSetQuery!.Value.Value!);
+        Assert.Contains($"?returnUrl={UrlEncoder.Default.Encode(value)}&", lastSetQuery!.Value.Value!);
     }
 
     [Fact]
