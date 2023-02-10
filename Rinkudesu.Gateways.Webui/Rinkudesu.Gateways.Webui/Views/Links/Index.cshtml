@@ -1,9 +1,12 @@
 ﻿@inject IViewLocalizer Localizer
+@using System.Text.Json
+@using System.Text.Json.Serialization
 @model LinkIndexQueryModel
 
 @{
     ViewBag.Title = Localizer["title"];
     Layout = "_Layout";
+    var queryJson = JsonSerializer.Serialize(Model, new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull });
 }
 
 <h2>@Localizer["title"]</h2>
@@ -37,6 +40,9 @@
 </div>
 
 @*TODO: localise this*@
-<div id="content">Loading...</div>
+<div id="content">
+    <span hidden id="query" data-value="@queryJson"></span>
+    Loading...
+</div>
 
 <script src="~/js/linkContentLoader.js" asp-append-version="true"></script>

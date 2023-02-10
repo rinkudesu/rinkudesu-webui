@@ -1,7 +1,15 @@
-﻿@using Rinkudesu.Gateways.Webui.Utils
-@inject IViewLocalizer Localizer
+﻿@inject IViewLocalizer Localizer
+@using System.Text.Json
+@using System.Text.Json.Serialization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model System.Collections.Generic.List<Rinkudesu.Gateways.Webui.Models.LinkIndexViewModel>
 
+@{
+    var query = (LinkIndexQueryModel)ViewBag.Query;
+    var queryJson = JsonSerializer.Serialize(query, new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull });
+}
+
+<span hidden id="query" data-value="@queryJson"></span>
 @foreach (var link in Model)
 {
     <div class="row mb-2">

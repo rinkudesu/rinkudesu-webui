@@ -22,4 +22,7 @@ public class LinkIndexQueryModel
     public LinkQueryDto.LinkListSortOptions? Sort { get; set; }
     [Display(Name = nameof(Resources.Models.Links.LinkIndexQueryModel.sortDescending), ResourceType = typeof(Resources.Models.Links.LinkIndexQueryModel))]
     public bool SortDescending { get; set; }
+    //todo: localisation
+    public int? Skip { get; set; } = 0;
+    public int? Take { get; set; } = 20;
 }

@@ -54,6 +54,7 @@ namespace Rinkudesu.Gateways.Webui.Controllers
             }
 
             ViewData["ReturnUrlBase"] = returnUrlBase;
+            ViewData["Query"] = query;
             return PartialView(linkModels);
         }
 
