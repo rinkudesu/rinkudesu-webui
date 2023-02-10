@@ -19,7 +19,7 @@ public class ReturnUrlValidationMiddleware
 
     private const string RETURN_URL_NAME = "returnUrl";
 #pragma warning disable SYSLIB1045
-    private readonly Regex _returnUrlRegex = new("[rR]eturn[uU]rl[^=]*=[^?]*[&$]");
+    private readonly Regex _returnUrlRegex = new("[rR]eturn[uU]rl=[^&]*");
 #pragma warning restore SYSLIB1045
 
     public async Task InvokeAsync(HttpContext context)
@@ -27,7 +27,7 @@ public class ReturnUrlValidationMiddleware
         if (context.Request.Query.TryGetValue(RETURN_URL_NAME, out var returnUrl))
         {
             var sanitised = SanitiseUrl(returnUrl!, encode: true);
-            var newQueryString = _returnUrlRegex.Replace(context.Request.QueryString.Value!, $"returnUrl={sanitised}&");
+            var newQueryString = _returnUrlRegex.Replace(context.Request.QueryString.Value!, $"returnUrl={sanitised}");
             context.Request.QueryString = new QueryString(newQueryString);
         }
         if (context.Request.HasFormContentType && context.Request.Form.TryGetValue(RETURN_URL_NAME, out returnUrl))
