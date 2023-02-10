@@ -28,26 +28,33 @@ namespace Rinkudesu.Gateways.Webui.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index([FromQuery] LinkIndexQueryModel query, [FromServices] LinkTagsClient linkTagsClient, CancellationToken cancellationToken)
+        public IActionResult Index([FromQuery] LinkIndexQueryModel query)
         {
-            if (!ModelState.IsValid) return this.ReturnBadRequest("/".ToUri(), "Provided query is not valid");
+            return View(query);
+        }
+
+        //todo: returnUrlBase is somewhat awkward right now, as it always redirects to the first page
+        [HttpGet]
+        public async Task<ActionResult> IndexContent([FromQuery] LinkIndexQueryModel query, [FromServices] LinkTagsClient linkTagsClient, Uri returnUrlBase, CancellationToken cancellationToken)
+        {
+            if (!ModelState.IsValid) return BadRequest("Provided query is not valid.");
 
             linkTagsClient.SetAccessToken(HttpContext.GetJwt());
             var links = await Client.GetLinks(_mapper.Map<LinkQueryDto>(query), cancellationToken);
             if (links is null)
-                return this.ReturnNotFound("/".ToUri());
+                return NotFound();
             var linkModels = _mapper.Map<List<LinkIndexViewModel>>(links.ToList());
 
             foreach (var link in linkModels)
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 var tags = await linkTagsClient.GetTagsForLink(link.Id, cancellationToken);
-                if (tags is null) return this.ReturnBadRequest("/".ToUri(), "We were unable to process tags assigned to links.");
+                if (tags is null) return BadRequest("We were unable to process tags assigned to links.");
                 link.LinkTags.AddRange(tags);
             }
 
-            ViewData["Query"] = query;
-            return View(linkModels);
+            ViewData["ReturnUrlBase"] = returnUrlBase;
+            return PartialView(linkModels);
         }
 
         [HttpGet]
