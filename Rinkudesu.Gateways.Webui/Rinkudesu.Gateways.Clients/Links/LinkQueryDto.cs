@@ -52,7 +52,7 @@ public class LinkQueryDto
         }
         if (Take.HasValue)
         {
-            queryArguments.AddLast($"skip={Take.Value.ToString(CultureInfo.InvariantCulture)}");
+            queryArguments.AddLast($"take={Take.Value.ToString(CultureInfo.InvariantCulture)}");
         }
         queryArguments.AddLast("&showPrivate=true");
         return $"?{string.Join('&', queryArguments)}";
