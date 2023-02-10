@@ -33,9 +33,8 @@ namespace Rinkudesu.Gateways.Webui.Controllers
             return View(query);
         }
 
-        //todo: returnUrlBase is somewhat awkward right now, as it always redirects to the first page
         [HttpGet]
-        public async Task<ActionResult> IndexContent([FromQuery] LinkIndexQueryModel query, [FromServices] LinkTagsClient linkTagsClient, Uri returnUrlBase, CancellationToken cancellationToken)
+        public async Task<ActionResult> IndexContent([FromQuery] LinkIndexQueryModel query, [FromServices] LinkTagsClient linkTagsClient, Uri returnUrl, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid) return BadRequest("Provided query is not valid.");
 
@@ -53,7 +52,7 @@ namespace Rinkudesu.Gateways.Webui.Controllers
                 link.LinkTags.AddRange(tags);
             }
 
-            ViewData["ReturnUrlBase"] = returnUrlBase;
+            ViewData["ReturnUrl"] = returnUrl;
             ViewData["Query"] = query;
             return PartialView(linkModels);
         }

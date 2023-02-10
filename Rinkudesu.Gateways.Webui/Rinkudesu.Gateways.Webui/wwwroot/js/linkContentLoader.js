@@ -1,12 +1,13 @@
 let query;
 const contentDiv = document.getElementById('content');
-const returnUrlPath = encodeURIComponent("/links");
-const linksContentBaseUrl = '/links/IndexContent?returnUrlBase=' + returnUrlPath;
+const returnUrlPath = "/links";
+const linksContentBaseUrl = '/links/IndexContent?returnUrl=';
 
 window.addEventListener('load', _ => { getQuery(); loadContent(); });
 document.getElementById('page-prev').addEventListener('click', prevPage);
 document.getElementById('page-next').addEventListener('click', nextPage);
 
+//todo: make buttons inactive when this happens
 function prevPage() {
     if (query.Skip < query.Take)
         return;
@@ -38,7 +39,7 @@ function handleWindowLocation() {
 
 //todo: this needs to be localised
 function loadContent() {
-    performHttpRequest(linksContentBaseUrl + getQueryAsString('&'), "GET", null, setLinksContent, _ => alert("loading failed"))
+    performHttpRequest(linksContentBaseUrl + getReturnUrl() + getQueryAsString('&'), "GET", null, setLinksContent, _ => alert("loading failed"))
 }
 
 function getQuery() {
@@ -56,6 +57,10 @@ function setLinksContent(responseEvent) {
     contentDiv.innerHTML = responseEvent.currentTarget.responseText;
     getQuery();
     handleWindowLocation();
+}
+
+function getReturnUrl() {
+    return encodeURIComponent(returnUrlPath + getQueryAsString('?'));
 }
 
 function getQueryAsString(prefix) {
