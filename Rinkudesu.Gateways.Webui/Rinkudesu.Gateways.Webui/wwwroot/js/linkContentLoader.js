@@ -15,10 +15,16 @@ function prevPage() {
     loadContent();
 }
 
-//todo: figure out when to stop allowing this
 function nextPage() {
+    if (getCurrentLinkCount() < query.Take)
+        return;
+
     query.Skip += query.Take;
     loadContent();
+}
+
+function getCurrentLinkCount() {
+    return contentDiv.getElementsByClassName('row').length;
 }
 
 function handleWindowLocation() {
