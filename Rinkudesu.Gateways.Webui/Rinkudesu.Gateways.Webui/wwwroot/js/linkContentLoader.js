@@ -21,6 +21,15 @@ function nextPage() {
     loadContent();
 }
 
+function handleWindowLocation() {
+    let newUrl = new URL(window.location);
+    newUrl.pathname = "/links";
+    newUrl.search = getQueryAsString();
+    //todo: support for "back" and "forward" browser button also needs to be added, as this breaks it completely
+    //current query can probably be stored in the "data" parameter below, but this needs some investigation
+    window.history.pushState({}, '', newUrl);
+}
+
 //todo: this needs to be localised
 function loadContent() {
     performHttpRequest(linksContentBaseUrl + getQueryAsString('&'), "GET", null, setLinksContent, _ => alert("loading failed"))
@@ -40,6 +49,7 @@ function setLinksContent(responseEvent) {
 
     contentDiv.innerHTML = responseEvent.currentTarget.responseText;
     getQuery();
+    handleWindowLocation();
 }
 
 function getQueryAsString(prefix) {
