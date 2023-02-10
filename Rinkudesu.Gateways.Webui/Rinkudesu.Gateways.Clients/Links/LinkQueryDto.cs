@@ -54,7 +54,7 @@ public class LinkQueryDto
         {
             queryArguments.AddLast($"take={Take.Value.ToString(CultureInfo.InvariantCulture)}");
         }
-        queryArguments.AddLast("&showPrivate=true");
+        queryArguments.AddLast("showPrivate=true");
         return $"?{string.Join('&', queryArguments)}";
     }
 
