@@ -177,20 +177,27 @@ body {
   color: white!important;
 }
 
-.previous {
+.page-changer {
   border-color: lightblue;
   border-width: 1px;
   border-style: solid;
   border-radius: var(--btn-radius);
+}
+
+.page-changer:hover {
+  background-color: darkblue;
+}
+
+.page-changer:active {
+  background-color: lightblue;
+}
+
+.previous {
   border-bottom-left-radius: var(--page-button-radiug-large);
   border-top-left-radius: var(--page-button-radiug-large);
 }
 
 .next {
-  border-color: lightblue;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: var(--btn-radius);
   border-bottom-right-radius: var(--page-button-radiug-large);
   border-top-right-radius: var(--page-button-radiug-large);
 }
