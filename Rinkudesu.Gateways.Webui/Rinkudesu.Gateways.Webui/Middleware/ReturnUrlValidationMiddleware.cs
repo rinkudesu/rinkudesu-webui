@@ -19,7 +19,7 @@ public class ReturnUrlValidationMiddleware
 
     private const string RETURN_URL_NAME = "returnUrl";
 #pragma warning disable SYSLIB1045
-    private readonly Regex _returnUrlRegex = new("[rR]eturn[uU]rl=[^&]*");
+    private readonly Regex _returnUrlRegex = new("[rR]eturn[uU]rl=[^&]*", RegexOptions.None, TimeSpan.FromSeconds(2));
 #pragma warning restore SYSLIB1045
 
     public async Task InvokeAsync(HttpContext context)
