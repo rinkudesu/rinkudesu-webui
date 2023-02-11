@@ -8,7 +8,6 @@ window.addEventListener('load', _ => { getQuery(); loadContent(); });
 document.getElementById('page-prev').addEventListener('click', prevPage);
 document.getElementById('page-next').addEventListener('click', nextPage);
 
-//todo: make buttons inactive when this happens
 function prevPage() {
     if (query.Skip < query.Take)
         return;
@@ -56,6 +55,12 @@ function setLinksContent(responseEvent) {
     contentDiv.innerHTML = responseEvent.currentTarget.responseText;
     getQuery();
     handleWindowLocation();
+    handlePageBtnState();
+}
+
+function handlePageBtnState() {
+   document.getElementById('page-prev').hidden = query.Skip < query.Take;
+   document.getElementById('page-next').hidden = getCurrentLinkCount() < query.Take;
 }
 
 function getReturnUrl() {
