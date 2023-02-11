@@ -34,11 +34,14 @@
         <value>Dodaj</value>
         <comment>create</comment>
     </data>
-    <data name="edit" xml:space="preserve">
-        <value>Edytuj</value>
-        <comment>edit</comment>
-    </data>
     <data name="filter" xml:space="preserve">
         <value>Filtrowanie</value>
+    </data>
+    <data name="loading" xml:space="preserve">
+        <value>Wczytywanie</value>
+        <comment>loading</comment>
+    </data>
+    <data name="data-load-failed" xml:space="preserve">
+        <value>Ładowanie linków nie powiodło się</value>
     </data>
 </root>

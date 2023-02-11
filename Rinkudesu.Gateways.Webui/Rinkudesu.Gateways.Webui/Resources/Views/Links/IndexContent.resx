@@ -18,31 +18,7 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="title" xml:space="preserve">
-        <value>Links</value>
-        <comment>title</comment>
-    </data>
-    <data name="share-key" xml:space="preserve">
-        <value>Sharing key</value>
-        <comment>share-key</comment>
-    </data>
-    <data name="find" xml:space="preserve">
-        <value>Find</value>
-        <comment>find</comment>
-    </data>
-    <data name="create" xml:space="preserve">
-        <value>Create</value>
-        <comment>create</comment>
-    </data>
-    <data name="filter" xml:space="preserve">
-        <value>Filtering</value>
-    </data>
-    <data name="loading" xml:space="preserve">
-        <value>Loading</value>
-        <comment>loading</comment>
-    </data>
-    <data name="data-load-failed" xml:space="preserve">
-        <value>Failed to load links</value>
-        <comment>data-load-failed</comment>
+    <data name="edit" xml:space="preserve">
+        <value>Edit</value>
     </data>
 </root>

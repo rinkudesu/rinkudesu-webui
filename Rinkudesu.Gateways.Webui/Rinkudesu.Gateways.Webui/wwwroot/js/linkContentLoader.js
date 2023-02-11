@@ -2,6 +2,7 @@ let query;
 const contentDiv = document.getElementById('content');
 const returnUrlPath = "/links";
 const linksContentBaseUrl = '/links/IndexContent?returnUrl=';
+const translations = document.getElementById('translations');
 
 window.addEventListener('load', _ => { getQuery(); loadContent(); });
 document.getElementById('page-prev').addEventListener('click', prevPage);
@@ -37,9 +38,8 @@ function handleWindowLocation() {
     window.history.pushState({}, '', newUrl);
 }
 
-//todo: this needs to be localised
 function loadContent() {
-    performHttpRequest(linksContentBaseUrl + getReturnUrl() + getQueryAsString('&'), "GET", null, setLinksContent, _ => alert("loading failed"))
+    performHttpRequest(linksContentBaseUrl + getReturnUrl() + getQueryAsString('&'), "GET", null, setLinksContent, _ => alert(translations.getAttribute('data-load-failed')));
 }
 
 function getQuery() {
@@ -48,8 +48,7 @@ function getQuery() {
 
 function setLinksContent(responseEvent) {
     if (responseEvent.currentTarget.status !== 200) {
-        alert("loading failed")
-        //alert(document.getElementById('translations').getAttribute('data-load-failed'));
+        alert(translations.getAttribute('data-load-failed'));
         contentDiv.innerText = "";
         return;
     }

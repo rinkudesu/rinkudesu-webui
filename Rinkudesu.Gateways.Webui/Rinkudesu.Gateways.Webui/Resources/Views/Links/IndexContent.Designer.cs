@@ -21,14 +21,14 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Links {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Index {
+    internal class IndexContent {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Index() {
+        internal IndexContent() {
         }
         
         /// <summary>
@@ -38,7 +38,7 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Links {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Views.Links.Index", typeof(Index).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Views.Links.IndexContent", typeof(IndexContent).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -60,65 +60,11 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Links {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create.
+        ///   Looks up a localized string similar to Edit.
         /// </summary>
-        internal static string create {
+        internal static string edit {
             get {
-                return ResourceManager.GetString("create", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to load links.
-        /// </summary>
-        internal static string data_load_failed {
-            get {
-                return ResourceManager.GetString("data-load-failed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filtering.
-        /// </summary>
-        internal static string filter {
-            get {
-                return ResourceManager.GetString("filter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Find.
-        /// </summary>
-        internal static string find {
-            get {
-                return ResourceManager.GetString("find", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Loading.
-        /// </summary>
-        internal static string loading {
-            get {
-                return ResourceManager.GetString("loading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sharing key.
-        /// </summary>
-        internal static string share_key {
-            get {
-                return ResourceManager.GetString("share-key", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Links.
-        /// </summary>
-        internal static string title {
-            get {
-                return ResourceManager.GetString("title", resourceCulture);
+                return ResourceManager.GetString("edit", resourceCulture);
             }
         }
     }

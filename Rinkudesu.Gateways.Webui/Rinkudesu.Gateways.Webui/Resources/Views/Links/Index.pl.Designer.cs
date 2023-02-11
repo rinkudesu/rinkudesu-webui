@@ -69,11 +69,11 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Links {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edytuj.
+        ///   Looks up a localized string similar to Ładowanie linków nie powiodło się.
         /// </summary>
-        internal static string edit {
+        internal static string data_load_failed {
             get {
-                return ResourceManager.GetString("edit", resourceCulture);
+                return ResourceManager.GetString("data-load-failed", resourceCulture);
             }
         }
         
@@ -92,6 +92,15 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Links {
         internal static string find {
             get {
                 return ResourceManager.GetString("find", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wczytywanie.
+        /// </summary>
+        internal static string loading {
+            get {
+                return ResourceManager.GetString("loading", resourceCulture);
             }
         }
         

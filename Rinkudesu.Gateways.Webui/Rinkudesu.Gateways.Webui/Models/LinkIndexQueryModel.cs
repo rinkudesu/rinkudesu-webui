@@ -22,7 +22,8 @@ public class LinkIndexQueryModel
     public LinkQueryDto.LinkListSortOptions? Sort { get; set; }
     [Display(Name = nameof(Resources.Models.Links.LinkIndexQueryModel.sortDescending), ResourceType = typeof(Resources.Models.Links.LinkIndexQueryModel))]
     public bool SortDescending { get; set; }
-    //todo: localisation
+
+    // the following properties don't need to be localised as they are never displayed to the user by name
     public int? Skip { get; set; } = 0;
     public int? Take { get; set; } = 20;
 }
