@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Linq;
 
 namespace Rinkudesu.Gateways.Clients.Links;
@@ -17,6 +18,8 @@ public class LinkQueryDto
     public string? Title { get; set; }
     public LinkListSortOptions? Sort { get; set; }
     public bool SortDescending { get; set; }
+    public int? Skip { get; set; }
+    public int? Take { get; set; }
 
     //todo: consider adding tests for this method once it becomes more complex than this or starts processing user-supplied bare strings
     internal string GenerateUriQueryString()
@@ -43,7 +46,15 @@ public class LinkQueryDto
         {
             queryArguments.AddLast("sortDescending=true");
         }
-        queryArguments.AddLast("&showPrivate=true");
+        if (Skip.HasValue)
+        {
+            queryArguments.AddLast($"skip={Skip.Value.ToString(CultureInfo.InvariantCulture)}");
+        }
+        if (Take.HasValue)
+        {
+            queryArguments.AddLast($"take={Take.Value.ToString(CultureInfo.InvariantCulture)}");
+        }
+        queryArguments.AddLast("showPrivate=true");
         return $"?{string.Join('&', queryArguments)}";
     }
 

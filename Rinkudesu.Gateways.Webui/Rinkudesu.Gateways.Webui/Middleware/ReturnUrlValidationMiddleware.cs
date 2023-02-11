@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
+using System.Text.Encodings.Web;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 
 namespace Rinkudesu.Gateways.Webui.Middleware;
 
@@ -17,15 +19,15 @@ public class ReturnUrlValidationMiddleware
 
     private const string RETURN_URL_NAME = "returnUrl";
 #pragma warning disable SYSLIB1045
-    private readonly Regex _returnUrlRegex = new("[rR]eturn[uU]rl[^=]*=[^?]*[&$]");
+    private readonly Regex _returnUrlRegex = new("[rR]eturn[uU]rl=[^&]*", RegexOptions.None, TimeSpan.FromSeconds(2));
 #pragma warning restore SYSLIB1045
 
     public async Task InvokeAsync(HttpContext context)
     {
         if (context.Request.Query.TryGetValue(RETURN_URL_NAME, out var returnUrl))
         {
-            var sanitised = SanitiseUrl(returnUrl!);
-            var newQueryString = _returnUrlRegex.Replace(context.Request.QueryString.Value!, $"returnUrl={sanitised}&");
+            var sanitised = SanitiseUrl(returnUrl!, encode: true);
+            var newQueryString = _returnUrlRegex.Replace(context.Request.QueryString.Value!, $"returnUrl={sanitised}");
             context.Request.QueryString = new QueryString(newQueryString);
         }
         if (context.Request.HasFormContentType && context.Request.Form.TryGetValue(RETURN_URL_NAME, out returnUrl))
@@ -38,14 +40,18 @@ public class ReturnUrlValidationMiddleware
         await _next(context);
     }
 
-    private static string SanitiseUrl(string originalUrl)
+    private static string SanitiseUrl(string originalUrl, bool encode = false)
     {
         if (!Uri.TryCreate(originalUrl, UriKind.RelativeOrAbsolute, out var returnUri))
             return originalUrl; //let it be if it doesn't parse so that we don't replace valid url elements by mistake
 
+        var sanitised = originalUrl;
         if (returnUri.IsAbsoluteUri)
-            return returnUri.PathAndQuery;
+            sanitised = returnUri.PathAndQuery;
 
-        return originalUrl;
+        if (encode)
+            sanitised = UrlEncoder.Default.Encode(sanitised);
+
+        return sanitised;
     }
 }
