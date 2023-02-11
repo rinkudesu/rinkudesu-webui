@@ -4,7 +4,7 @@ const returnUrlPath = "/links";
 const linksContentBaseUrl = '/links/IndexContent?returnUrl=';
 const translations = document.getElementById('translations');
 
-window.addEventListener('load', _ => { getQuery(); loadContent(); });
+window.addEventListener('load', () => { getQuery(); loadContent(); });
 document.getElementById('page-prev').addEventListener('click', prevPage);
 document.getElementById('page-next').addEventListener('click', nextPage);
 
@@ -41,7 +41,7 @@ function handleWindowLocation() {
 }
 
 function loadContent(moveLocation = true) {
-    performHttpRequest(linksContentBaseUrl + getReturnUrl() + getQueryAsString('&'), "GET", null, setLinksContent, _ => alert(translations.getAttribute('data-load-failed')));
+    performHttpRequest(linksContentBaseUrl + getReturnUrl() + getQueryAsString('&'), "GET", null, setLinksContent, () => alert(translations.getAttribute('data-load-failed')));
 
     if (moveLocation)
         handleWindowLocation();
