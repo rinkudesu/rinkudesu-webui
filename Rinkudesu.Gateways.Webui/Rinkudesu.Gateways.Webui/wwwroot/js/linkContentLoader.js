@@ -8,6 +8,11 @@ window.addEventListener('load', _ => { getQuery(); loadContent(); });
 document.getElementById('page-prev').addEventListener('click', prevPage);
 document.getElementById('page-next').addEventListener('click', nextPage);
 
+onpopstate = (event) => {
+    query = event.state;
+    loadContent(false);
+}
+
 function prevPage() {
     if (query.Skip < query.Take)
         return;
@@ -32,13 +37,14 @@ function handleWindowLocation() {
     let newUrl = new URL(window.location);
     newUrl.pathname = "/links";
     newUrl.search = getQueryAsString();
-    //todo: support for "back" and "forward" browser button also needs to be added, as this breaks it completely
-    //current query can probably be stored in the "data" parameter below, but this needs some investigation
-    window.history.pushState({}, '', newUrl);
+    window.history.pushState(structuredClone(query), '', newUrl);
 }
 
-function loadContent() {
+function loadContent(moveLocation = true) {
     performHttpRequest(linksContentBaseUrl + getReturnUrl() + getQueryAsString('&'), "GET", null, setLinksContent, _ => alert(translations.getAttribute('data-load-failed')));
+
+    if (moveLocation)
+        handleWindowLocation();
 }
 
 function getQuery() {
@@ -54,7 +60,6 @@ function setLinksContent(responseEvent) {
 
     contentDiv.innerHTML = responseEvent.currentTarget.responseText;
     getQuery();
-    handleWindowLocation();
     handlePageBtnState();
 }
 
