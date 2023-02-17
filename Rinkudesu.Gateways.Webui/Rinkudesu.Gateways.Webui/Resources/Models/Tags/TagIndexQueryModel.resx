@@ -18,32 +18,7 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="title" xml:space="preserve">
-        <value>Tags</value>
-        <comment>title</comment>
-    </data>
-    <data name="edit" xml:space="preserve">
-        <value>Edit</value>
-        <comment>edit</comment>
-    </data>
-    <data name="data-load-failed" xml:space="preserve">
-        <value>Failed to load tags</value>
-        <comment>data-load-failed</comment>
-    </data>
-    <data name="loading" xml:space="preserve">
-        <value>Loading</value>
-        <comment>loading</comment>
-    </data>
-    <data name="previous" xml:space="preserve">
-        <value>Previous</value>
-        <comment>previous</comment>
-    </data>
-    <data name="next" xml:space="preserve">
-        <value>Next</value>
-        <comment>next</comment>
-    </data>
-    <data name="filter" xml:space="preserve">
-        <value>Filtering</value>
-        <comment>filter</comment>
+    <data name="name" xml:space="preserve">
+        <value>Name</value>
     </data>
 </root>

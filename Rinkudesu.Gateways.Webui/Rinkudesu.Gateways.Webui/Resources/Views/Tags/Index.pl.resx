@@ -42,4 +42,8 @@
         <value>Dalej</value>
         <comment>next</comment>
     </data>
+    <data name="filter" xml:space="preserve">
+        <value>Filtrowanie</value>
+        <comment>filter</comment>
+    </data>
 </root>

@@ -78,6 +78,15 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Tags {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Filtrowanie.
+        /// </summary>
+        internal static string filter {
+            get {
+                return ResourceManager.GetString("filter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wczytywanie.
         /// </summary>
         internal static string loading {

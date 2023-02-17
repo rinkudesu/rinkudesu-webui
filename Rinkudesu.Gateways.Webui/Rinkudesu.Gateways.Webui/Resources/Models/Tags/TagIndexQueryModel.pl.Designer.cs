@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Rinkudesu.Gateways.Webui.Resources.Views.Tags {
+namespace Rinkudesu.Gateways.Webui.Resources.Models.Tags {
     using System;
     
     
@@ -21,24 +21,24 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Tags {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Index {
+    public class TagIndexQueryModel_pl {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Index() {
+        internal TagIndexQueryModel_pl() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Views.Tags.Index", typeof(Index).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Models.Tags.TagIndexQueryModel.pl", typeof(TagIndexQueryModel_pl).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -50,7 +50,7 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Tags {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -60,65 +60,11 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Tags {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to load tags.
+        ///   Looks up a localized string similar to Nazwa.
         /// </summary>
-        internal static string data_load_failed {
+        public static string name {
             get {
-                return ResourceManager.GetString("data-load-failed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Edit.
-        /// </summary>
-        internal static string edit {
-            get {
-                return ResourceManager.GetString("edit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filtering.
-        /// </summary>
-        internal static string filter {
-            get {
-                return ResourceManager.GetString("filter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Loading.
-        /// </summary>
-        internal static string loading {
-            get {
-                return ResourceManager.GetString("loading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Next.
-        /// </summary>
-        internal static string next {
-            get {
-                return ResourceManager.GetString("next", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Previous.
-        /// </summary>
-        internal static string previous {
-            get {
-                return ResourceManager.GetString("previous", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tags.
-        /// </summary>
-        internal static string title {
-            get {
-                return ResourceManager.GetString("title", resourceCulture);
+                return ResourceManager.GetString("name", resourceCulture);
             }
         }
     }
