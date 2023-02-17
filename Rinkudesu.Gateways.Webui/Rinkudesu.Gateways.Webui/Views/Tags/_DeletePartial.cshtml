@@ -1,4 +1,3 @@
-@using Rinkudesu.Gateways.Webui.Utils
 @inject IViewLocalizer Localizer
 @model Rinkudesu.Gateways.Webui.Models.TagIndexViewModel
 
@@ -14,7 +13,7 @@
             </div>
             <div class="modal-body">
                 <form asp-action="Delete" asp-antiforgery="true">
-                    <input type="hidden" name="returnUrl" value="@Context.GetCurrentUrl()"/>
+                    <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl"/>
                     <input name="id" value="@Model.Id.ToString()" type="hidden"/>
                     <input type="submit" class="btn btn-danger" value="@Localizer["delete"]"/>
                 </form>

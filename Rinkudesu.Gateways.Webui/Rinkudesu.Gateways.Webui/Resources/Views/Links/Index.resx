@@ -45,4 +45,12 @@
         <value>Failed to load links</value>
         <comment>data-load-failed</comment>
     </data>
+    <data name="previous" xml:space="preserve">
+        <value>Previous</value>
+        <comment>previous</comment>
+    </data>
+    <data name="next" xml:space="preserve">
+        <value>Next</value>
+        <comment>next</comment>
+    </data>
 </root>

@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using System.Text.Json
+@using System.Text.Json.Serialization
+@model System.Collections.Generic.List<Rinkudesu.Gateways.Webui.Models.TagIndexViewModel>
+@inject IViewLocalizer Localizer
+
+@{
+    var query = (TagIndexQueryModel)ViewBag.Query;
+    var queryJson = JsonSerializer.Serialize(query, new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull });
+}
+
+<span hidden id="query" data-value="@queryJson"></span>
+@foreach (var tag in Model)
+{
+    <div class="row index-data-row">
+        <div class="col index-data-row-col user-data-display">
+            @tag.Name
+        </div>
+        <div class="col index-data-row-col index-row-col-btn">
+            <a class="btn btn-info" asp-action="Edit" asp-route-id="@tag.Id.ToString()" asp-route-returnUrl="@ViewBag.ReturnUrl">@Localizer["edit"]</a>
+            @await Html.PartialAsync("_DeletePartial", tag)
+        </div>
+    </div>
+}

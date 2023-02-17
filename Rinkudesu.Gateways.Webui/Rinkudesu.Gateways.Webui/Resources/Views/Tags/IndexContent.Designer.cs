@@ -21,14 +21,14 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Tags {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Index_pl {
+    internal class IndexContent {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Index_pl() {
+        internal IndexContent() {
         }
         
         /// <summary>
@@ -38,7 +38,7 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Tags {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Views.Tags.Index.pl", typeof(Index_pl).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Views.Tags.IndexContent", typeof(IndexContent).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -60,56 +60,11 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Tags {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ładowanie tagów nie powiodło się.
-        /// </summary>
-        internal static string data_load_failed {
-            get {
-                return ResourceManager.GetString("data-load-failed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Edytuj.
+        ///   Looks up a localized string similar to Edit.
         /// </summary>
         internal static string edit {
             get {
                 return ResourceManager.GetString("edit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Wczytywanie.
-        /// </summary>
-        internal static string loading {
-            get {
-                return ResourceManager.GetString("loading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Dalej.
-        /// </summary>
-        internal static string next {
-            get {
-                return ResourceManager.GetString("next", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Wstecz.
-        /// </summary>
-        internal static string previous {
-            get {
-                return ResourceManager.GetString("previous", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tagi.
-        /// </summary>
-        internal static string title {
-            get {
-                return ResourceManager.GetString("title", resourceCulture);
             }
         }
     }

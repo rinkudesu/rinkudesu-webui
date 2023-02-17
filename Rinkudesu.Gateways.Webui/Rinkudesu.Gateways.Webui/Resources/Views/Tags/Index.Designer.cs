@@ -60,11 +60,47 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Tags {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to load tags.
+        /// </summary>
+        internal static string data_load_failed {
+            get {
+                return ResourceManager.GetString("data-load-failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         internal static string edit {
             get {
                 return ResourceManager.GetString("edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading.
+        /// </summary>
+        internal static string loading {
+            get {
+                return ResourceManager.GetString("loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Next.
+        /// </summary>
+        internal static string next {
+            get {
+                return ResourceManager.GetString("next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previous.
+        /// </summary>
+        internal static string previous {
+            get {
+                return ResourceManager.GetString("previous", resourceCulture);
             }
         }
         

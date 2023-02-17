@@ -1,26 +1,32 @@
 ﻿@using Rinkudesu.Gateways.Clients.Tags
-@using Rinkudesu.Gateways.Webui.Utils
-@model System.Collections.Generic.List<Rinkudesu.Gateways.Webui.Models.TagIndexViewModel>
+@using System.Text.Json
+@using System.Text.Json.Serialization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model TagIndexQueryModel
 @inject IViewLocalizer Localizer
 
 @{
     ViewBag.Title = Localizer["title"];
     Layout = "_Layout";
+    var queryJson = JsonSerializer.Serialize(Model, new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull });
 }
+
+<span hidden id="translations" data-load-failed="@Localizer["data-load-failed"]"></span>
 
 <h2>@Localizer["title"]</h2>
 
 @await Html.PartialAsync("_QuickCreatePartial", new TagDto())
 
-@foreach (var tag in Model)
-{
-    <div class="row index-data-row">
-        <div class="col index-data-row-col user-data-display">
-            @tag.Name
-        </div>
-        <div class="col index-data-row-col index-row-col-btn">
-            <a class="btn btn-info" asp-action="Edit" asp-route-id="@tag.Id.ToString()" asp-route-returnUrl="@Context.GetCurrentUrl()">@Localizer["edit"]</a>
-            @await Html.PartialAsync("_DeletePartial", tag)
-        </div>
+<div id="content">
+    <span hidden id="query" data-value="@queryJson"></span>
+    @Localizer["loading"]...
+</div>
+<div class="row" id="page-selection">
+    <div class="col-4">
+        <a id="page-prev" class="page-changer previous btn">@Localizer["previous"]</a>
+        <a id="page-next" class="page-changer next btn">@Localizer["next"]</a>
     </div>
-}
+</div>
+
+<script src="~/js/tagContentLoader.js" asp-append-version="true"></script>
+<script src="~/js/dynamicContentLoader.js" asp-append-version="true"></script>

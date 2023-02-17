@@ -105,6 +105,24 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Links {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Next.
+        /// </summary>
+        internal static string next {
+            get {
+                return ResourceManager.GetString("next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previous.
+        /// </summary>
+        internal static string previous {
+            get {
+                return ResourceManager.GetString("previous", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sharing key.
         /// </summary>
         internal static string share_key {
