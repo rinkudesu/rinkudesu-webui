@@ -22,12 +22,21 @@ public class TagsController : AccessTokenClientController<TagsClient>
     }
 
     [HttpGet]
-    public async Task<IActionResult> Index()
+    public IActionResult Index([Bind] TagIndexQueryModel query)
     {
-        var tags = await Client.GetTags(TagQueryDto.Empty);
+        return View(query);
+    }
+
+    [HttpGet]
+    public async Task<ActionResult> IndexContent([Bind] TagIndexQueryModel query, Uri returnUrl, CancellationToken cancellationToken)
+    {
+        var tags = await Client.GetTags(_mapper.Map<TagQueryDto>(query), cancellationToken);
         if (tags is null)
-            return this.ReturnNotFound("/".ToUri());
-        return View(_mapper.Map<List<TagIndexViewModel>>(tags));
+            return NotFound();
+
+        ViewData["ReturnUrl"] = returnUrl;
+        ViewData["Query"] = query;
+        return PartialView(_mapper.Map<List<TagIndexViewModel>>(tags));
     }
 
     [HttpPost, ValidateAntiForgeryToken]

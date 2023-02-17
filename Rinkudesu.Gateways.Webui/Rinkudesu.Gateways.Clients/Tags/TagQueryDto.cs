@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 
 namespace Rinkudesu.Gateways.Clients.Tags;
 
@@ -9,6 +10,8 @@ namespace Rinkudesu.Gateways.Clients.Tags;
 public class TagQueryDto
 {
     public string? Name { get; set; }
+    public int? Skip { get; set; }
+    public int? Take { get; set; }
 
     public static readonly TagQueryDto Empty = new();
 
@@ -19,6 +22,14 @@ public class TagQueryDto
         if (!string.IsNullOrWhiteSpace(Name))
         {
             queryArguments.AddLast($"name={Uri.EscapeDataString(Name)}");
+        }
+        if (Skip.HasValue)
+        {
+            queryArguments.AddLast($"offset={Skip.Value.ToString(CultureInfo.InvariantCulture)}");
+        }
+        if (Take.HasValue)
+        {
+            queryArguments.AddLast($"limit={Take.Value.ToString(CultureInfo.InvariantCulture)}");
         }
 
         return $"?{string.Join('&', queryArguments)}";
