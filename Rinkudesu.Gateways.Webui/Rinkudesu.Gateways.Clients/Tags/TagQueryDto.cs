@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Text.Json.Serialization;
 
 namespace Rinkudesu.Gateways.Clients.Tags;
 
@@ -9,7 +10,8 @@ namespace Rinkudesu.Gateways.Clients.Tags;
 [SuppressMessage("Performance", "CA1819:Properties should not return arrays")]
 public class TagQueryDto
 {
-    public string? Name { get; set; }
+    [JsonPropertyName("Name")]
+    public string? NameQuery { get; set; }
     public int? Skip { get; set; }
     public int? Take { get; set; }
 
@@ -19,9 +21,9 @@ public class TagQueryDto
     {
         var queryArguments = new LinkedList<string>();
 
-        if (!string.IsNullOrWhiteSpace(Name))
+        if (!string.IsNullOrWhiteSpace(NameQuery))
         {
-            queryArguments.AddLast($"name={Uri.EscapeDataString(Name)}");
+            queryArguments.AddLast($"name={Uri.EscapeDataString(NameQuery)}");
         }
         if (Skip.HasValue)
         {

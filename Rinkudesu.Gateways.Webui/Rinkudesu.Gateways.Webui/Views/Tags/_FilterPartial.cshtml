@@ -1,0 +1,19 @@
+﻿@model TagIndexQueryModel
+@inject IViewLocalizer Localizer
+
+<form method="get" asp-action="Index" asp-antiforgery="false" class="mt-3 mb-3">
+    <div class="row mb-2">
+        <div class="col-2">
+            <label asp-for="NameQuery"></label>
+        </div>
+        <div class="col-10">
+            <input asp-for="NameQuery" class="form-control"/>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-11"><!--padding--></div>
+        <div class="col-1 d-flex flex-column">
+            <input type="submit" class="btn btn-primary" value="@Localizer["filter"]"/>
+        </div>
+    </div>
+</form>

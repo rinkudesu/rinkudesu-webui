@@ -21,7 +21,7 @@ public class TagsAutocompletionApiController : AccessTokenClientControllerBase<T
 
     public async Task<ActionResult> GetTags([FromQuery] string name, CancellationToken cancellationToken)
     {
-        var query = new TagQueryDto { Name = name };
+        var query = new TagQueryDto { NameQuery = name };
         var results = await Client.GetTags(query, cancellationToken);
         if (results is null)
             return NotFound();
