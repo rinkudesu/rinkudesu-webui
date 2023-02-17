@@ -44,4 +44,12 @@
     <data name="data-load-failed" xml:space="preserve">
         <value>Ładowanie linków nie powiodło się</value>
     </data>
+    <data name="previous" xml:space="preserve">
+        <value>Wstecz</value>
+        <comment>previous</comment>
+    </data>
+    <data name="next" xml:space="preserve">
+        <value>Dalej</value>
+        <comment>next</comment>
+    </data>
 </root>

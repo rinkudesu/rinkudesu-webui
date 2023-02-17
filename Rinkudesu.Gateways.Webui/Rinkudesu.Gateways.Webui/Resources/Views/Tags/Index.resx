@@ -26,4 +26,20 @@
         <value>Edit</value>
         <comment>edit</comment>
     </data>
+    <data name="data-load-failed" xml:space="preserve">
+        <value>Failed to load tags</value>
+        <comment>data-load-failed</comment>
+    </data>
+    <data name="loading" xml:space="preserve">
+        <value>Loading</value>
+        <comment>loading</comment>
+    </data>
+    <data name="previous" xml:space="preserve">
+        <value>Previous</value>
+        <comment>previous</comment>
+    </data>
+    <data name="next" xml:space="preserve">
+        <value>Next</value>
+        <comment>next</comment>
+    </data>
 </root>

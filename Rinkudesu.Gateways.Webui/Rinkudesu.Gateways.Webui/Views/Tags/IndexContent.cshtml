@@ -1,5 +1,4 @@
-﻿@using Rinkudesu.Gateways.Webui.Utils
-@using Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
 @using System.Text.Json
 @using System.Text.Json.Serialization
 @model System.Collections.Generic.List<Rinkudesu.Gateways.Webui.Models.TagIndexViewModel>
@@ -18,7 +17,6 @@
             @tag.Name
         </div>
         <div class="col index-data-row-col index-row-col-btn">
-            @*TODO: move this translation to a correct file*@
             <a class="btn btn-info" asp-action="Edit" asp-route-id="@tag.Id.ToString()" asp-route-returnUrl="@ViewBag.ReturnUrl">@Localizer["edit"]</a>
             @await Html.PartialAsync("_DeletePartial", tag)
         </div>
