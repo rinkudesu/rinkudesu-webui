@@ -13,8 +13,8 @@
 @foreach (var link in Model)
 {
     <div class="row mb-2">
-        <div class="col">
-            @link.LinkUrl
+        <div class="col user-data-display">
+            @link.Title
         </div>
         <div class="col multiline-tags-container">
             @foreach (var tag in link.LinkTags)
