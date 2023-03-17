@@ -13,13 +13,6 @@ namespace Rinkudesu.Gateways.Webui.Controllers
 {
     public class UserSessionController : Controller
     {
-        private readonly IKafkaProducer _kafkaProducer;
-
-        public UserSessionController(IKafkaProducer kafkaProducer)
-        {
-            _kafkaProducer = kafkaProducer;
-        }
-
 // Disable antiforgery token check
 #pragma warning disable CA5391
         [HttpGet]
@@ -38,16 +31,6 @@ namespace Rinkudesu.Gateways.Webui.Controllers
             if (!User.Identity!.IsAuthenticated) return Redirect("/");
             await HttpContext.SignOutAsync();
             return Redirect($"{KeycloakSettings.Current.Authority}/protocol/openid-connect/logout?client_id={KeycloakSettings.Current.ClientId}&post_logout_redirect_uri={HttpContext.GetEncodedBasePath()}");
-        }
-
-        [HttpPost]
-        [Authorize]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteUser()
-        {
-            //todo: this is just a mock, it just posts "delete user" message to queue, but doesn't actually delete any users
-            await _kafkaProducer.ProduceUserDeleted(User.GetIdAsGuid());
-            return LocalRedirect("/");
         }
     }
 }
