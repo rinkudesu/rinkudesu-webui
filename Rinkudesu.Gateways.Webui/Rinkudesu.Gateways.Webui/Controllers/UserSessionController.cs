@@ -13,7 +13,6 @@ namespace Rinkudesu.Gateways.Webui.Controllers
 {
     public class UserSessionController : Controller
     {
-
 // Disable antiforgery token check
 #pragma warning disable CA5391
         [HttpGet]
