@@ -201,3 +201,13 @@ body {
   border-bottom-right-radius: var(--page-button-radiug-large);
   border-top-right-radius: var(--page-button-radiug-large);
 }
+
+.tag-background-pill {
+  background: unset;
+  padding: 2px;
+  border-radius: var(--btn-radius);
+}
+
+.tag-background-pill-text {
+  mix-blend-mode: difference;
+}
