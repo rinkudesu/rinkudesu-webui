@@ -21,4 +21,7 @@
     <data name="name" xml:space="preserve">
         <value>Nazwa</value>
     </data>
+    <data name="colour" xml:space="preserve">
+        <value>Kolor</value>
+    </data>
 </root>
