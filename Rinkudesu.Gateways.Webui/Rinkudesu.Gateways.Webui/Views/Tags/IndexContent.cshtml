@@ -14,7 +14,7 @@
 {
     <div class="row index-data-row">
         <div class="col index-data-row-col user-data-display">
-            @tag.Name
+            <span class="tag-background-pill has-bg-colour" data-bg-colour="@tag.Colour"><span class="tag-background-pill-text">@tag.Name</span></span>
         </div>
         <div class="col index-data-row-col index-row-col-btn">
             <a class="btn btn-info" asp-action="Edit" asp-route-id="@tag.Id.ToString()" asp-route-returnUrl="@ViewBag.ReturnUrl">@Localizer["edit"]</a>

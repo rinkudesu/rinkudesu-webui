@@ -34,6 +34,8 @@ function onTagsLoad(responseEvent) {
             }
         }
     }
+
+    applyBgColourToAll();
 }
 
 function onTagDelete(button) {

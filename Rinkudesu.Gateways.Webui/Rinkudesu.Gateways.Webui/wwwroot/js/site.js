@@ -27,6 +27,20 @@ function disableWithChildren(node, status = false) {
     }
 }
 
+function setBgColour(element) {
+    const colour = element.getAttribute('data-bg-colour');
+    if (colour == null)
+        return;
+
+    element.style.background = colour;
+}
+
+function applyBgColourToAll() {
+    for (const element of document.getElementsByClassName('has-bg-colour')) {
+        setBgColour(element);
+    }
+}
+
 window.addEventListener('load', _ => initialiseTagsAutocompletion());
 window.addEventListener('load', _ => initialiseGenericTomselect());
 

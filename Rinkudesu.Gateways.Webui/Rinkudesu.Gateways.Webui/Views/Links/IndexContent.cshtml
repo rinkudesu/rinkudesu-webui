@@ -19,7 +19,7 @@
         <div class="col multiline-tags-container">
             @foreach (var tag in link.LinkTags)
             {
-                <span class="tag-display"><span class="user-data-display">@tag.Name</span></span>
+                <span class="tag-display tag-background-pill has-bg-colour" data-bg-colour="@tag.Colour"><span class="user-data-display tag-background-pill-text">@tag.Name</span></span>
             }
         </div>
         <div class="col-1">

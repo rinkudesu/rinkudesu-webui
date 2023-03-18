@@ -56,6 +56,7 @@ function setContent(responseEvent) {
     contentDiv.innerHTML = responseEvent.currentTarget.responseText;
     getQuery();
     handlePageBtnState();
+    applyBgColourToAll();
 }
 
 function getQuery() {

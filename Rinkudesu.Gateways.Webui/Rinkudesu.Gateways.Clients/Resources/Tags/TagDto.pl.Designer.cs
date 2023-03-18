@@ -60,6 +60,15 @@ namespace Rinkudesu.Gateways.Clients.Resources.Tags {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kolor.
+        /// </summary>
+        public static string colour {
+            get {
+                return ResourceManager.GetString("colour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nazwa.
         /// </summary>
         public static string name {
