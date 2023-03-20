@@ -36,4 +36,7 @@
     <data name="enumPublic" xml:space="preserve">
         <value>Public</value>
     </data>
+    <data name="tagIds" xml:space="preserve">
+        <value>Tags</value>
+    </data>
 </root>
