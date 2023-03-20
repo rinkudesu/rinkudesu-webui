@@ -46,30 +46,40 @@ window.addEventListener('load', _ => initialiseGenericTomselect());
 
 function initialiseGenericTomselect() {
     for (const tomselect of document.getElementsByClassName('tomselect')) {
-        new TomSelect(tomselect, {});
+        try {
+            new TomSelect(tomselect, {});
+        }
+        catch {
+            //ignore TS creation errors, as they happen always...
+        }
     }
 }
 
 function initialiseTagsAutocompletion() {
     for (const tomselect of document.getElementsByClassName('tags-autocompletion')) {
-        const allowCreate = tomselect.getAttribute('data-allow-create') != null;
-        let select = new TomSelect(tomselect, {
-            valueField: 'id',
-            labelField: 'data',
-            searchField: 'data',
-            create: allowCreate,
-            load: function (query, callback) {
-                const url = '/api/autocompletion/TagsAutocompletionApi?name=' + encodeURIComponent(query);
-                fetch(url)
-                    .then(response => response.json())
-                    .then(json => {
-                        callback(json);
-                    }).catch(() => {
-                    callback();
-                });
-            }
-        });
-        select.on("option_add", createTagInAutocompletion);
+        try {
+            const allowCreate = tomselect.getAttribute('data-allow-create') != null;
+            let select = new TomSelect(tomselect, {
+                valueField: 'id',
+                labelField: 'data',
+                searchField: 'data',
+                create: allowCreate,
+                load: function (query, callback) {
+                    const url = '/api/autocompletion/TagsAutocompletionApi?name=' + encodeURIComponent(query);
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(json => {
+                            callback(json);
+                        }).catch(() => {
+                        callback();
+                    });
+                }
+            });
+            select.on("option_add", createTagInAutocompletion);
+        }
+        catch {
+            //ignore TS creation errors, as they happen always...
+        }
     }
 }
 
