@@ -29,25 +29,23 @@ public class TagsClient : AccessTokenClient
         }
     }
 
-    public async Task<bool> CreateTag(TagDto newTag, CancellationToken cancellationToken = default)
+    public async Task<TagDto?> CreateTag(TagDto newTag, CancellationToken cancellationToken = default)
     {
         try
         {
             using var content = GetJsonContent(newTag);
             var response = await Client.PostAsync("tags".ToUri(), content, cancellationToken).ConfigureAwait(false);
-            if (response.IsSuccessStatusCode) return true;
-            Logger.LogWarning("Unable to create new tag. Response code was '{StatusCode}'.", response.StatusCode);
-            return false;
+            return await HandleMessageAndParseDto<TagDto>(response, "new", cancellationToken).ConfigureAwait(false);
         }
         catch (JsonException e)
         {
             Logger.LogWarning(e, "Unable to serialise new tag into json");
-            return false;
+            return null;
         }
         catch (HttpRequestException e)
         {
             Logger.LogWarning(e, "Error while requesting new tag creation.");
-            return false;
+            return null;
         }
     }
 

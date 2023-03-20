@@ -12,7 +12,7 @@
     @await Html.PartialAsync("_FormFields")
     <div class="mb-3">
         <label asp-for="TagIds"></label>
-        <select class="tags-autocompletion" asp-for="TagIds"></select>
+        <select class="tags-autocompletion" data-allow-create="true" asp-for="TagIds"></select>
     </div>
     <div class="mb-3">
         <input class="btn btn-primary" type="submit" value="@Localizer["add"]"/>

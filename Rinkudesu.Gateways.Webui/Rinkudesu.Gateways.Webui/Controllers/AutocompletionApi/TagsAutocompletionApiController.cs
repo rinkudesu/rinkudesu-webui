@@ -28,4 +28,17 @@ public class TagsAutocompletionApiController : AccessTokenClientControllerBase<T
 
         return Ok(results.Select(r => new AutocompletionItemViewModel { ItemId = r.Id.ToString(), ItemData = r.Name }).ToArray());
     }
+
+    [HttpPost]
+    public async Task<ActionResult> CreateTag([FromForm] string name, CancellationToken cancellationToken)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            return BadRequest();
+
+        var tagDto = new TagDto { Name = name };
+        var result = await Client.CreateTag(tagDto, cancellationToken);
+        if (result is null)
+            return BadRequest();
+        return CreatedAtAction(nameof(CreateTag), result);
+    }
 }

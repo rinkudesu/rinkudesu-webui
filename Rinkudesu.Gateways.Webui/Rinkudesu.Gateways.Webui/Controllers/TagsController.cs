@@ -45,7 +45,7 @@ public class TagsController : AccessTokenClientController<TagsClient>
         if (!ModelState.IsValid)
             return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri());
 
-        var isSuccess = await Client.CreateTag(newTag);
+        var isSuccess = await Client.CreateTag(newTag) is not null;
         if (!isSuccess)
             return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri());
         return Redirect(nameof(Index));
