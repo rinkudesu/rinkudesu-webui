@@ -52,10 +52,12 @@ function initialiseGenericTomselect() {
 
 function initialiseTagsAutocompletion() {
     for (const tomselect of document.getElementsByClassName('tags-autocompletion')) {
+        const allowCreate = tomselect.getAttribute('data-allow-create') != null;
         new TomSelect(tomselect, {
             valueField: 'id',
             labelField: 'data',
             searchField: 'data',
+            create: allowCreate,
             load: function (query, callback) {
                 const url = '/api/autocompletion/TagsAutocompletionApi?name=' + encodeURIComponent(query);
                 fetch(url)
