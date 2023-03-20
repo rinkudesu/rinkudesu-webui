@@ -45,23 +45,27 @@ window.addEventListener('load', _ => initialiseTagsAutocompletion());
 window.addEventListener('load', _ => initialiseGenericTomselect());
 
 function initialiseGenericTomselect() {
-    new TomSelect('.tomselect', {});
+    for (const tomselect of document.getElementsByClassName('tomselect')) {
+        new TomSelect(tomselect, {});
+    }
 }
 
 function initialiseTagsAutocompletion() {
-    new TomSelect('.tags-autocompletion', {
-        valueField: 'id',
-        labelField: 'data',
-        searchField: 'data',
-        load: function (query, callback) {
-            const url = '/api/autocompletion/TagsAutocompletionApi?name=' + encodeURIComponent(query);
-            fetch(url)
-                .then(response => response.json())
-                .then(json => {
-                    callback(json);
-                }).catch(() => {
-                callback();
-            });
-        }
-    });
+    for (const tomselect of document.getElementsByClassName('tags-autocompletion')) {
+        new TomSelect(tomselect, {
+            valueField: 'id',
+            labelField: 'data',
+            searchField: 'data',
+            load: function (query, callback) {
+                const url = '/api/autocompletion/TagsAutocompletionApi?name=' + encodeURIComponent(query);
+                fetch(url)
+                    .then(response => response.json())
+                    .then(json => {
+                        callback(json);
+                    }).catch(() => {
+                    callback();
+                });
+            }
+        });
+    }
 }
