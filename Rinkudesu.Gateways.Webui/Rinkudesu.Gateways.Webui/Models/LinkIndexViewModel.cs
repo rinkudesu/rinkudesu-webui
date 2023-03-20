@@ -21,6 +21,12 @@ namespace Rinkudesu.Gateways.Webui.Models
 
         [SuppressMessage("Design", "CA1002:Do not expose generic lists")]
         public List<TagDto> LinkTags { get; } = new();
+        /// <summary>
+        /// This is a list of tag ids used only during link creation.
+        /// </summary>
+        [SuppressMessage("Design", "CA1002:Do not expose generic lists")]
+        [Display(Name = nameof(Resources.Models.Links.LinkIndexViewModel.tagIds), ResourceType = typeof(Resources.Models.Links.LinkIndexViewModel))]
+        public List<Guid> TagIds { get; } = new();
     }
 
     public enum LinkPrivacyOptions

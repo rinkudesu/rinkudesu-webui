@@ -62,14 +62,22 @@ namespace Rinkudesu.Gateways.Webui.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind] LinkDto newLink)
+        public async Task<IActionResult> Create([Bind] LinkIndexViewModel newLink, [FromServices] LinkTagsClient linkTagsClient)
         {
             if (!ModelState.IsValid)
                 return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri());
 
-            var isSuccess = await Client.CreateLink(newLink);
-            if (!isSuccess)
-                this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri(), _localizer["unableToCreate"]);
+            var newLinkDto = _mapper.Map<LinkDto>(newLink);
+
+            var returnedDto = await Client.CreateLink(newLinkDto);
+            if (returnedDto is null)
+                return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri(), _localizer["unableToCreate"]);
+            linkTagsClient.SetAccessToken(HttpContext.GetJwt());
+            foreach (var tagId in newLink.TagIds)
+            {
+                //todo: consider some sort of error handling here, as the link already exists at this point, but just quietly failing to create tags is not the best option
+                await linkTagsClient.Assign(new() { LinkId = returnedDto.Id, TagId = tagId });
+            }
             return Redirect(nameof(Index));
         }
 
@@ -82,7 +90,7 @@ namespace Rinkudesu.Gateways.Webui.Controllers
 
             var newLink = new LinkDto { Title = url.ToString(), LinkUrl = url, PrivacyOptions = LinkPrivacyOptionsDto.Private };
 
-            var isSuccess = await Client.CreateLink(newLink);
+            var isSuccess = await Client.CreateLink(newLink) is not null;
             if (!isSuccess)
                 this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri(), _localizer["unableToCreate"]);
             return Redirect(nameof(Index));

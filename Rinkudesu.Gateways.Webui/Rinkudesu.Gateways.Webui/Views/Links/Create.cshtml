@@ -1,5 +1,5 @@
 @inject IViewLocalizer Localizer
-@model Rinkudesu.Gateways.Clients.Links.LinkDto
+@model Rinkudesu.Gateways.Webui.Models.LinkIndexViewModel
 
 @{
     ViewBag.Title = Localizer["title"];
@@ -10,6 +10,10 @@
 
 <form asp-action="Create" asp-antiforgery="true">
     @await Html.PartialAsync("_FormFields")
+    <div class="mb-3">
+        <label asp-for="TagIds"></label>
+        <select class="tags-autocompletion" asp-for="TagIds"></select>
+    </div>
     <div class="mb-3">
         <input class="btn btn-primary" type="submit" value="@Localizer["add"]"/>
     </div>

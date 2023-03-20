@@ -105,6 +105,15 @@ namespace Rinkudesu.Gateways.Webui.Resources.Models.Links {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tags.
+        /// </summary>
+        public static string tagIds {
+            get {
+                return ResourceManager.GetString("tagIds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Title.
         /// </summary>
         public static string title {
