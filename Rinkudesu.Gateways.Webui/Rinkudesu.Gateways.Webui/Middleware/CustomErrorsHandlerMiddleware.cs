@@ -1,10 +1,12 @@
 ﻿using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
 namespace Rinkudesu.Gateways.Webui.Middleware;
 
+[ExcludeFromCodeCoverage]
 public class CustomErrorsHandlerMiddleware
 {
     private readonly RequestDelegate _next;
