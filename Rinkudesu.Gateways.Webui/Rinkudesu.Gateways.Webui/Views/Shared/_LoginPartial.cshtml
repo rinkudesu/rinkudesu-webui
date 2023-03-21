@@ -12,7 +12,7 @@
     {
         <form asp-controller="UserSession" asp-action="Login" asp-antiforgery="true" method="get">
             <input type="hidden" name="returnUrl" value="@Context.GetCurrentUrl()"/>
-            <input type="submit" class="btn btn-secondary" value="@Localizer["login"]"/>
+            <input type="submit" id="login_submit" class="btn btn-secondary" value="@Localizer["login"]"/>
         </form>
     }
 </ul>
