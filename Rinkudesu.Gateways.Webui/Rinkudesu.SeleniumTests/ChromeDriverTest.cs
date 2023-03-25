@@ -23,7 +23,8 @@ public abstract class ChromeDriverTest : IDisposable
         if (!Debugger.IsAttached)
         {
             options.AddArgument("--headless");
-            options.AddArgument("--window-size=1920,1080");
+            // simulate a fairly large window to avoid issues with controls being out of view sometimes
+            options.AddArgument("--window-size=5000,5000");
         }
         _driver = new ChromeDriver(options);
         GoTo(_baseUrl);
@@ -35,7 +36,13 @@ public abstract class ChromeDriverTest : IDisposable
 
     protected void Click(By locator) => _driver.FindElement(locator).Click();
 
-    protected void FillTextBox(By locator, string keys) => _driver.FindElement(locator).SendKeys(keys);
+    protected void FillTextBox(By locator, string keys, bool clearFirst = false)
+    {
+        var box = _driver.FindElement(locator);
+        if (clearFirst)
+            box.Clear();
+        _driver.FindElement(locator).SendKeys(keys);
+    }
 
     protected void LogIn(string username = "test", string password = "test")
     {
@@ -45,6 +52,8 @@ public abstract class ChromeDriverTest : IDisposable
         FillTextBox(By.Id("password"), password);
         Click(By.Id("kc-login"));
     }
+
+    protected void ScrollTo(IWebElement element) => _driver.ExecuteScript("arguments[0].scrollIntoView()", element);
 
     // controlId cannot be By as it needs to be appended before use
     protected void SelectFromDropDown(string controlId, IEnumerable<string> selectedValues)
@@ -78,7 +87,7 @@ public abstract class ChromeDriverTest : IDisposable
         {
             return driver.FindElement(locator).Displayed;
         }
-        catch (NoSuchElementException)
+        catch (Exception e) when(e is NoSuchElementException or StaleElementReferenceException)
         {
             return false;
         }
