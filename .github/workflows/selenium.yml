@@ -20,7 +20,7 @@ jobs:
       - name: Prepare docker environment
         shell: bash
         run: |
-          cd Rinkudesu.SeleniumTests
+          cd Rinkudesu.Gateways.Webui/Rinkudesu.SeleniumTests
           docker compose up -d --build
           sleep 10
       - name: Run selenium tests
