@@ -25,4 +25,4 @@ jobs:
           sleep 10
       - name: Run selenium tests
         run: |
-          dotnet test -c Release
+          dotnet test -c Release Rinkudesu.Gateways.Webui/Rinkudesu.SeleniumTests
