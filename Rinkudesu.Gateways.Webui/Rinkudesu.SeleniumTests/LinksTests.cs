@@ -111,8 +111,7 @@ public class LinksTests : RinkudesuDataFilledTest
         nextPage.Click();
         WaitUntilNotVisible("page-next".AsId());
         linkRows = GetDriver().FindElement("content".AsId()).FindElements(By.ClassName("index-data-row"));
-        // I'm not 100% sure why this is 20, so if it ever fails, just change this value to something sane as this test doesn't cover if it's sorted in a proper way
-        Assert.Equal("20", linkRows.First().FindElement(By.ClassName("index-data-row-col")).Text);
+        Assert.Equal("27", linkRows.First().FindElement(By.ClassName("index-data-row-col")).Text);
         nextPage = GetDriver().FindElement("page-next".AsId());
         Assert.False(nextPage.Displayed);
         prevPage = GetDriver().FindElement("page-prev".AsId());
