@@ -27,7 +27,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3.0.3
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: 7.0.x
       - name: Cache SonarCloud scanner
         id: cache-sonar-scanner
         uses: actions/cache@v3
@@ -49,5 +49,5 @@ jobs:
         run: |
           ./.sonar/scanner/dotnet-sonarscanner begin /k:"rinkudesu_rinkudesu-webui" /o:"rinkudesu" /d:sonar.cs.opencover.reportsPaths="**/*.Tests/coverage.opencover.xml" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build ./Rinkudesu.Gateways.Webui -c Release
-          dotnet test ./Rinkudesu.Gateways.Webui -c Release
+          dotnet test --filter "\!~Selenium" ./Rinkudesu.Gateways.Webui -c Release
           ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"

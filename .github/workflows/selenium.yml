@@ -1,0 +1,28 @@
+name: Build and test
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  build-for-sonar:
+    name: Build and test with selenium
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3.0.3
+        with:
+          dotnet-version: 7.0.x
+      - name: Set Keycloak host mapping
+        run: |
+          sudo echo "127.0.0.1 selenium-keycloak" | sudo tee -a /etc/hosts
+      - name: Prepare docker environment
+        shell: bash
+        run: |
+          cd Rinkudesu.Gateways.Webui/Rinkudesu.SeleniumTests
+          docker compose up -d --build
+          sleep 30
+      - name: Run selenium tests
+        run: |
+          dotnet test -c Release Rinkudesu.Gateways.Webui/Rinkudesu.SeleniumTests

@@ -12,20 +12,20 @@
 <span hidden id="query" data-value="@queryJson"></span>
 @foreach (var link in Model)
 {
-    <div class="row mb-2">
-        <div class="col user-data-display">
+    <div class="row mb-2 index-data-row">
+        <div class="col user-data-display index-data-row-col">
             @link.Title
         </div>
-        <div class="col multiline-tags-container">
+        <div class="col multiline-tags-container index-data-row-col">
             @foreach (var tag in link.LinkTags)
             {
                 <span class="tag-display tag-background-pill has-bg-colour" data-bg-colour="@tag.Colour"><span class="user-data-display tag-background-pill-text">@tag.Name</span></span>
             }
         </div>
-        <div class="col-1">
+        <div class="col-1 index-data-row-col">
             <a class="btn btn-info" asp-action="Edit" asp-route-id="@link.Id.ToString()" asp-route-returnUrl="@ViewBag.ReturnUrl">@Localizer["edit"]</a>
         </div>
-        <div class="col-1">
+        <div class="col-1 index-data-row-col">
             @await Html.PartialAsync("_DeletePartial", link)
         </div>
     </div>
