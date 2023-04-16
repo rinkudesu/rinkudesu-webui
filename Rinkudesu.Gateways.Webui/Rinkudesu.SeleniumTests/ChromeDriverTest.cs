@@ -13,7 +13,7 @@ public abstract class ChromeDriverTest : IDisposable
 
     protected ChromeDriverTest(string? baseUrl = null)
     {
-        _baseUrl = baseUrl ?? Environment.GetEnvironmentVariable("RINKUDESU_SELENIUM_BASEURL") ?? "http://localhost:5000/";
+        _baseUrl = baseUrl ?? Environment.GetEnvironmentVariable("RINKUDESU_SELENIUM_BASEURL") ?? "https://localhost:5001/";
         var options = new ChromeOptions
         {
             AcceptInsecureCertificates = true,
