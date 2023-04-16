@@ -1,0 +1,116 @@
+services:
+  selenium-postgres-keycloak:
+    image: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak
+  selenium-keycloak:
+    image: quay.io/keycloak/keycloak
+    restart: unless-stopped
+    environment:
+      KC_HOSTNAME: selenium-keycloak
+      KC_DB: postgres
+      KC_DB_PASSWORD: keycloak
+      KC_DB_URL: jdbc:postgresql://selenium-postgres-keycloak/keycloak
+      KC_DB_USERNAME: keycloak
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    volumes:
+      - ./keycloakImports:/opt/keycloak/data/import
+    ports:
+      - 127.0.0.1:8080:8080
+    depends_on:
+      - selenium-postgres-keycloak
+    command: start-dev --import-realm
+
+  selenium-postgres-tags:
+    image: postgres:alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: rinkudesu
+      POSTGRES_PASSWORD: rinkudesu
+      POSTGRES_DB: rinkudesu
+  selenium-rinkudesu-tags:
+    image: ghcr.io/rinkudesu/rinkudesu-tags:experimental
+    restart: unless-stopped
+    depends_on:
+      - selenium-keycloak
+      - selenium-postgres-tags
+      - selenium-kafka
+    environment:
+      TAGS_DB: "postgres://rinkudesu:rinkudesu@selenium-postgres-tags:5432/rinkudesu"
+      TAGS_LOG-LEVEL: "info"
+      GIN_MODE: "release"
+      TAGS_AUTHORITY: "http://selenium-keycloak:8080/realms/rinkudesu"
+      RINKU_KAFKA_ADDRESS: "selenium-kafka:9092"
+      RINKU_KAFKA_CLIENT_ID: "rinkudesu-tags"
+      RINKU_KAFKA_CONSUMER_GROUP_ID: "rinkudesu-tags"
+
+  selenium-postgres-links:
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: rinkudesu
+  selenium-rinkudesu-links:
+      image: ghcr.io/rinkudesu/rinkudesu-links:experimental
+      restart: unless-stopped
+      depends_on:
+        - selenium-postgres-links
+        - selenium-kafka
+        - selenium-keycloak
+      environment:
+        RINKU_LINKS_CONNECTIONSTRING: "Server=selenium-postgres-links;Port=5432;Database=rinku-links;User Id=postgres;Password=rinkudesu;"
+        RINKUDESU_AUTHORITY: "http://selenium-keycloak:8080/realms/rinkudesu"
+        RINKU_KAFKA_ADDRESS: "selenium-kafka:9092"
+        RINKU_KAFKA_CLIENT_ID: "rinkudesu-links"
+        RINKU_KAFKA_CONSUMER_GROUP_ID: "rinkudesu-links"
+        RINKUDESU_AUTHORITY_ALLOW_HTTP: 1
+        RINKUDESU_TAGS: "http://selenium-rinkudesu-tags:5000/api/"
+      command:
+        - "--applyMigrations"
+
+  selenium-rinkudesu-webui:
+    image: ghcr.io/rinkudesu/rinkudesu-webui:experimental
+    restart: unless-stopped
+    build:
+      context: ..
+      dockerfile: Rinkudesu.Gateways.Webui/Dockerfile
+    depends_on:
+      - selenium-kafka
+      - selenium-keycloak
+      - selenium-rinkudesu-links
+      - selenium-rinkudesu-tags
+    ports:
+      - "127.0.0.1:5000:80"
+      - "127.0.0.1:5001:443"
+    volumes:
+      - ./cert.pfx:/app/cert.pfx:ro
+    environment:
+      RINKUDESU_AUTHORITY: "http://selenium-keycloak:8080/realms/rinkudesu"
+      RINKUDESU_CLIENTID: "rinkudesu"
+      RINKUDESU_LINKS: "http://selenium-rinkudesu-links/api/"
+      RINKUDESU_TAGS: "http://selenium-rinkudesu-tags:5000/api/v0/"
+      RINKU_KAFKA_ADDRESS: "selenium-kafka:9092"
+      RINKU_KAFKA_CLIENT_ID: "rinkudesu-webui"
+      RINKU_KAFKA_CONSUMER_GROUP_ID: "rinkudesu-webui"
+      RINKUDESU_AUTHORITY_ALLOW_HTTP: 1
+      ASPNETCORE_URLS: "http://0.0.0.0:80;https://0.0.0.0:443"
+
+  selenium-zookeeper:
+    image: docker.io/bitnami/zookeeper:latest
+    restart: unless-stopped
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+      - KAFKA_TLS_CLIENT_AUTH=none
+  selenium-kafka:
+    image: docker.io/bitnami/kafka:latest
+    restart: unless-stopped
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=selenium-zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://selenium-kafka:9092
+    depends_on:
+      - selenium-zookeeper

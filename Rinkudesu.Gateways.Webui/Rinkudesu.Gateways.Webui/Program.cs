@@ -1,6 +1,9 @@
 using System;
+using System.IO;
+using System.Security.Cryptography.X509Certificates;
 using CommandLine;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Rinkudesu.Gateways.Webui;
 using Serilog;
 using Serilog.Exceptions;
@@ -48,6 +51,16 @@ try
             .Enrich.WithProperty("ApplicationName", context.HostingEnvironment.ApplicationName)
             .Enrich.WithExceptionDetails();
     });
+
+    // This is useful for selenium tests, that sometimes might require https, even if invalid
+    if (File.Exists("./cert.pfx"))
+    {
+        webApp.WebHost.UseKestrel(o => {
+            o.ConfigureHttpsDefaults(h => {
+                h.ServerCertificate = new X509Certificate2("./cert.pfx");
+            });
+        });
+    }
 
     var app = webApp.Build();
     startup.Configure(app, app.Environment);
