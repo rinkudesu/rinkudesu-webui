@@ -103,9 +103,9 @@ namespace Rinkudesu.Gateways.Webui
 
             services.Configure<ForwardedHeadersOptions>(o => {
                 o.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
-                o.KnownProxies.Add(IPAddress.Parse("192.168.0.0/16"));
-                o.KnownProxies.Add(IPAddress.Parse("10.0.0.0/8"));
-                o.KnownProxies.Add(IPAddress.Parse("172.16.0.0/12"));
+                o.KnownNetworks.Add(new IPNetwork(IPAddress.Parse("192.168.0.0"), 16));
+                o.KnownNetworks.Add(new IPNetwork(IPAddress.Parse("10.0.0.0"), 8));
+                o.KnownNetworks.Add(new IPNetwork(IPAddress.Parse("172.16.0.0"), 12));
             });
 
             services.AddMvc().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
