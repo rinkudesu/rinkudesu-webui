@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Net.Http;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -9,6 +11,7 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -98,6 +101,13 @@ namespace Rinkudesu.Gateways.Webui
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 
+            services.Configure<ForwardedHeadersOptions>(o => {
+                o.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+                o.KnownProxies.Add(IPAddress.Parse("192.168.0.0/16"));
+                o.KnownProxies.Add(IPAddress.Parse("10.0.0.0/8"));
+                o.KnownProxies.Add(IPAddress.Parse("172.16.0.0/12"));
+            });
+
             services.AddMvc().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
         }
 
@@ -118,6 +128,7 @@ namespace Rinkudesu.Gateways.Webui
 
             var supportedCultures = new[] { "en-GB", "pl" };
             app.UseRequestLocalization(new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0]).AddSupportedCultures(supportedCultures).AddSupportedUICultures(supportedCultures));
+            app.UseForwardedHeaders();
 
             app.UseMiddleware<ReturnUrlValidationMiddleware>();
             app.UseHttpsRedirection();
