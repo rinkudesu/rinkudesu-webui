@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
@@ -10,9 +9,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,6 +24,7 @@ using Rinkudesu.Gateways.Clients.Tags;
 using Rinkudesu.Gateways.Utils;
 using Rinkudesu.Gateways.Webui.Middleware;
 using Rinkudesu.Gateways.Webui.Models;
+using Rinkudesu.Gateways.Webui.Utils;
 using Rinkudesu.Kafka.Dotnet;
 using Rinkudesu.Kafka.Dotnet.Base;
 
@@ -57,6 +57,7 @@ namespace Rinkudesu.Gateways.Webui
             SetupKafka(services);
 
             KeycloakSettings.Current = new KeycloakSettings();
+            RedisSettings.Current = new RedisSettings();
 
 #if DEBUG
             IdentityModelEventSource.ShowPII = true;
@@ -84,6 +85,7 @@ namespace Rinkudesu.Gateways.Webui
                         }
                         return Task.CompletedTask;
                     };
+                    options.SessionStore = new RedisCacheTicketStore(RedisSettings.Current.GetRedisOptions());
                 })
                 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options => {
                     options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -92,7 +94,7 @@ namespace Rinkudesu.Gateways.Webui
                     options.ResponseType = "code";
                     options.SaveTokens = true;
                     options.UseTokenLifetime = true;
-                    options.GetClaimsFromUserInfoEndpoint = true;
+                    options.GetClaimsFromUserInfoEndpoint = false;
                     options.RequireHttpsMetadata = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("RINKUDESU_AUTHORITY_ALLOW_HTTP"));
                     options.TokenValidationParameters.NameClaimType = "preferred_username";
                     options.TokenValidationParameters.ClockSkew = TimeSpan.Zero;
