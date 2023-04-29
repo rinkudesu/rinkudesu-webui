@@ -12,7 +12,8 @@
         "RINKUDESU_TAGS": "http://localhost:5010/api/v0/",
         "RINKU_KAFKA_ADDRESS": "localhost:9092",
         "RINKU_KAFKA_CLIENT_ID": "rinkudesu-webui",
-        "RINKU_KAFKA_CONSUMER_GROUP_ID": "rinkudesu-webui"
+        "RINKU_KAFKA_CONSUMER_GROUP_ID": "rinkudesu-webui",
+        "RINKUDESU_REDIS_ADDRESS": "127.0.0.1:6379"
       }
     }
   }
