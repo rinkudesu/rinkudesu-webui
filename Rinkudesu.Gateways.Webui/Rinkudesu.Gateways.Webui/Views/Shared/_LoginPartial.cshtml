@@ -11,9 +11,6 @@
     }
     else
     {
-        <form asp-controller="UserSession" asp-action="Login" asp-antiforgery="true" method="get">
-            <input type="hidden" name="returnUrl" value="@Context.GetCurrentUrl()"/>
-            <input type="submit" id="login_submit" class="btn btn-secondary" value="@Localizer["login"]"/>
-        </form>
+        <a id="login_btn" class="btn btn-primary" asp-controller="UserSession" asp-action="Login" asp-route-returnUrl="@Context.GetCurrentUrl()">@Localizer["login"]</a>
     }
 </ul>

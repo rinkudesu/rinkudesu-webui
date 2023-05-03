@@ -1,29 +1,4 @@
 services:
-  selenium-postgres-keycloak:
-    image: postgres
-    restart: unless-stopped
-    environment:
-      POSTGRES_DB: keycloak
-      POSTGRES_USER: keycloak
-      POSTGRES_PASSWORD: keycloak
-  selenium-keycloak:
-    image: quay.io/keycloak/keycloak
-    restart: unless-stopped
-    environment:
-      KC_HOSTNAME: selenium-keycloak
-      KC_DB: postgres
-      KC_DB_PASSWORD: keycloak
-      KC_DB_URL: jdbc:postgresql://selenium-postgres-keycloak/keycloak
-      KC_DB_USERNAME: keycloak
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
-    volumes:
-      - ./keycloakImports:/opt/keycloak/data/import
-    ports:
-      - 127.0.0.1:8080:8080
-    depends_on:
-      - selenium-postgres-keycloak
-    command: start-dev --import-realm
 
   selenium-postgres-tags:
     image: postgres:alpine
