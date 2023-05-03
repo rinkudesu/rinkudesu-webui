@@ -6,7 +6,7 @@
 @inject IViewLocalizer Localizer
 
 @{
-    TagsClient.SetAccessToken(Context.GetJwt());
+    await TagsClient.SetAccessToken(Context.Request);
     var selectedTags = new List<TagDto>();
     foreach (var tagId in Model.TagIds ?? Array.Empty<Guid>())
     {

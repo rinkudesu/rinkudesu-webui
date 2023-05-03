@@ -28,6 +28,7 @@ public class SharedLinksController : AccessTokenClientControllerBase<SharedLinks
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<string>> GetKey(Guid id, CancellationToken cancellationToken)
     {
+        await SetJwt();
         return Ok(await Client.GetKey(id, cancellationToken));
     }
 
@@ -35,6 +36,7 @@ public class SharedLinksController : AccessTokenClientControllerBase<SharedLinks
     [ValidateAntiForgeryToken]
     public async Task<ActionResult<string>> Share(Guid id, CancellationToken cancellationToken)
     {
+        await SetJwt();
         return Ok(await Client.Share(id, cancellationToken));
     }
 
@@ -42,6 +44,7 @@ public class SharedLinksController : AccessTokenClientControllerBase<SharedLinks
     [ValidateAntiForgeryToken]
     public async Task<ActionResult> Unshare(Guid id, CancellationToken cancellationToken)
     {
+        await SetJwt();
         await Client.Unshare(id, cancellationToken);
         return Ok();
     }

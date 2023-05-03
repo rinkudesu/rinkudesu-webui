@@ -19,6 +19,7 @@ public class SharedLinksAccessController : AccessTokenClientController<LinksClie
     [HttpGet]
     public async Task<IActionResult> Get(string key, CancellationToken cancellationToken)
     {
+        await SetJwt();
         var link = await Client.GetLink(key, cancellationToken);
 
         if (link is null)

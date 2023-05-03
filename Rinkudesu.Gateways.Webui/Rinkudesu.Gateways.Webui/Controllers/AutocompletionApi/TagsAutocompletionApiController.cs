@@ -22,6 +22,7 @@ public class TagsAutocompletionApiController : AccessTokenClientControllerBase<T
     public async Task<ActionResult> GetTags([FromQuery] string name, CancellationToken cancellationToken)
     {
         var query = new TagQueryDto { NameQuery = name };
+        await SetJwt();
         var results = await Client.GetTags(query, cancellationToken);
         if (results is null)
             return NotFound();
@@ -36,6 +37,7 @@ public class TagsAutocompletionApiController : AccessTokenClientControllerBase<T
             return BadRequest();
 
         var tagDto = new TagDto { Name = name };
+        await SetJwt();
         var result = await Client.CreateTag(tagDto, cancellationToken);
         if (result is null)
             return BadRequest();

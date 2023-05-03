@@ -38,7 +38,8 @@ namespace Rinkudesu.Gateways.Webui.Controllers
         {
             if (!ModelState.IsValid) return BadRequest("Provided query is not valid.");
 
-            linkTagsClient.SetAccessToken(HttpContext.GetJwt());
+            await linkTagsClient.SetAccessToken(HttpContext.Request);
+            await SetJwt();
             var links = await Client.GetLinks(_mapper.Map<LinkQueryDto>(query), cancellationToken);
             if (links is null)
                 return NotFound();
@@ -69,10 +70,11 @@ namespace Rinkudesu.Gateways.Webui.Controllers
 
             var newLinkDto = _mapper.Map<LinkDto>(newLink);
 
+            await SetJwt();
             var returnedDto = await Client.CreateLink(newLinkDto);
             if (returnedDto is null)
                 return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri(), _localizer["unableToCreate"]);
-            linkTagsClient.SetAccessToken(HttpContext.GetJwt());
+            await linkTagsClient.SetAccessToken(HttpContext.Request);
             foreach (var tagId in newLink.TagIds)
             {
                 //todo: consider some sort of error handling here, as the link already exists at this point, but just quietly failing to create tags is not the best option
@@ -90,6 +92,7 @@ namespace Rinkudesu.Gateways.Webui.Controllers
 
             var newLink = new LinkDto { Title = url.ToString(), LinkUrl = url, PrivacyOptions = LinkPrivacyOptionsDto.Private };
 
+            await SetJwt();
             var isSuccess = await Client.CreateLink(newLink) is not null;
             if (!isSuccess)
                 this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri(), _localizer["unableToCreate"]);
@@ -105,6 +108,7 @@ namespace Rinkudesu.Gateways.Webui.Controllers
             if (!Guid.TryParse(id, out var guid))
                 return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri(), _localizer["invalidId"]);
 
+            await SetJwt();
             if (!await Client.Delete(guid))
                 return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri(), _localizer["unableToDelete"]);
 
@@ -117,6 +121,7 @@ namespace Rinkudesu.Gateways.Webui.Controllers
             if (string.IsNullOrEmpty(id) || !Guid.TryParse(id, out var guid))
                 return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri(), _localizer["invalidId"]);
 
+            await SetJwt();
             var link = await Client.GetLink(guid, token);
 
             if (link is null)
@@ -132,6 +137,7 @@ namespace Rinkudesu.Gateways.Webui.Controllers
             if (!Guid.TryParse(id, out var guid) || !ModelState.IsValid)
                 return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri(), _localizer["invalidId"]);
 
+            await SetJwt();
             var result = await Client.Edit(guid, editLink);
 
             if (!result)

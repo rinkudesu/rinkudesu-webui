@@ -28,12 +28,6 @@ namespace Rinkudesu.Gateways.Webui.Utils
         }
 
         [ExcludeFromCodeCoverage]
-        public static string GetJwt(this HttpContext context)
-        {
-            return context.Items.TryGetValue("JwtToken", out var token) ? (token as string)! : string.Empty;
-        }
-
-        [ExcludeFromCodeCoverage]
         public static void AddErrorDetails(this HttpContext context, Uri redirectUri, string? errorDetails = null)
         {
             context.Items.Add(ErrorController.RETURN_URL_ITEM_NAME, redirectUri);
