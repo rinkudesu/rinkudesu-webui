@@ -1,60 +1,23 @@
-﻿using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Text.Json;
-using System.Threading;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Rinkudesu.Gateways.Clients.Identity;
 
 namespace Rinkudesu.Gateways.Clients;
 
-public abstract class AccessTokenClient
+public abstract class AccessTokenClient : MicroserviceClient
 {
-    protected ILogger<AccessTokenClient> Logger { get; }
-    protected HttpClient Client { get; }
+    private readonly IdentityClient _identityClient;
 
-    protected AccessTokenClient(HttpClient client, ILogger<AccessTokenClient> logger)
+    protected AccessTokenClient(HttpClient client, ILogger<AccessTokenClient> logger, IdentityClient identityClient) : base(client, logger)
     {
-        Client = client;
-        Logger = logger;
+        _identityClient = identityClient;
     }
 
-    public AccessTokenClient SetAccessToken(string token)
+    public async Task SetAccessToken(HttpRequest controllerRequest)
     {
+        var token = await _identityClient.ReadIdentityCookie(controllerRequest).RequestJwt().ConfigureAwait(false);
         Client.DefaultRequestHeaders.Authorization = new ("Bearer", token);
-        return this;
-    }
-
-    protected async Task<TDto?> HandleMessageAndParseDto<TDto>(HttpResponseMessage message, string logId, CancellationToken token) where TDto : class
-    {
-        if (!message.IsSuccessStatusCode)
-        {
-            if (message.StatusCode == HttpStatusCode.NotFound)
-            {
-                Logger.LogInformation("Object in client {ClientName} with {LogId} not found", GetType().Name, logId);
-            }
-            else
-            {
-                Logger.LogWarning("Unexpected response code while querying for object in client {ClientName} with {LogId}: '{StatusCode}'", GetType().Name, logId, message.StatusCode);
-            }
-            return null;
-        }
-
-        try
-        {
-            var stream = await message.Content.ReadAsStreamAsync(token).ConfigureAwait(false);
-            return await JsonSerializer.DeserializeAsync<TDto>(stream, CommonSettings.JsonOptions, token).ConfigureAwait(false);
-        }
-        catch (JsonException e)
-        {
-            Logger.LogWarning(e, "Unable to parse object in client {ClientType} with id {LogId}", GetType().Name, logId);
-            return null;
-        }
-    }
-
-    protected static StringContent GetJsonContent<TDto>(TDto dto)
-    {
-        var message = JsonSerializer.Serialize(dto, CommonSettings.JsonOptions);
-        return new StringContent(message, Encoding.UTF8, "application/json");
     }
 }

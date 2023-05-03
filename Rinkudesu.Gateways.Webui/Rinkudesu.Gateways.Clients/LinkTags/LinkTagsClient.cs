@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Rinkudesu.Gateways.Clients.Identity;
 using Rinkudesu.Gateways.Clients.Tags;
 using Rinkudesu.Gateways.Utils;
 
@@ -12,7 +13,7 @@ namespace Rinkudesu.Gateways.Clients.LinkTags;
 
 public class LinkTagsClient : AccessTokenClient
 {
-    public LinkTagsClient(HttpClient client, ILogger<LinkTagsClient> logger) : base(client, logger)
+    public LinkTagsClient(HttpClient client, ILogger<LinkTagsClient> logger, IdentityClient identityClient) : base(client, logger, identityClient)
     {
     }
 

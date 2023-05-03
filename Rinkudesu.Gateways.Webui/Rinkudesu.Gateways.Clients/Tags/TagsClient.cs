@@ -5,13 +5,14 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Rinkudesu.Gateways.Clients.Identity;
 using Rinkudesu.Gateways.Utils;
 
 namespace Rinkudesu.Gateways.Clients.Tags;
 
 public class TagsClient : AccessTokenClient
 {
-    public TagsClient(HttpClient client, ILogger<TagsClient> logger) : base(client, logger)
+    public TagsClient(HttpClient client, ILogger<TagsClient> logger, IdentityClient identityClient) : base(client, logger, identityClient)
     {
     }
 
