@@ -3,8 +3,7 @@
 <ul class="navbar-nav">
     @if (User.Identity!.IsAuthenticated)
     {
-        @*todo: no account management exists as of right now*@
-        <a class="btn btn-primary">@Localizer["hello"] @User.Identity.Name</a>
+        <a class="btn btn-primary" asp-area="" asp-action="Index" asp-controller="AccountManagement">@Localizer["hello"] @User.Identity.Name</a>
         <form asp-controller="UserSession" asp-action="Logout" asp-antiforgery="true">
             <input type="submit" value="@Localizer["logout"]" class="btn btn-secondary"/>
         </form>

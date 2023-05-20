@@ -1,0 +1,10 @@
+@model Rinkudesu.Gateways.Clients.Identity.UserDetailsDto
+
+@{
+    ViewBag.Title = "Account management";
+    Layout = "_Layout";
+}
+
+<h2>Account management</h2>
+
+@await Html.PartialAsync("_ChangePasswordPartial", new PasswordChangeViewModel())
