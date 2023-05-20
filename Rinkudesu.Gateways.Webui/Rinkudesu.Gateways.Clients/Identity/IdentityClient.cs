@@ -12,7 +12,7 @@ namespace Rinkudesu.Gateways.Clients.Identity;
 
 public class IdentityClient : MicroserviceClient
 {
-    private string? identityCookie;
+    private string? localIdentityCookie;
     //todo: figure out how to inject that during service resolution as it gets pretty weird when using "AddHttpClient".
     public string? IdentityCookieName { get; set; } = ".rinkudesu.session";
 
@@ -25,8 +25,8 @@ public class IdentityClient : MicroserviceClient
         if (string.IsNullOrWhiteSpace(IdentityCookieName))
             throw new InvalidOperationException("Identity cookie name must be set first");
 
-        identityCookie = request.Cookies[IdentityCookieName];
-        if (StringValues.IsNullOrEmpty(identityCookie))
+        localIdentityCookie = request.Cookies[IdentityCookieName];
+        if (StringValues.IsNullOrEmpty(localIdentityCookie))
             throw new ArgumentException(@"This request does not contain identity cookies", nameof(request));
 
         return this;
@@ -89,9 +89,9 @@ public class IdentityClient : MicroserviceClient
 
     private void EnsureIdentityCookieSet()
     {
-        if (string.IsNullOrWhiteSpace(identityCookie))
+        if (string.IsNullOrWhiteSpace(localIdentityCookie))
             throw new InvalidOperationException("You must set the identity cookie value first");
     }
 
-    private void AppendIdentityToRequest(HttpRequestMessage request) => request.Headers.Add("Cookie", $"{IdentityCookieName}={identityCookie};");
+    private void AppendIdentityToRequest(HttpRequestMessage request) => request.Headers.Add("Cookie", $"{IdentityCookieName}={localIdentityCookie};");
 }
