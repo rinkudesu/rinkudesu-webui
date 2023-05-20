@@ -80,7 +80,7 @@ services:
     environment:
       POSTGRES_PASSWORD: postgres
   selenium-rinkudesu-identity:
-    image: ghcr.io/rinkudesu/rinkudesu-identity:latest
+    image: ghcr.io/rinkudesu/rinkudesu-identity:experimental
     restart: unless-stopped
     depends_on:
       - selenium-postgres-identity
