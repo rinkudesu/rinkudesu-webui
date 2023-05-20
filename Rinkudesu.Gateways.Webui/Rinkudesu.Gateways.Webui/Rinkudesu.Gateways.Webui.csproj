@@ -253,6 +253,38 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>UserSessionController.pl.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Controllers\AccountManagementController.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>AccountManagementController.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Controllers\AccountManagementController.pl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>AccountManagementController.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\AccountManagement\_ChangePasswordPartial.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ChangePasswordPartial.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\AccountManagement\_ChangePasswordPartial.pl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ChangePasswordPartial.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\AccountManagement\Index.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Index.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\AccountManagement\Index.pl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Index.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Models\Identity\PasswordChangeViewModel.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>PasswordChangeViewModel.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Models\Identity\PasswordChangeViewModel.pl.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>PasswordChangeViewModel.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -520,6 +552,46 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>UserSessionController.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Controllers\AccountManagementController.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>AccountManagementController.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Controllers\AccountManagementController.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>AccountManagementController.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\AccountManagement\_ChangePasswordPartial.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ChangePasswordPartial.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\AccountManagement\_ChangePasswordPartial.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ChangePasswordPartial.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\AccountManagement\Index.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Index.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\AccountManagement\Index.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Index.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Models\Identity\PasswordChangeViewModel.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>PasswordChangeViewModel.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Models\Identity\PasswordChangeViewModel.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>PasswordChangeViewModel.pl.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

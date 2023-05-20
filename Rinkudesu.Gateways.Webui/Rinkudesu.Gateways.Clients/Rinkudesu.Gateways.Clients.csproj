@@ -42,6 +42,14 @@
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>LinkQueryDto.pl.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Identity\PasswordChangeViewModel.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>PasswordChangeViewModel.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Identity\PasswordChangeViewModel.pl.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>PasswordChangeViewModel.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -64,6 +72,16 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>LinkQueryDto.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Identity\PasswordChangeViewModel.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>PasswordChangeViewModel.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Identity\PasswordChangeViewModel.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>PasswordChangeViewModel.pl.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

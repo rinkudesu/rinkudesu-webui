@@ -1,17 +1,18 @@
 @model Rinkudesu.Gateways.Clients.Identity.UserDetailsDto
+@inject IViewLocalizer Localizer
 
 @{
-    ViewBag.Title = "Account management";
+    ViewBag.Title = Localizer["title"];
     Layout = "_Layout";
     var isSuccess = (bool)ViewBag.IsSuccess;
 }
 
-<h2>Account management</h2>
+<h2>@Localizer["accountManagement"]</h2>
 
 @if (isSuccess)
 {
     <div class="alert alert-success" role="alert">
-        Changes saved successfully @*TODO: localisation*@
+        @Localizer["changesSaved"]
     </div>
 }
 
