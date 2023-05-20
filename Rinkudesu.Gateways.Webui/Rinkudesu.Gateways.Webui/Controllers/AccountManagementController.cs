@@ -24,17 +24,20 @@ public class AccountManagementController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(bool isSuccess = false)
     {
         var details = await _client.ReadIdentityCookie(Request).GetDetails();
         if (details is null)
             return this.ReturnNotFound("/".ToUri());
+
+        ViewData["IsSuccess"] = isSuccess;
         return View(details);
     }
 
     [HttpPost, ValidateAntiForgeryToken]
-    public async Task<IActionResult> ChangePassword([Bind] PasswordChangeViewModel model, Uri returnUrl)
+    public async Task<IActionResult> ChangePassword([Bind] PasswordChangeViewModel model)
     {
+        var returnUrl = Url.ActionLink(nameof(Index))!.ToUri();
         if (!ModelState.IsValid)
             return this.ReturnBadRequest(returnUrl);//todo: display localised error
         if (!model.NewPasswordsMatch)
@@ -45,7 +48,6 @@ public class AccountManagementController : Controller
         if (!changed)
             return this.ReturnBadRequest(returnUrl);//todo: display localised error
 
-        //todo: users should be notified when the action is successfull
-        return LocalRedirect(returnUrl.ToString());
+        return RedirectToAction(nameof(Index), new { isSuccess = true });
     }
 }

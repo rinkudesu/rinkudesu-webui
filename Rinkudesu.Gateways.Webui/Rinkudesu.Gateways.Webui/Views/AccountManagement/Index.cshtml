@@ -3,8 +3,16 @@
 @{
     ViewBag.Title = "Account management";
     Layout = "_Layout";
+    var isSuccess = (bool)ViewBag.IsSuccess;
 }
 
 <h2>Account management</h2>
+
+@if (isSuccess)
+{
+    <div class="alert alert-success" role="alert">
+        Changes saved successfully @*TODO: localisation*@
+    </div>
+}
 
 @await Html.PartialAsync("_ChangePasswordPartial", new PasswordChangeViewModel())
