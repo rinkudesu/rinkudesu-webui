@@ -11,7 +11,7 @@ services:
     image: ghcr.io/rinkudesu/rinkudesu-tags:experimental
     restart: unless-stopped
     depends_on:
-      - selenium-identity
+      - selenium-rinkudesu-identity
       - selenium-postgres-tags
       - selenium-kafka
     environment:
@@ -34,7 +34,7 @@ services:
       depends_on:
         - selenium-postgres-links
         - selenium-kafka
-        - selenium-identity
+        - selenium-rinkudesu-identity
       environment:
         RINKU_LINKS_CONNECTIONSTRING: "Server=selenium-postgres-links;Port=5432;Database=rinku-links;User Id=postgres;Password=rinkudesu;"
         RINKUDESU_AUTHORITY: "http://selenium-rinkudesu-identity:5500/"
@@ -54,7 +54,7 @@ services:
       dockerfile: Rinkudesu.Gateways.Webui/Dockerfile
     depends_on:
       - selenium-kafka
-      - selenium-identity
+      - selenium-rinkudesu-identity
       - selenium-rinkudesu-links
       - selenium-rinkudesu-tags
     ports:
