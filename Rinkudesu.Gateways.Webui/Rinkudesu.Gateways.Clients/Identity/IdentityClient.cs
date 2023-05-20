@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -85,6 +87,33 @@ public class IdentityClient : MicroserviceClient
             return null;
         }
         return await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+    }
+
+    public async Task<UserDetailsDto?> GetDetails()
+    {
+        EnsureIdentityCookieSet();
+        using var request = new HttpRequestMessage(HttpMethod.Get, "accountManagement".ToUri());
+        AppendIdentityToRequest(request);
+        using var response = await Client.SendAsync(request).ConfigureAwait(false);
+
+        return await HandleMessageAndParseDto<UserDetailsDto>(response, "UserCookie", CancellationToken.None).ConfigureAwait(false);
+    }
+
+    public async Task<bool> ChangePassword(PasswordChangeDto passwordChangeDto)
+    {
+        EnsureIdentityCookieSet();
+        using var request = new HttpRequestMessage(HttpMethod.Post, "accountManagement/changePassword".ToUri());
+        AppendIdentityToRequest(request);
+        using var content = JsonContent.Create(passwordChangeDto);
+        request.Content = content;
+        using var response = await Client.SendAsync(request).ConfigureAwait(false);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            Logger.LogWarning("Failed to change password for user");
+            return false;
+        }
+        return true;
     }
 
     private void EnsureIdentityCookieSet()
