@@ -27,6 +27,7 @@ public class LinkTagsController : AccessTokenClientController<LinkTagsClient>
         if (id == Guid.Empty)
             return BadRequest();
 
+        await SetJwt();
         var tags = await Client.GetTagsForLink(id, cancellationToken);
 
         ViewData["LinkId"] = id;
@@ -41,6 +42,7 @@ public class LinkTagsController : AccessTokenClientController<LinkTagsClient>
         if (!ModelState.IsValid)
             return BadRequest();
 
+        await SetJwt();
         var result = await Client.Assign(newLinkTag, cancellationToken);
 
         return result ? Ok() : BadRequest();
@@ -52,6 +54,7 @@ public class LinkTagsController : AccessTokenClientController<LinkTagsClient>
         if (linkId == Guid.Empty || tagId == Guid.Empty)
             return BadRequest();
 
+        await SetJwt();
         var result = await Client.Delete(linkId, tagId, cancellationToken);
 
         return result ? Ok() : BadRequest();

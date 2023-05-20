@@ -3,16 +3,14 @@
 <ul class="navbar-nav">
     @if (User.Identity!.IsAuthenticated)
     {
-        <a href="@KeycloakSettings.Current.Authority/account" target="_blank" class="btn btn-primary">@Localizer["hello"] @User.Identity.Name</a>
+        @*todo: no account management exists as of right now*@
+        <a class="btn btn-primary">@Localizer["hello"] @User.Identity.Name</a>
         <form asp-controller="UserSession" asp-action="Logout" asp-antiforgery="true">
             <input type="submit" value="@Localizer["logout"]" class="btn btn-secondary"/>
         </form>
     }
     else
     {
-        <form asp-controller="UserSession" asp-action="Login" asp-antiforgery="true" method="get">
-            <input type="hidden" name="returnUrl" value="@Context.GetCurrentUrl()"/>
-            <input type="submit" id="login_submit" class="btn btn-secondary" value="@Localizer["login"]"/>
-        </form>
+        <a id="login_btn" class="btn btn-primary" asp-controller="UserSession" asp-action="Login" asp-route-returnUrl="@Context.GetCurrentUrl()">@Localizer["login"]</a>
     }
 </ul>

@@ -1,0 +1,46 @@
+﻿@model UserLoginViewModel
+@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = Localizer["log-in"];
+    Layout = "_Layout";
+}
+
+<h2>Log in to your account</h2>
+
+<div class="row">
+    <div class="col-4">
+        <form asp-action="LoginPost" asp-antiforgery="true">
+            <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl"/>
+            <div class="mb-3">
+                <div class="row mb">
+                    <div class="col">
+                        @Html.DisplayNameFor(m => m.UserName)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input class="form-control" asp-for="UserName"/>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col">
+                        @Html.DisplayNameFor(m => m.Password)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input class="form-control" asp-for="Password"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input id="login_submit" class="btn btn-primary" type="submit" value="@Localizer["log-in"]"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

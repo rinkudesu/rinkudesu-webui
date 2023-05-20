@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Rinkudesu.Gateways.Clients;
-using Rinkudesu.Gateways.Webui.Utils;
 
 namespace Rinkudesu.Gateways.Webui.Controllers;
 
@@ -13,11 +14,9 @@ public abstract class AccessTokenClientController<TClient> : Controller where TC
     {
         get
         {
-            if (tokenSet)
-                return _client;
+            if (!tokenSet)
+                throw new InvalidOperationException("JWT must be set first");
 
-            _client.SetAccessToken(HttpContext.GetJwt());
-            tokenSet = true;
             return _client;
         }
     }
@@ -25,5 +24,14 @@ public abstract class AccessTokenClientController<TClient> : Controller where TC
     protected AccessTokenClientController(TClient client)
     {
         _client = client;
+    }
+
+    protected async Task SetJwt()
+    {
+        if (tokenSet)
+            return;
+
+        await _client.SetAccessToken(HttpContext.Request);
+        tokenSet = true;
     }
 }

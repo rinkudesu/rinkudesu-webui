@@ -22,6 +22,7 @@
       <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="7.0.5" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.5" />
       <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="7.0.5" />
+      <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="7.0.5" />
       <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="7.0.5" />
       <PackageReference Include="Serilog" Version="2.12.0" />
       <PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
@@ -227,6 +228,30 @@
       <EmbeddedResource Update="Resources\Views\Tags\_FilterPartial.pl.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>_FilterPartial.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Models\UserSession\UserLoginViewModel.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>UserLoginViewModel.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Models\UserSession\UserLoginViewModel.pl.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>UserLoginViewModel.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\UserSession\Login.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Login.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\UserSession\Login.pl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Login.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Controllers\UserSessionController.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>UserSessionController.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Controllers\UserSessionController.pl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>UserSessionController.pl.Designer.cs</LastGenOutput>
       </EmbeddedResource>
     </ItemGroup>
 
@@ -465,6 +490,36 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>_FilterPartial.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Models\UserSession\UserLoginViewModel.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>UserLoginViewModel.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Models\UserSession\UserLoginViewModel.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>UserLoginViewModel.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\UserSession\Login.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Login.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\UserSession\Login.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Login.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Controllers\UserSessionController.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>UserSessionController.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Controllers\UserSessionController.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>UserSessionController.pl.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

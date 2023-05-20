@@ -6,13 +6,14 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Rinkudesu.Gateways.Clients.Identity;
 using Rinkudesu.Gateways.Utils;
 
 namespace Rinkudesu.Gateways.Clients.Links
 {
     public class LinksClient : AccessTokenClient
     {
-        public LinksClient(HttpClient client, ILogger<LinksClient> logger) : base(client, logger)
+        public LinksClient(HttpClient client, ILogger<LinksClient> logger, IdentityClient identityClient) : base(client, logger, identityClient)
         {
         }
 

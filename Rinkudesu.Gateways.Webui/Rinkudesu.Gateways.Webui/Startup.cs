@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Caching.StackExchangeRedis;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +20,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
 using Polly;
 using Polly.Extensions.Http;
+using Rinkudesu.Gateways.Clients.Identity;
 using Rinkudesu.Gateways.Clients.Links;
 using Rinkudesu.Gateways.Clients.LinkTags;
 using Rinkudesu.Gateways.Clients.Tags;
@@ -27,11 +30,14 @@ using Rinkudesu.Gateways.Webui.Models;
 using Rinkudesu.Gateways.Webui.Utils;
 using Rinkudesu.Kafka.Dotnet;
 using Rinkudesu.Kafka.Dotnet.Base;
+using StackExchange.Redis;
 
 namespace Rinkudesu.Gateways.Webui
 {
     public class Startup
     {
+        private const string IDENTITY_COOKIE_NAME = ".rinkudesu.session";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -56,49 +62,22 @@ namespace Rinkudesu.Gateways.Webui
             SetupClients(services);
             SetupKafka(services);
 
-            KeycloakSettings.Current = new KeycloakSettings();
             RedisSettings.Current = new RedisSettings();
+
+            var redisConnectionMultiplexer = ConnectionMultiplexer.Connect(RedisSettings.Current.Address);
+            services.AddDataProtection().SetApplicationName("rinkudesu").PersistKeysToStackExchangeRedis(redisConnectionMultiplexer, "DataProtection-Keys");
 
 #if DEBUG
             IdentityModelEventSource.ShowPII = true;
 #endif
 
             services.AddAuthentication(options => {
-                    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                    options.DefaultScheme = IdentityConstants.ApplicationScheme;
                 })
-                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options => {
-                    //forcefully revalidate cookie once jwt token is expired
-                    //
-                    // This is necessary as aspnet doesn't do this by itself for some reason when used together with a cookie.
-                    // That would lead to expired JWTs being passed to other microservices, that would (correctly) reject them.
-                    // What the line below does is it manually checks for the expiration date, and if it's passed, forces cookie revalidation, which in turn runs the challenge, thus refreshing the token.
-                    options.Events.OnValidatePrincipal = context => {
-                        if (context.Properties.Items.TryGetValue(".Token.expires_at", out var expireString))
-                        {
-                            var expiration = DateTime.Parse(expireString!, CultureInfo.InvariantCulture);
-                            if (expiration < DateTime.Now)
-                            {
-                                context.ShouldRenew = true;
-                                context.RejectPrincipal();
-                            }
-                        }
-                        return Task.CompletedTask;
-                    };
+                .AddCookie(IdentityConstants.ApplicationScheme, options => {
+                    options.Cookie.Name = IDENTITY_COOKIE_NAME;
                     options.SessionStore = new RedisCacheTicketStore(RedisSettings.Current.GetRedisOptions());
-                })
-                .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options => {
-                    options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                    options.Authority = KeycloakSettings.Current.Authority;
-                    options.ClientId = KeycloakSettings.Current.ClientId;
-                    options.ResponseType = "code";
-                    options.SaveTokens = true;
-                    options.UseTokenLifetime = true;
-                    options.GetClaimsFromUserInfoEndpoint = false;
-                    options.RequireHttpsMetadata = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("RINKUDESU_AUTHORITY_ALLOW_HTTP"));
-                    options.TokenValidationParameters.NameClaimType = "preferred_username";
-                    options.TokenValidationParameters.ClockSkew = TimeSpan.Zero;
-                    options.TokenValidationParameters.ValidateLifetime = true;
+                    options.LoginPath = "/UserSession/login";
                 });
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
@@ -143,7 +122,6 @@ namespace Rinkudesu.Gateways.Webui
 
             app.UseAuthorization();
 
-            app.UseMiddleware<AccessTokenReaderMiddleware>();
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllerRoute(
                     name: "default",
@@ -157,6 +135,7 @@ namespace Rinkudesu.Gateways.Webui
                            throw new InvalidOperationException(
                                "RINKUDESU_LINKS env variable pointing to links microservice must be set");
             var tagsUrl = Environment.GetEnvironmentVariable("RINKUDESU_TAGS") ?? throw new InvalidOperationException("RUNKUDESU_TAGS env variable pointing to tags microservice must be set");
+            var identityUrl = Environment.GetEnvironmentVariable("RINKUDESU_IDENTITY") ?? throw new InvalidOperationException("RUNKUDESU_IDENTITY env variable pointing to identity microservice must be set");
             services.AddHttpClient<LinksClient>(o => {
                 o.BaseAddress = new Uri(linksUrl);
             }).AddPolicyHandler(GetRetryPolicy());
@@ -168,6 +147,9 @@ namespace Rinkudesu.Gateways.Webui
             }).AddPolicyHandler(GetRetryPolicy());
             services.AddHttpClient<LinkTagsClient>(o => {
                 o.BaseAddress = tagsUrl.ToUri();
+            }).AddPolicyHandler(GetRetryPolicy());
+            services.AddHttpClient<IdentityClient>(o => {
+                o.BaseAddress = identityUrl.ToUri();
             }).AddPolicyHandler(GetRetryPolicy());
         }
 

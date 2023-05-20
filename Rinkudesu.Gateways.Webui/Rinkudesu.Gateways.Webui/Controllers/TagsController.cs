@@ -30,6 +30,7 @@ public class TagsController : AccessTokenClientController<TagsClient>
     [HttpGet]
     public async Task<ActionResult> IndexContent([Bind] TagIndexQueryModel query, Uri returnUrl, CancellationToken cancellationToken)
     {
+        await SetJwt();
         var tags = await Client.GetTags(_mapper.Map<TagQueryDto>(query), cancellationToken);
         if (tags is null)
             return NotFound();
@@ -45,6 +46,7 @@ public class TagsController : AccessTokenClientController<TagsClient>
         if (!ModelState.IsValid)
             return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri());
 
+        await SetJwt();
         var isSuccess = await Client.CreateTag(newTag) is not null;
         if (!isSuccess)
             return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri());
@@ -57,6 +59,7 @@ public class TagsController : AccessTokenClientController<TagsClient>
         if (id == Guid.Empty)
             return this.ReturnBadRequest(returnUrl);
 
+        await SetJwt();
         var tag = await Client.GetTag(id, cancellationToken);
 
         if (tag is null)
@@ -71,6 +74,7 @@ public class TagsController : AccessTokenClientController<TagsClient>
         if (id == Guid.Empty || !ModelState.IsValid)
             return this.ReturnBadRequest(returnUrl);
 
+        await SetJwt();
         var result = await Client.Edit(id, editTag, cancellationToken);
 
         if (!result)
@@ -84,6 +88,7 @@ public class TagsController : AccessTokenClientController<TagsClient>
         if (id == Guid.Empty)
             return this.ReturnBadRequest(returnUrl);
 
+        await SetJwt();
         var result = await Client.Delete(id, cancellationToken);
 
         if (!result)

@@ -9,6 +9,6 @@ services:
     ports:
       - "127.0.0.1:9876:80"
     environment:
-      RINKUDESU_AUTHORITY: "http://<hostname-of-keycloak>:8080/realms/rinkudesu"
       RINKUDESU_CLIENTID: "rinkudesu"
       RINKUDESU_LINKS: "https://<hostname-of-links-microservice>/api/"
+      RINKUDESU_IDENTITY: "http://<hostname-of-identity-ms>/api/"

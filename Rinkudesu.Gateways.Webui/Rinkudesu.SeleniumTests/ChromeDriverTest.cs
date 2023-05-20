@@ -44,13 +44,14 @@ public abstract class ChromeDriverTest : IDisposable
         _driver.FindElement(locator).SendKeys(keys);
     }
 
-    protected void LogIn(string username = "test", string password = "test")
+    //todo: test docker compose needs to reference identity now
+    protected void LogIn(string username = "test", string password = "1qazXSW@")
     {
         GoTo();
+        Click(By.Id("login_btn"));
+        FillTextBox(By.Id("UserName"), username);
+        FillTextBox(By.Id("Password"), password);
         Click(By.Id("login_submit"));
-        FillTextBox(By.Id("username"), username);
-        FillTextBox(By.Id("password"), password);
-        Click(By.Id("kc-login"));
     }
 
     protected void ScrollTo(IWebElement element) => _driver.ExecuteScript("arguments[0].scrollIntoView()", element);

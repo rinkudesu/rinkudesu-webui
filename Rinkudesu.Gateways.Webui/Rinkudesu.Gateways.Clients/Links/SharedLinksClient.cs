@@ -5,13 +5,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Rinkudesu.Gateways.Clients.Exceptions;
+using Rinkudesu.Gateways.Clients.Identity;
 using Rinkudesu.Gateways.Utils;
 
 namespace Rinkudesu.Gateways.Clients.Links;
 
 public class SharedLinksClient : AccessTokenClient
 {
-    public SharedLinksClient(HttpClient client, ILogger<SharedLinksClient> logger) : base(client, logger)
+    public SharedLinksClient(HttpClient client, ILogger<SharedLinksClient> logger, IdentityClient identityClient) : base(client, logger, identityClient)
     {
     }
 
