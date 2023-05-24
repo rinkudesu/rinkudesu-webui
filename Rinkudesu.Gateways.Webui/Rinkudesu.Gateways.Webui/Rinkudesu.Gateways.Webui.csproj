@@ -285,6 +285,14 @@
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>PasswordChangeViewModel.pl.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\AccountManagement\_LogOutEverywhere.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_LogOutEverywhere.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\AccountManagement\_LogOutEverywhere.pl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_LogOutEverywhere.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -592,6 +600,16 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>PasswordChangeViewModel.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\AccountManagement\_LogOutEverywhere.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_LogOutEverywhere.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\AccountManagement\_LogOutEverywhere.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_LogOutEverywhere.pl.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 
