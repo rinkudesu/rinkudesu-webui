@@ -51,4 +51,14 @@ public class AccountManagementController : Controller
 
         return RedirectToAction(nameof(Index), new { isSuccess = true });
     }
+
+    [HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> LogOutEverywhere()
+    {
+        if (!await _client.ReadIdentityCookie(Request).LogOutEverywhere())
+            return this.ReturnBadRequest("/".ToUri());
+
+        // if logger out, just redirect to home to avoid immediate login screens
+        return LocalRedirect("/");
+    }
 }

@@ -116,6 +116,21 @@ public class IdentityClient : MicroserviceClient
         return true;
     }
 
+    public async Task<bool> LogOutEverywhere()
+    {
+        EnsureIdentityCookieSet();
+        using var request = new HttpRequestMessage(HttpMethod.Post, "accountManagement/logOutEverywhere".ToUri());
+        AppendIdentityToRequest(request);
+        using var response = await Client.SendAsync(request).ConfigureAwait(false);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            Logger.LogWarning("Failed to log user out everywhere");
+            return false;
+        }
+        return true;
+    }
+
     private void EnsureIdentityCookieSet()
     {
         if (string.IsNullOrWhiteSpace(localIdentityCookie))

@@ -1,0 +1,10 @@
+@inject IViewLocalizer Localizer
+
+<h3>@Localizer["logOutEverywhere"]</h3>
+<form asp-action="LogOutEverywhere" asp-antiforgery="true">
+    <div class="row mt-2">
+        <div class="col">
+            <input class="btn btn-primary" type="submit" value="@Localizer["logOutEverywhere"]"/>
+        </div>
+    </div>
+</form>
