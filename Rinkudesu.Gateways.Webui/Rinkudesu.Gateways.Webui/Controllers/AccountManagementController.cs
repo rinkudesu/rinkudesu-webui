@@ -61,4 +61,15 @@ public class AccountManagementController : Controller
         // if logger out, just redirect to home to avoid immediate login screens
         return LocalRedirect("/");
     }
+
+    [HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteAccount([Bind] DeleteAccountViewModel model)
+    {
+        if (!ModelState.IsValid)
+            return this.ReturnBadRequest("/".ToUri());
+
+        var result = await _client.ReadIdentityCookie(Request).DeleteAccount(_mapper.Map<AccountDeleteDto>(model));
+
+        return result ? LocalRedirect("/") : this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri());
+    }
 }
