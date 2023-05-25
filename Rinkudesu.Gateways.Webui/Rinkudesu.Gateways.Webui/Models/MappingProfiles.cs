@@ -17,6 +17,7 @@ namespace Rinkudesu.Gateways.Webui.Models
             CreateMap<TagIndexQueryModel, TagQueryDto>();
             CreateMap<LinkIndexViewModel, LinkDto>();
             CreateMap<PasswordChangeViewModel, PasswordChangeDto>();
+            CreateMap<DeleteAccountViewModel, AccountDeleteDto>();
         }
     }
 }

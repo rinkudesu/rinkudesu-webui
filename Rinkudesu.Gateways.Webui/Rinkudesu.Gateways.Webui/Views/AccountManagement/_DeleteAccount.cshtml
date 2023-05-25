@@ -1,0 +1,20 @@
+@model DeleteAccountViewModel
+@inject IViewLocalizer Localizer
+
+<h3>@Localizer["deleteAccount"]</h3>
+<form asp-action="DeleteAccount" asp-antiforgery="true">
+    <div class="row mt-2">
+        <div class="col-12">
+            <p class="text-danger">@Localizer["noReturn"]</p>
+        </div>
+        <div class="col-12">
+            <p class="mb-0">@Localizer["mustProvidePassword"]</p>
+        </div>
+        <div class="col-12">
+            <input asp-for="Password" class="form-control"/>
+        </div>
+        <div class="col-12 mt-2">
+            <input class="btn btn-danger" type="submit" value="@Localizer["deleteAccount"]"/>
+        </div>
+    </div>
+</form>

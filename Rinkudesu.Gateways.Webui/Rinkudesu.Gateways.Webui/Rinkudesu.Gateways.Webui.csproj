@@ -293,6 +293,22 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>_LogOutEverywhere.pl.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Models\Identity\DeleteAccountViewModel.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>DeleteAccountViewModel.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Models\Identity\DeleteAccountViewModel.pl.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>DeleteAccountViewModel.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\AccountManagement\_DeleteAccount.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_DeleteAccount.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\AccountManagement\_DeleteAccount.pl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_DeleteAccount.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -610,6 +626,26 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>_LogOutEverywhere.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Models\Identity\DeleteAccountViewModel.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>DeleteAccountViewModel.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Models\Identity\DeleteAccountViewModel.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>DeleteAccountViewModel.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\AccountManagement\_DeleteAccount.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_DeleteAccount.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\AccountManagement\_DeleteAccount.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_DeleteAccount.pl.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

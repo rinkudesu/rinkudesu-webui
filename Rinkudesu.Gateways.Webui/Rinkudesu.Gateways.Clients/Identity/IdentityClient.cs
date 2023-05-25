@@ -131,6 +131,18 @@ public class IdentityClient : MicroserviceClient
         return true;
     }
 
+    public async Task<bool> DeleteAccount(AccountDeleteDto accountDeleteDto)
+    {
+        EnsureIdentityCookieSet();
+        using var request = new HttpRequestMessage(HttpMethod.Post, "accountManagement/deleteAccount".ToUri());
+        AppendIdentityToRequest(request);
+        using var content = JsonContent.Create(accountDeleteDto);
+        request.Content = content;
+        using var response = await Client.SendAsync(request).ConfigureAwait(false);
+
+        return response.IsSuccessStatusCode;
+    }
+
     private void EnsureIdentityCookieSet()
     {
         if (string.IsNullOrWhiteSpace(localIdentityCookie))
