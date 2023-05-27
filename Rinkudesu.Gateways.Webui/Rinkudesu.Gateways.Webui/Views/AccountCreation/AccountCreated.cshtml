@@ -1,0 +1,11 @@
+@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = Localizer["title"];
+    Layout = "_Layout";
+}
+
+<h2>@Localizer["title"]</h2>
+
+<p>@Localizer["accountCreated"]</p>
+<a href="/" class="btn btn-primary">@Localizer["goHome"]</a>

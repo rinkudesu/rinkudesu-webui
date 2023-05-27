@@ -11,5 +11,6 @@
     else
     {
         <a id="login_btn" class="btn btn-primary" asp-controller="UserSession" asp-action="Login" asp-route-returnUrl="@Context.GetCurrentUrl()">@Localizer["login"]</a>
+        <a id="register_btn" class="btn btn-secondary" asp-controller="AccountCreation" asp-action="Index">@Localizer["register"]</a>
     }
 </ul>

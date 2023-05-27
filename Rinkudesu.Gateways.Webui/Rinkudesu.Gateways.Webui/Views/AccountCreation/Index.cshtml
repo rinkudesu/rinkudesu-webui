@@ -1,0 +1,43 @@
+@model RegisterAccountViewModel
+@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = Localizer["title"];
+    Layout = "_Layout";
+}
+
+<h2>@Localizer["title"]</h2>
+
+<p>@Localizer["welcome"]</p>
+
+<form asp-action="CreateAccount" asp-antiforgery="true">
+    <div class="row mb-2">
+        <div class="col-12 mb-0">
+            <label asp-for="Email"></label>
+        </div>
+        <div class="col-12">
+            <input asp-for="Email" class="form-control"/>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-12 mb-0">
+            <label asp-for="Password"></label>
+        </div>
+        <div class="col-12">
+            <input asp-for="Password" class="form-control"/>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-12 mb-0">
+            <label asp-for="PasswordRepeat"></label>
+        </div>
+        <div class="col-12">
+            <input asp-for="PasswordRepeat" class="form-control"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2 offset-10 d-flex">
+            <input type="submit" class="btn btn-success flex-fill" value="@Localizer["create"]"/>
+        </div>
+    </div>
+</form>

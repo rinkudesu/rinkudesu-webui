@@ -309,6 +309,38 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>_DeleteAccount.pl.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Controllers\AccountCreationController.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>AccountCreationController.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Controllers\AccountCreationController.pl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>AccountCreationController.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\AccountCreation\Index.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Index.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\AccountCreation\Index.pl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Index.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\AccountCreation\AccountCreated.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>AccountCreated.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\AccountCreation\AccountCreated.pl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>AccountCreated.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Models\Identity\RegisterAccountViewModel.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>RegisterAccountViewModel.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Models\Identity\RegisterAccountViewModel.pl.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>RegisterAccountViewModel.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -646,6 +678,46 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>_DeleteAccount.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Controllers\AccountCreationController.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>AccountCreationController.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Controllers\AccountCreationController.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>AccountCreationController.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\AccountCreation\Index.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Index.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\AccountCreation\Index.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Index.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\AccountCreation\AccountCreated.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>AccountCreated.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\AccountCreation\AccountCreated.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>AccountCreated.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Models\Identity\RegisterAccountViewModel.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>RegisterAccountViewModel.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Models\Identity\RegisterAccountViewModel.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>RegisterAccountViewModel.pl.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 
