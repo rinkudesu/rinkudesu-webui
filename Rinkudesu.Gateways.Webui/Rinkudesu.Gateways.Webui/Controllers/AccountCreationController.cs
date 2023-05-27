@@ -33,6 +33,9 @@ public class AccountCreationController : Controller
     [HttpPost, ValidateAntiForgeryToken]
     public async Task<IActionResult> CreateAccount([Bind] RegisterAccountViewModel model)
     {
+        if (!EnvironmentalVariableReader.RegistrationEnabled)
+            return this.ReturnBadRequest("/".ToUri(), "Registration disabled");
+
         if (!ModelState.IsValid || model.PasswordMismatch)
             return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri());
 
