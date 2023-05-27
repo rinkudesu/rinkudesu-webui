@@ -30,4 +30,8 @@
         <value>Log out</value>
         <comment>logout</comment>
     </data>
+    <data name="register" xml:space="preserve">
+        <value>Register</value>
+        <comment>register</comment>
+    </data>
 </root>

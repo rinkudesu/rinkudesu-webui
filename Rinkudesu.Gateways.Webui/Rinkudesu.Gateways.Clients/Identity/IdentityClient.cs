@@ -143,6 +143,26 @@ public class IdentityClient : MicroserviceClient
         return response.IsSuccessStatusCode;
     }
 
+    public async Task<AccountCreatedDto?> RegisterAccount(RegisterAccountDto registerAccountDto)
+    {
+        using var request = new HttpRequestMessage(HttpMethod.Post, "accountManagement/createAccount".ToUri())
+        {
+            Content = JsonContent.Create(registerAccountDto),
+        };
+        using var response = await Client.SendAsync(request).ConfigureAwait(false);
+        return await HandleMessageAndParseDto<AccountCreatedDto>(response, "account creation", CancellationToken.None).ConfigureAwait(false);
+    }
+
+    public async Task<bool> ConfirmEmail(ConfirmEmailDto emailDto)
+    {
+        using var request = new HttpRequestMessage(HttpMethod.Post, "accountManagement/confirmEmail".ToUri())
+        {
+            Content = JsonContent.Create(emailDto),
+        };
+        using var response = await Client.SendAsync(request).ConfigureAwait(false);
+        return response.IsSuccessStatusCode;
+    }
+
     private void EnsureIdentityCookieSet()
     {
         if (string.IsNullOrWhiteSpace(localIdentityCookie))

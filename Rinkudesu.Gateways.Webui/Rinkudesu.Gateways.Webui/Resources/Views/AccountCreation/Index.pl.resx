@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <root>
     <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
@@ -18,19 +18,16 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="hello" xml:space="preserve">
-        <value>Witaj</value>
-        <comment>hello</comment>
-    </data>
-    <data name="login" xml:space="preserve">
-        <value>Zaloguj się</value>
-    </data>
-    <data name="logout" xml:space="preserve">
-        <value>Wyloguj się</value>
-        <comment>logout</comment>
-    </data>
-    <data name="register" xml:space="preserve">
+    <data name="title" xml:space="preserve">
         <value>Stwórz konto</value>
-        <comment>register</comment>
+        <comment>title</comment>
+    </data>
+    <data name="welcome" xml:space="preserve">
+        <value>Witamy w Rinkudesu! Żeby stworzyć konto podaj swój email i hasło poniżej.</value>
+        <comment>welcome</comment>
+    </data>
+    <data name="create" xml:space="preserve">
+        <value>Stwórz konto</value>
+        <comment>create</comment>
     </data>
 </root>

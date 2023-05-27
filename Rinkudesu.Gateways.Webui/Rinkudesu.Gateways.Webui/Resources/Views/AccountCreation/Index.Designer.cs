@@ -7,28 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Rinkudesu.Gateways.Webui.Resources.Views.Shared {
+namespace Rinkudesu.Gateways.Webui.Resources.Views.AccountCreation {
     using System;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class _LoginPartial {
+    internal class Index {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal _LoginPartial() {
+        internal Index() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Views.Shared._LoginPartial", typeof(_LoginPartial).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Views.AccountCreation.Index", typeof(Index).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -45,27 +45,21 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Shared {
             }
         }
         
-        internal static string hello {
+        internal static string title {
             get {
-                return ResourceManager.GetString("hello", resourceCulture);
+                return ResourceManager.GetString("title", resourceCulture);
             }
         }
         
-        internal static string login {
+        internal static string welcome {
             get {
-                return ResourceManager.GetString("login", resourceCulture);
+                return ResourceManager.GetString("welcome", resourceCulture);
             }
         }
         
-        internal static string logout {
+        internal static string create {
             get {
-                return ResourceManager.GetString("logout", resourceCulture);
-            }
-        }
-        
-        internal static string register {
-            get {
-                return ResourceManager.GetString("register", resourceCulture);
+                return ResourceManager.GetString("create", resourceCulture);
             }
         }
     }
