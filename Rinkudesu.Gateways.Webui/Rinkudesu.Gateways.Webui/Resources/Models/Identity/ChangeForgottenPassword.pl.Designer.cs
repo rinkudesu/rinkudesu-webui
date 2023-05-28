@@ -7,28 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Rinkudesu.Gateways.Webui.Resources.Views.UserSession {
+namespace Rinkudesu.Gateways.Webui.Resources.Models.Identity {
     using System;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Login_pl {
+    public class ChangeForgottenPassword_pl {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Login_pl() {
+        internal ChangeForgottenPassword_pl() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static System.Resources.ResourceManager ResourceManager {
+        public static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Views.UserSession.Login_pl", typeof(Login_pl).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Models.Identity.ChangeForgottenPassword_pl", typeof(ChangeForgottenPassword_pl).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -36,7 +36,7 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.UserSession {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static System.Globalization.CultureInfo Culture {
+        public static System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -45,15 +45,15 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.UserSession {
             }
         }
         
-        internal static string log_in {
+        public static string password {
             get {
-                return ResourceManager.GetString("log-in", resourceCulture);
+                return ResourceManager.GetString("password", resourceCulture);
             }
         }
         
-        internal static string forgotPassword {
+        public static string passwordRepeat {
             get {
-                return ResourceManager.GetString("forgotPassword", resourceCulture);
+                return ResourceManager.GetString("passwordRepeat", resourceCulture);
             }
         }
     }

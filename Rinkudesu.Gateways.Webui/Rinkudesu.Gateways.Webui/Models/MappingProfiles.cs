@@ -19,6 +19,8 @@ namespace Rinkudesu.Gateways.Webui.Models
             CreateMap<PasswordChangeViewModel, PasswordChangeDto>();
             CreateMap<DeleteAccountViewModel, AccountDeleteDto>();
             CreateMap<RegisterAccountViewModel, RegisterAccountDto>();
+            CreateMap<ForgotPasswordViewModel, ForgotPasswordDto>();
+            CreateMap<ChangeForgottenPasswordViewModel, ChangeForgottenPasswordDto>();
         }
     }
 }

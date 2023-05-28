@@ -21,4 +21,20 @@
     <data name="login-failed" xml:space="preserve">
         <value>Błąd logowania, sprawdź swój login i hasło i spróbuj ponownie</value>
     </data>
+    <data name="forgotPasswordSubject" xml:space="preserve">
+        <value>Reset hasła</value>
+        <comment>forgotPasswordSubject</comment>
+    </data>
+    <data name="forgotPasswordIntro" xml:space="preserve">
+        <value>Otrzymaliśmy zgłoszenie resetu hasła w Rinkudesu. Aby tego dokonać, kliknij poniższy link.</value>
+        <comment>forgotPasswordIntro</comment>
+    </data>
+    <data name="forgotPasswordClick" xml:space="preserve">
+        <value>Resetuj hasło</value>
+        <comment>forgotPasswordClick</comment>
+    </data>
+    <data name="passwordMismatch" xml:space="preserve">
+        <value>Hasła nie pasują do siebie</value>
+        <comment>passwordMismatch</comment>
+    </data>
 </root>
