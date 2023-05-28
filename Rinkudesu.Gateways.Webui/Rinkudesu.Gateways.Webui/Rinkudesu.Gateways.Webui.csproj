@@ -373,6 +373,22 @@
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>ChangeForgottenPassword.pl.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Models\Identity\ChangeEmailViewModel.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>ChangeEmailViewModel.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Models\Identity\ChangeEmailViewModel.pl.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>ChangeEmailViewModel.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\AccountManagement\_ChangeEmail.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ChangeEmail.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\AccountManagement\_ChangeEmail.pl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ChangeEmail.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -790,6 +806,26 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>ChangeForgottenPassword.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Models\Identity\ChangeEmailViewModel.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ChangeEmailViewModel.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Models\Identity\ChangeEmailViewModel.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ChangeEmailViewModel.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\AccountManagement\_ChangeEmail.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ChangeEmail.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\AccountManagement\_ChangeEmail.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ChangeEmail.pl.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

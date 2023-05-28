@@ -30,4 +30,16 @@
         <value>Zmiana hasła się nie powiodła, spróbuj ponownie</value>
         <comment>failedToChange</comment>
     </data>
+    <data name="emailChangeSubject" xml:space="preserve">
+        <value>Zmień email</value>
+        <comment>emailChangeSubject</comment>
+    </data>
+    <data name="emailChangeIntro" xml:space="preserve">
+        <value>Aby zmienić email, kliknij w link poniżej.</value>
+        <comment>emailChangeIntro</comment>
+    </data>
+    <data name="emailChangeClick" xml:space="preserve">
+        <value>Potwierdź nowy email</value>
+        <comment>emailChangeClick</comment>
+    </data>
 </root>

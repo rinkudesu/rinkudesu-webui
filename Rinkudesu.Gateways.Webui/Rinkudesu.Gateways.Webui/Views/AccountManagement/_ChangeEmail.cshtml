@@ -1,0 +1,21 @@
+@model ChangeEmailViewModel
+@inject IViewLocalizer Localizer
+
+<h3>@Localizer["changeEmail"]</h3>
+<form asp-action="ChangeEmail" asp-antiforgery="true">
+    <div class="row mt-2">
+        <div class="col">
+            @Html.DisplayNameFor(m => m.Email)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <input class="form-control" asp-for="Email"/>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <input class="btn btn-primary" type="submit" value="@Localizer["saveChanges"]"/>
+        </div>
+    </div>
+</form>

@@ -62,5 +62,23 @@ namespace Rinkudesu.Gateways.Webui.Resources.Controllers {
                 return ResourceManager.GetString("failedToChange", resourceCulture);
             }
         }
+        
+        internal static string emailChangeSubject {
+            get {
+                return ResourceManager.GetString("emailChangeSubject", resourceCulture);
+            }
+        }
+        
+        internal static string emailChangeIntro {
+            get {
+                return ResourceManager.GetString("emailChangeIntro", resourceCulture);
+            }
+        }
+        
+        internal static string emailChangeClick {
+            get {
+                return ResourceManager.GetString("emailChangeClick", resourceCulture);
+            }
+        }
     }
 }

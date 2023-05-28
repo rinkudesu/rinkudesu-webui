@@ -1,12 +1,16 @@
+using System;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Rinkudesu.Gateways.Clients.Identity;
+using Rinkudesu.Gateways.MessageQueues;
 using Rinkudesu.Gateways.Utils;
 using Rinkudesu.Gateways.Webui.Models;
 using Rinkudesu.Gateways.Webui.Utils;
+using Rinkudesu.Kafka.Dotnet.Base;
 
 namespace Rinkudesu.Gateways.Webui.Controllers;
 
@@ -71,5 +75,35 @@ public class AccountManagementController : Controller
         var result = await _client.ReadIdentityCookie(Request).DeleteAccount(_mapper.Map<AccountDeleteDto>(model));
 
         return result ? LocalRedirect("/") : this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri());
+    }
+
+    [HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> ChangeEmail([Bind] ChangeEmailViewModel model, [FromServices] IKafkaProducer kafkaProducer, CancellationToken cancellationToken)
+    {
+        if (!ModelState.IsValid)
+            return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri());
+
+        var result = await _client.ReadIdentityCookie(Request).RequestEmailChange(_mapper.Map<ChangeEmailDto>(model), cancellationToken: cancellationToken);
+        if (result is null)
+            return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri());
+
+        await kafkaProducer.ProduceSendEmail(
+            result.UserId,
+            _localizer["emailChangeSubject"],
+            _localizer["emailChangeIntro"] + $"<br/><a href='{HttpContext.GetBasePath()}{Url.Action(nameof(ConfirmEmailChange), new { result.UserId, result.NewEmail, result.Token })!.TrimStart('/')}'>{_localizer["emailChangeClick"]}</a>",
+            true);
+        return RedirectToAction(nameof(Index), new { isSuccess = true });
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> ConfirmEmailChange(Guid userId, string newEmail, string token)
+    {
+        var result = await _client.ReadIdentityCookie(Request).ConfirmEmailChange(new ConfirmEmailChangeDto
+        {
+            UserId = userId,
+            NewEmail = newEmail,
+            Token = token,
+        });
+        return result ? LocalRedirect("/") : this.ReturnBadRequest("/".ToUri());
     }
 }
