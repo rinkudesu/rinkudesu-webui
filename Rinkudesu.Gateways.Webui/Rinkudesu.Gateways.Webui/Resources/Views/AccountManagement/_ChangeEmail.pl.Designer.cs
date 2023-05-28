@@ -7,28 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Rinkudesu.Gateways.Webui.Resources.Controllers {
+namespace Rinkudesu.Gateways.Webui.Resources.Views.AccountManagement {
     using System;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class AccountManagementController_pl {
+    internal class _ChangeEmail_pl {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AccountManagementController_pl() {
+        internal _ChangeEmail_pl() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Controllers.AccountManagementController_pl", typeof(AccountManagementController_pl).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Views.AccountManagement._ChangeEmail_pl", typeof(_ChangeEmail_pl).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -45,39 +45,15 @@ namespace Rinkudesu.Gateways.Webui.Resources.Controllers {
             }
         }
         
-        internal static string invalidForm {
+        internal static string saveChanges {
             get {
-                return ResourceManager.GetString("invalidForm", resourceCulture);
+                return ResourceManager.GetString("saveChanges", resourceCulture);
             }
         }
         
-        internal static string passwordMismatch {
+        internal static string changeEmail {
             get {
-                return ResourceManager.GetString("passwordMismatch", resourceCulture);
-            }
-        }
-        
-        internal static string failedToChange {
-            get {
-                return ResourceManager.GetString("failedToChange", resourceCulture);
-            }
-        }
-        
-        internal static string emailChangeSubject {
-            get {
-                return ResourceManager.GetString("emailChangeSubject", resourceCulture);
-            }
-        }
-        
-        internal static string emailChangeIntro {
-            get {
-                return ResourceManager.GetString("emailChangeIntro", resourceCulture);
-            }
-        }
-        
-        internal static string emailChangeClick {
-            get {
-                return ResourceManager.GetString("emailChangeClick", resourceCulture);
+                return ResourceManager.GetString("changeEmail", resourceCulture);
             }
         }
     }

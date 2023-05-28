@@ -183,6 +183,30 @@ public class IdentityClient : MicroserviceClient
         return response.IsSuccessStatusCode;
     }
 
+    public async Task<EmailChangeConfirmationDto?> RequestEmailChange(ChangeEmailDto dto, CancellationToken cancellationToken = default)
+    {
+        EnsureIdentityCookieSet();
+        using var request = new HttpRequestMessage(HttpMethod.Post, "accountManagement/changeEmail".ToUri())
+        {
+            Content = JsonContent.Create(dto),
+        };
+        AppendIdentityToRequest(request);
+        using var response = await Client.SendAsync(request, cancellationToken: cancellationToken).ConfigureAwait(false);
+        return await HandleMessageAndParseDto<EmailChangeConfirmationDto>(response, "email change", cancellationToken).ConfigureAwait(false);
+    }
+
+    public async Task<bool> ConfirmEmailChange(ConfirmEmailChangeDto dto, CancellationToken cancellationToken = default)
+    {
+        EnsureIdentityCookieSet();
+        using var request = new HttpRequestMessage(HttpMethod.Post, "accountManagement/confirmEmailChange".ToUri())
+        {
+            Content = JsonContent.Create(dto),
+        };
+        AppendIdentityToRequest(request);
+        using var response = await Client.SendAsync(request, cancellationToken: cancellationToken).ConfigureAwait(false);
+        return response.IsSuccessStatusCode;
+    }
+
     private void EnsureIdentityCookieSet()
     {
         if (string.IsNullOrWhiteSpace(localIdentityCookie))

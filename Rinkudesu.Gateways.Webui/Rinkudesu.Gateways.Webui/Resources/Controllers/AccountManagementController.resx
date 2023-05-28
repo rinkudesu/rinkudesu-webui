@@ -30,4 +30,16 @@
         <value>Failed to change your password, please try again</value>
         <comment>failedToChange</comment>
     </data>
+    <data name="emailChangeSubject" xml:space="preserve">
+        <value>Email change</value>
+        <comment>emailChangeSubject</comment>
+    </data>
+    <data name="emailChangeIntro" xml:space="preserve">
+        <value>In order to change your email, please click the link below.</value>
+        <comment>emailChangeIntro</comment>
+    </data>
+    <data name="emailChangeClick" xml:space="preserve">
+        <value>Confirm new email</value>
+        <comment>emailChangeClick</comment>
+    </data>
 </root>
