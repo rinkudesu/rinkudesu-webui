@@ -91,7 +91,8 @@ public class AccountManagementController : Controller
             result.UserId,
             _localizer["emailChangeSubject"],
             _localizer["emailChangeIntro"] + $"<br/><a href='{HttpContext.GetBasePath()}{Url.Action(nameof(ConfirmEmailChange), new { result.UserId, result.NewEmail, result.Token })!.TrimStart('/')}'>{_localizer["emailChangeClick"]}</a>",
-            true);
+            true,
+            result.NewEmail);
         return RedirectToAction(nameof(Index), new { isSuccess = true });
     }
 
