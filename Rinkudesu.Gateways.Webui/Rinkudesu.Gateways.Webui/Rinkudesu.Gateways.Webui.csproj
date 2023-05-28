@@ -341,6 +341,38 @@
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>RegisterAccountViewModel.pl.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\UserSession\ForgotPassword.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>ForgotPassword.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\UserSession\ForgotPassword.pl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>ForgotPassword.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Models\Identity\ForgotPasswordViewModel.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>ForgotPasswordViewModel.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Models\Identity\ForgotPasswordViewModel.pl.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>ForgotPasswordViewModel.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\UserSession\ChangeForgottenPassword.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>ChangeForgottenPassword.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\UserSession\ChangeForgottenPassword.pl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>ChangeForgottenPassword.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Models\Identity\ChangeForgottenPassword.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>ChangeForgottenPassword.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Models\Identity\ChangeForgottenPassword.pl.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>ChangeForgottenPassword.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -718,6 +750,46 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>RegisterAccountViewModel.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\UserSession\ForgotPassword.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ForgotPassword.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\UserSession\ForgotPassword.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ForgotPassword.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Models\Identity\ForgotPasswordViewModel.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ForgotPasswordViewModel.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Models\Identity\ForgotPasswordViewModel.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ForgotPasswordViewModel.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\UserSession\ChangeForgottenPassword.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ChangeForgottenPassword.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\UserSession\ChangeForgottenPassword.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ChangeForgottenPassword.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Models\Identity\ChangeForgottenPassword.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ChangeForgottenPassword.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Models\Identity\ChangeForgottenPassword.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ChangeForgottenPassword.pl.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

@@ -21,4 +21,8 @@
     <data name="log-in" xml:space="preserve">
         <value>Zaloguj się</value>
     </data>
+    <data name="forgotPassword" xml:space="preserve">
+        <value>Zapomniałem hasła</value>
+        <comment>forgotPassword</comment>
+    </data>
 </root>

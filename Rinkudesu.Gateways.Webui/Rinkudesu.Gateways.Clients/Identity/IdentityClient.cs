@@ -163,6 +163,26 @@ public class IdentityClient : MicroserviceClient
         return response.IsSuccessStatusCode;
     }
 
+    public async Task<PasswordRecoveryDto?> ForgotPassword(ForgotPasswordDto dto, CancellationToken cancellationToken = default)
+    {
+        using var request = new HttpRequestMessage(HttpMethod.Post, "accountManagement/forgotPassword".ToUri())
+        {
+            Content = JsonContent.Create(dto),
+        };
+        using var response = await Client.SendAsync(request, cancellationToken).ConfigureAwait(false);
+        return await HandleMessageAndParseDto<PasswordRecoveryDto>(response, "password recovery", cancellationToken).ConfigureAwait(false);
+    }
+
+    public async Task<bool> ResetPassword(ChangeForgottenPasswordDto dto, CancellationToken cancellationToken = default)
+    {
+        using var request = new HttpRequestMessage(HttpMethod.Post, "accountManagement/resetPassword".ToUri())
+        {
+            Content = JsonContent.Create(dto),
+        };
+        using var response = await Client.SendAsync(request, cancellationToken).ConfigureAwait(false);
+        return response.IsSuccessStatusCode;
+    }
+
     private void EnsureIdentityCookieSet()
     {
         if (string.IsNullOrWhiteSpace(localIdentityCookie))
