@@ -16,10 +16,10 @@
     </div>
 }
 
-@await Html.PartialAsync("_ChangePasswordPartial", new PasswordChangeViewModel())
-<hr/>
 @await Html.PartialAsync("_LogOutEverywhere")
-<hr/>
-@await Html.PartialAsync("_DeleteAccount", new DeleteAccountViewModel())
-<hr/>
+<hr class="my-5"/>
+@await Html.PartialAsync("_ChangePasswordPartial", new PasswordChangeViewModel())
+<hr class="my-5"/>
 @await Html.PartialAsync("_ChangeEmail", new ChangeEmailViewModel())
+<hr class="my-5"/>
+@await Html.PartialAsync("_DeleteAccount", new DeleteAccountViewModel())
