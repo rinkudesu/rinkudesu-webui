@@ -18,7 +18,7 @@ services:
       TAGS_DB: "postgres://rinkudesu:rinkudesu@selenium-postgres-tags:5432/rinkudesu"
       TAGS_LOG-LEVEL: "info"
       GIN_MODE: "release"
-      TAGS_AUTHORITY: "http://selenium-rinkudesu-identity:5500/"
+      TAGS_AUTHORITY: "http://selenium-rinkudesu-identity/"
       RINKU_KAFKA_ADDRESS: "selenium-kafka:9092"
       RINKU_KAFKA_CLIENT_ID: "rinkudesu-tags"
       RINKU_KAFKA_CONSUMER_GROUP_ID: "rinkudesu-tags"
@@ -37,7 +37,7 @@ services:
         - selenium-rinkudesu-identity
       environment:
         RINKU_LINKS_CONNECTIONSTRING: "Server=selenium-postgres-links;Port=5432;Database=rinku-links;User Id=postgres;Password=rinkudesu;"
-        RINKUDESU_AUTHORITY: "http://selenium-rinkudesu-identity:5500/"
+        RINKUDESU_AUTHORITY: "http://selenium-rinkudesu-identity/"
         RINKU_KAFKA_ADDRESS: "selenium-kafka:9092"
         RINKU_KAFKA_CLIENT_ID: "rinkudesu-links"
         RINKU_KAFKA_CONSUMER_GROUP_ID: "rinkudesu-links"
@@ -63,7 +63,7 @@ services:
     volumes:
       - ./cert.pfx:/app/cert.pfx:ro
     environment:
-      RINKUDESU_AUTHORITY: "http://selenium-rinkudesu-identity:5500/"
+      RINKUDESU_AUTHORITY: "http://selenium-rinkudesu-identity/"
       RINKUDESU_CLIENTID: "rinkudesu"
       RINKUDESU_LINKS: "http://selenium-rinkudesu-links/api/"
       RINKUDESU_TAGS: "http://selenium-rinkudesu-tags:5000/api/v0/"
@@ -73,6 +73,7 @@ services:
       RINKUDESU_AUTHORITY_ALLOW_HTTP: 1
       ASPNETCORE_URLS: "http://0.0.0.0:80;https://0.0.0.0:443"
       RINKUDESU_REDIS_ADDRESS: selenium-redis:6379
+      RINKUDESU_IDENTITY: "http://selenium-rinkudesu-identity/api/v1/"
 
   selenium-postgres-identity:
     image: postgres:latest
@@ -84,13 +85,17 @@ services:
     restart: unless-stopped
     depends_on:
       - selenium-postgres-identity
-    ports:
-      - "127.0.0.1:80:80"
     environment:
       RINKU_IDENTITY_CONNECTIONSTRING: "Server=selenium-postgres-identity;Port=5432;Database=rinku-links;User Id=postgres;Password=postgres;"
-      RINKU_IDENTITY_BASEURL: http://rinkudesu-links/
+      RINKU_IDENTITY_BASEURL: http://selenium-rinkudesu-identity/
       RINKU_IDENTITY_REDIS: selenium-redis:6379
       RINKU_ARGON_SECRET: "replace with secure random string"
+      RINKU_KAFKA_ADDRESS: "selenium-kafka:9092"
+      RINKU_KAFKA_CLIENT_ID: "rinkudesu-identity"
+      RINKU_KAFKA_CONSUMER_GROUP_ID: "rinkudesu-identity"
+      RINKU_INITIAL_USER_EMAIL: "test@example.com"
+      RINKU_INITIAL_USER_PASSWORD: "qwertyuiop[]"
+      RINKUDESU_EMAIL_CONFIRMATION_DISABLED: "1"
     command:
       - "--applyMigrations"
   selenium-redis:
