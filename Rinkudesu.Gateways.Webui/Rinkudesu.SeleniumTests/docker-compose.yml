@@ -95,7 +95,10 @@ services:
       RINKU_KAFKA_CONSUMER_GROUP_ID: "rinkudesu-identity"
       RINKU_INITIAL_USER_EMAIL: "test@example.com"
       RINKU_INITIAL_USER_PASSWORD: "qwertyuiop[]"
+      RINKU_RSA_PASSWORD: "test"
       RINKUDESU_EMAIL_CONFIRMATION_DISABLED: "1"
+    volumes:
+      - ./JWK:/app/JWK:ro
     command:
       - "--applyMigrations"
   selenium-redis:
