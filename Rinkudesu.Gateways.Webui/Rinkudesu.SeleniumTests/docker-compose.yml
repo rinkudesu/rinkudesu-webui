@@ -97,6 +97,11 @@ services:
       RINKU_INITIAL_USER_PASSWORD: "qwertyuiop[]"
       RINKU_RSA_PASSWORD: "test"
       RINKUDESU_EMAIL_CONFIRMATION_DISABLED: "1"
+      RINKU_EMAIL_FROM: test@example.com
+      RINKU_EMAIL_HOST: localhost
+      RINKU_EMAIL_PASSWORD: test
+      RINKU_EMAIL_PORT: 2525
+      RINKU_EMAIL_USERNAME: test
     volumes:
       - ./JWK:/app/JWK:ro
     command:
