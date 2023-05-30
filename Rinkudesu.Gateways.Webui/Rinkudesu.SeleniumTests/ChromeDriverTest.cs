@@ -44,8 +44,7 @@ public abstract class ChromeDriverTest : IDisposable
         _driver.FindElement(locator).SendKeys(keys);
     }
 
-    //todo: test docker compose needs to reference identity now
-    protected void LogIn(string username = "test", string password = "1qazXSW@")
+    protected void LogIn(string username = "test@example.com", string password = "qwertyuiop[]")
     {
         GoTo();
         Click(By.Id("login_btn"));
