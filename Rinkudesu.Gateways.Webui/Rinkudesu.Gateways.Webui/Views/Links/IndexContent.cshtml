@@ -14,7 +14,7 @@
 {
     <div class="row mb-2 index-data-row">
         <div class="col user-data-display index-data-row-col">
-            @link.Title
+            <a href="@link.LinkUrl" rel="noopener" target="_blank">@Html.DisplayFor(_ => link.Title)</a>
         </div>
         <div class="col multiline-tags-container index-data-row-col">
             @foreach (var tag in link.LinkTags)
