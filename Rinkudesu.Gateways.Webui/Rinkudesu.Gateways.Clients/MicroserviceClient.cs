@@ -13,6 +13,11 @@ public abstract class MicroserviceClient
     protected ILogger<MicroserviceClient> Logger { get; }
     protected HttpClient Client { get; }
 
+    /// <summary>
+    /// Reads text returned from a microservice if the response code was not 2XX.
+    /// </summary>
+    public string? LastErrorReturned { get; private set; }
+
     protected MicroserviceClient(HttpClient client, ILogger<MicroserviceClient> logger)
     {
         Logger = logger;
@@ -23,6 +28,10 @@ public abstract class MicroserviceClient
     {
         if (!message.IsSuccessStatusCode)
         {
+            var response = await message.Content.ReadAsStringAsync(cancellationToken: token).ConfigureAwait(false);
+            if (!string.IsNullOrEmpty(response))
+                LastErrorReturned = response;
+
             if (message.StatusCode == HttpStatusCode.NotFound)
             {
                 Logger.LogInformation("Object in client {ClientName} with {LogId} not found", GetType().Name, logId);
