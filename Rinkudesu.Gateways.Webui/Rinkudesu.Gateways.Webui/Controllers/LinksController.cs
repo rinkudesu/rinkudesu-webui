@@ -95,7 +95,11 @@ namespace Rinkudesu.Gateways.Webui.Controllers
             await SetJwt();
             var isSuccess = await Client.CreateLink(newLink) is not null;
             if (!isSuccess)
-                this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri(), _localizer["unableToCreate"]);
+            {
+                if (Client.LastErrorReturned == "Link already exists")
+                    return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri(), _localizer["alreadyExists"]);
+                return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri(), _localizer["unableToCreate"]);
+            }
             return Redirect(nameof(Index));
         }
 
