@@ -38,4 +38,8 @@
         <value>Invalid Id value</value>
         <comment>invalidId</comment>
     </data>
+    <data name="alreadyExists" xml:space="preserve">
+        <value>This link already exists</value>
+        <comment>alreadyExists</comment>
+    </data>
 </root>
