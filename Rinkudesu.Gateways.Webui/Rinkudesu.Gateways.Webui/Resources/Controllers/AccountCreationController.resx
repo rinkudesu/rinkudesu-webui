@@ -30,4 +30,8 @@
         <value>Confirm email</value>
         <comment>click</comment>
     </data>
+    <data name="emailUsed" xml:space="preserve">
+        <value>You've requested account creation at Rinkudesu, but it appears your email is already used by someone. If that's you but you've forgotten about it, just use the "forgot password" feature. If you believe this account was not created by you, contact us immediately.</value>
+        <comment>emailUsed</comment>
+    </data>
 </root>
