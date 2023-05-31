@@ -41,9 +41,15 @@ public class AccountCreationController : Controller
 
         var result = await _client.RegisterAccount(_mapper.Map<RegisterAccountDto>(model));
         if (result is null)
-            return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri());
+        {
+            if (_client.LastErrorReturned == "Email already exists")
+                await _kafkaProducer.ProduceSendEmail(Guid.Empty, _localizer["welcome"], _localizer["emailUsed"], true, forceAnotherEmail: model.Email);
+            else
+                return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri());
+        }
+        else
+            await _kafkaProducer.ProduceSendEmail(result.UserId, _localizer["welcome"], _localizer["greetings"] + $"<a href='{HttpContext.GetBasePath()}{Url.Action(nameof(ConfirmEmail), new { result.UserId, result.EmailConfirmationToken })!.TrimStart('/')}'>{_localizer["click"]}</a>", true);
 
-        await _kafkaProducer.ProduceSendEmail(result.UserId, _localizer["welcome"], _localizer["greetings"] + $"<a href='{HttpContext.GetBasePath()}{Url.Action(nameof(ConfirmEmail), new { result.UserId, result.EmailConfirmationToken })!.TrimStart('/')}'>{_localizer["click"]}</a>", true);
         return View("AccountCreated");
     }
 

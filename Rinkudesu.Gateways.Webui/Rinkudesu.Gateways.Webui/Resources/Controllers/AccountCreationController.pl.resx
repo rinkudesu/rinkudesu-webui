@@ -30,4 +30,8 @@
         <value>Potwierdź email</value>
         <comment>click</comment>
     </data>
+    <data name="emailUsed" xml:space="preserve">
+        <value>Otrzymaliśmy prośbę o założenie konta w Rinkudesu, ale wygląda na to, że Twój adres email jest już używany. Jeśli to Ty, ale o tym zapomniałeś, po prostu użyj funkcjonalności "nie pamiętam hasła". Jeśli wydaje Ci się, że to konto nie zostało stworzone przez Ciebie, natychmiast się z nami skontaktuj.</value>
+        <comment>emailUsed</comment>
+    </data>
 </root>
