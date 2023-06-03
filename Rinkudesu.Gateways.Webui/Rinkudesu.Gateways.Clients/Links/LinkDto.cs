@@ -15,6 +15,14 @@ namespace Rinkudesu.Gateways.Clients.Links
         public LinkPrivacyOptionsDto PrivacyOptions { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime LastUpdate { get; set; }
+
+        public static string LimitQuickAddTitle(Uri uri, int maxLength = 50)
+        {
+            var title = $"{uri.Scheme}://{uri.Authority}/";
+            if (title.Length > maxLength)
+                return title[..maxLength];
+            return title;
+        }
     }
 
     public enum LinkPrivacyOptionsDto
