@@ -85,10 +85,10 @@ namespace Rinkudesu.Gateways.Webui.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> QuickCreate(Uri? url)
+        public async Task<IActionResult> QuickCreate(Uri? url, Uri returnUrl)
         {
             if (url is null)
-                return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri(), _localizer["missingUrl"]);
+                return this.ReturnBadRequest(returnUrl, _localizer["missingUrl"]);
 
             var newLink = new LinkDto { Title = url.ToString(), LinkUrl = url, PrivacyOptions = LinkPrivacyOptionsDto.Private };
 
@@ -97,10 +97,10 @@ namespace Rinkudesu.Gateways.Webui.Controllers
             if (!isSuccess)
             {
                 if (Client.LastErrorReturned == "Link already exists")
-                    return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri(), _localizer["alreadyExists"]);
-                return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri(), _localizer["unableToCreate"]);
+                    return this.ReturnBadRequest(returnUrl, _localizer["alreadyExists"]);
+                return this.ReturnBadRequest(returnUrl, _localizer["unableToCreate"]);
             }
-            return Redirect(nameof(Index));
+            return LocalRedirect(returnUrl.ToString());
         }
 
         [HttpPost]

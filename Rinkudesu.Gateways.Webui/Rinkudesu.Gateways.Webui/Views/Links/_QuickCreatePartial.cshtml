@@ -1,7 +1,9 @@
+@using Rinkudesu.Gateways.Webui.Utils
 @model Rinkudesu.Gateways.Webui.Models.LinkIndexViewModel
 @inject IViewLocalizer Localizer
 
 <form asp-action="QuickCreate" asp-antiforgery="true">
+    <input type="hidden" name="returnUrl" value="@Context.GetCurrentUrl()"/>
     <div class="mb-3 row">
         <div class="col-2">
             <label asp-for="LinkUrl" class="form-label"></label>
