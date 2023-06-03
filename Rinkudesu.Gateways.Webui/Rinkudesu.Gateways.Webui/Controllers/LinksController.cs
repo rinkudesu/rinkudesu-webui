@@ -90,7 +90,7 @@ namespace Rinkudesu.Gateways.Webui.Controllers
             if (url is null)
                 return this.ReturnBadRequest(returnUrl, _localizer["missingUrl"]);
 
-            var newLink = new LinkDto { Title = url.ToString(), LinkUrl = url, PrivacyOptions = LinkPrivacyOptionsDto.Private };
+            var newLink = new LinkDto { Title = LinkDto.LimitQuickAddTitle(url), LinkUrl = url, PrivacyOptions = LinkPrivacyOptionsDto.Private };
 
             await SetJwt();
             var isSuccess = await Client.CreateLink(newLink) is not null;
