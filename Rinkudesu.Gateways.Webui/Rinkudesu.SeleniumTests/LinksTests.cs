@@ -22,10 +22,10 @@ public class LinksTests : RinkudesuDataFilledTest
     }
 
     [Theory]
-    [InlineData("test", "url", "", new string[0])]
-    [InlineData("test", "url", "description", new string[0])]
-    [InlineData("test", "url", "description", new [] {"test1"})]
-    [InlineData("test", "url", "description", new [] {"test1", "test2"})]
+    [InlineData("test", "https://url/", "", new string[0])]
+    [InlineData("test", "https://url/", "description", new string[0])]
+    [InlineData("test", "https://url/", "description", new [] {"test1"})]
+    [InlineData("test", "https://url/", "description", new [] {"test1", "test2"})]
     public void CreateNewLink_NewLinkAdded(string linkName, string linkUrl, string linkDescription, string[] tagNames)
     {
         CreateLink(linkName, linkUrl, linkDescription, tagNames);
@@ -49,15 +49,15 @@ public class LinksTests : RinkudesuDataFilledTest
     [InlineData("this is a test")]
     public void CreateNewLink_DuplicateName(string linkName)
     {
-        CreateLink(linkName, linkName);
+        CreateLink(linkName, "https://" + linkName);
 
-        CreateLink(linkName, linkName);
+        CreateLink(linkName, "https://" + linkName);
 
         Assert.Equal("Bad request", GetDriver().FindElement(By.TagName("h1")).Text);
     }
 
     [Theory]
-    [InlineData("test1", "test2", "url1", "url2")]
+    [InlineData("test1", "test2", "https://url1/", "https://url2/")]
     public void EditLink_NameAndUrlChanged(string oldName, string newName, string oldUrl, string newUrl)
     {
         CreateLink(oldName, oldUrl);
@@ -76,7 +76,7 @@ public class LinksTests : RinkudesuDataFilledTest
     }
 
     [Theory]
-    [InlineData("test")]
+    [InlineData("https://test")]
     public void DeleteLink_DeletedProperly(string linkData)
     {
         CreateLink(linkData, linkData);
@@ -98,7 +98,7 @@ public class LinksTests : RinkudesuDataFilledTest
     {
         for (var i = 0; i < 30; i++)
         {
-            CreateLink($"{i}", $"{i}");
+            CreateLink($"{i}", $"https://{i}");
         }
         WaitForIndexLoad();
 
