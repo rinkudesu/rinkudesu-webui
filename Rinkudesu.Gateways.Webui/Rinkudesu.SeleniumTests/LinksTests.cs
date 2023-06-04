@@ -40,7 +40,7 @@ public class LinksTests : RinkudesuDataFilledTest
         {
             Assert.Contains(tagName, splitTags);
         }
-        linkColumns[^2].FindElement(By.TagName("a")).Click();
+        linkColumns[^1].FindElement(By.ClassName("btn-info")).Click();
         Assert.Equal(linkUrl, GetDriver().FindElement("LinkUrl".AsId()).GetAttribute("value"));
         Assert.Equal(linkDescription, GetDriver().FindElement("Description".AsId()).GetAttribute("value"));
     }
@@ -71,7 +71,7 @@ public class LinksTests : RinkudesuDataFilledTest
         Assert.Single(linkRows);
         var linkColumns = linkRows.Single().FindElements(By.ClassName("index-data-row-col"));
         Assert.Equal(newName, linkColumns.First().Text);
-        linkColumns[^2].FindElement(By.TagName("a")).Click();
+        linkColumns[^1].FindElement(By.ClassName("btn-info")).Click();
         Assert.Equal(newUrl, GetDriver().FindElement("LinkUrl".AsId()).GetAttribute("value"));
     }
 
@@ -128,7 +128,7 @@ public class LinksTests : RinkudesuDataFilledTest
         WaitForIndexLoad();
         var linkRows = GetDriver().FindElement("content".AsId()).FindElements(By.ClassName("index-data-row"));
         var linkColumns = linkRows.Single().FindElements(By.ClassName("index-data-row-col"));
-        linkColumns[^2].FindElement(By.TagName("a")).Click();
+        linkColumns[^1].FindElement(By.ClassName("btn-info")).Click();
     }
 
     private void WaitForIndexLoad() => WaitUntilNotVisible("loading_notice".AsId());
