@@ -29,7 +29,7 @@ function nextPage() {
 }
 
 function getCurrentItemCount() {
-    return contentDiv.getElementsByClassName('row').length;
+    return contentDiv.getElementsByClassName('index-data-row').length;
 }
 
 function handleWindowLocation() {
