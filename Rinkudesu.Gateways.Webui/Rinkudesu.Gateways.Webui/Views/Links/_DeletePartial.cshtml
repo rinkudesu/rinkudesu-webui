@@ -1,7 +1,7 @@
 @inject IViewLocalizer Localizer
 @model Rinkudesu.Gateways.Webui.Models.LinkIndexViewModel
 
-<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-@Model.Id.ToString()">
+<button type="button" class="btn btn-danger flex-fill" data-bs-toggle="modal" data-bs-target="#delete-@Model.Id.ToString()">
     @Localizer["delete"]
 </button>
 <div class="modal fade" id="delete-@Model.Id.ToString()" tabindex="-1" aria-labelledby="delete-label-@Model.Id.ToString()" aria-hidden="true">
