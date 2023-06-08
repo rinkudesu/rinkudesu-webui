@@ -47,13 +47,19 @@ public class TagsController : AccessTokenClientController<TagsClient>
     [HttpPost, ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind] TagDto newTag)
     {
+        var redirectUri = Url.ActionLink(nameof(Index))!.ToUri();
         if (!ModelState.IsValid)
-            return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri());
+            return this.ReturnBadRequest(redirectUri);
 
         await SetJwt();
         var isSuccess = await Client.CreateTag(newTag) is not null;
         if (!isSuccess)
-            return this.ReturnBadRequest(Url.ActionLink(nameof(Index))!.ToUri());
+        {
+            if (Client.LastErrorReturned == "Tag already exists")
+                return this.ReturnBadRequest(redirectUri, _localizer["tagExists"]);
+
+            return this.ReturnBadRequest(redirectUri);
+        }
         return Redirect(nameof(Index));
     }
 
