@@ -389,6 +389,14 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>_ChangeEmail.pl.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Controllers\TagsController.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>TagsController.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Controllers\TagsController.pl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>TagsController.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -826,6 +834,16 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>_ChangeEmail.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Controllers\TagsController.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>TagsController.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Controllers\TagsController.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>TagsController.pl.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 
