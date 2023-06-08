@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Rinkudesu.Gateways.Clients.Tags;
 using Rinkudesu.Gateways.Utils;
 using Rinkudesu.Gateways.Webui.Models;
@@ -16,9 +17,12 @@ namespace Rinkudesu.Gateways.Webui.Controllers;
 public class TagsController : AccessTokenClientController<TagsClient>
 {
     private readonly IMapper _mapper;
-    public TagsController(TagsClient client, IMapper mapper) : base(client)
+    private readonly IStringLocalizer<TagsController> _localizer;
+
+    public TagsController(TagsClient client, IMapper mapper, IStringLocalizer<TagsController> localizer) : base(client)
     {
         _mapper = mapper;
+        _localizer = localizer;
     }
 
     [HttpGet]
@@ -78,7 +82,12 @@ public class TagsController : AccessTokenClientController<TagsClient>
         var result = await Client.Edit(id, editTag, cancellationToken);
 
         if (!result)
+        {
+            if (Client.LastErrorReturned == "Tag already exists")
+                return this.ReturnBadRequest(returnUrl, _localizer["tagExists"]);
+
             return this.ReturnNotFound(returnUrl);
+        }
         return LocalRedirect(returnUrl.ToString());
     }
 
