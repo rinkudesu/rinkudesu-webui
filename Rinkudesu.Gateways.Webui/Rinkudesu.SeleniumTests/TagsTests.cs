@@ -60,6 +60,23 @@ public class TagsTests : RinkudesuDataFilledTest
     }
 
     [Theory]
+    [InlineData("test1", "test2")]
+    public void EditTag_NewNameAlreadyExists_ReturnsError(string originalName, string duplicateName)
+    {
+        CreateTag(originalName);
+        CreateTag(duplicateName);
+        WaitForIndexLoad();
+
+        var tagRows = GetDriver().FindElement("content".AsId()).FindElements(By.ClassName("index-data-row"));
+        tagRows.First(t => t.FindElement(By.ClassName("tag-background-pill-text")).Text == originalName).FindElements(By.ClassName("col")).Last().FindElements(By.TagName("a")).First(a => a.Text == "Edit").Click();
+        FillTextBox("Name".AsId(), duplicateName, true);
+        GetDriver().FindElements(By.ClassName("btn-primary")).Last().Click();
+
+        var h1 = GetDriver().FindElement(By.TagName("h1"));
+        Assert.Equal("Bad request", h1.Text);
+    }
+
+    [Theory]
     [InlineData("this is a test")]
     public void DeleteTag_DeletedProperly(string tagName)
     {
