@@ -1,0 +1,67 @@
+@model System.Collections.Generic.List<Rinkudesu.Gateways.Clients.Identity.UserAdminDetailsDto>
+@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = Localizer["users"];
+    Layout = "_Layout";
+}
+
+<h2>@Localizer["users"]</h2>
+
+@foreach (var user in Model)
+{
+    <div class="row border my-2 p-1">
+        <div class="col-9">
+            <div class="row">
+                <div class="col-12 mb-2 text-break">
+                    <strong>@Html.DisplayFor(_ => user.Email)</strong>
+                </div>
+
+                <div class="col-12 col-lg-4 d-flex">
+                    @if (user.EmailConfirmed)
+                    {
+                        <div class="flex-fill bg-success text-center text-break"><span>@Localizer["emailConfirmed"]</span></div>
+                    }
+                    else
+                    {
+                        <div class="flex-fill bg-warning text-center text-break"><span>@Localizer["emailNotConfirmed"]</span></div>
+                    }
+                </div>
+                <div class="col-12 col-lg-4 d-flex">
+                    @if (user.TwoFactorEnabled)
+                    {
+                        <div class="flex-fill bg-success text-center text-break"><span>@Localizer["twoFactorEnabled"]</span></div>
+                    }
+                    else
+                    {
+                        <div class="flex-fill bg-warning text-center text-break"><span>@Localizer["twoFactorNotEnabled"]</span></div>
+                    }
+                </div>
+                @if (user.AccountLockedOut)
+                {
+                    <div class="col-12 col-lg-4 d-flex">
+                        <div class="flex-fill bg-warning text-center text-break"><span>@Localizer["accountLocked"]</span></div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="row">
+                @*todo: this is a list of placeholder buttons to handle later*@
+                <div class="col-12 col-lg-6">
+                    <button>Make admin</button>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <button>delete</button>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <button>lock/unlock</button>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <button>More</button>@*Re-send confirmation email, force confirm account, force disable 2fa,...*@
+                </div>
+            </div>
+        </div>
+    </div>
+}
