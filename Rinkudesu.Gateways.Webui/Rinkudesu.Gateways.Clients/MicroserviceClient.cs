@@ -28,9 +28,7 @@ public abstract class MicroserviceClient
     {
         if (!message.IsSuccessStatusCode)
         {
-            var response = await message.Content.ReadAsStringAsync(cancellationToken: token).ConfigureAwait(false);
-            if (!string.IsNullOrEmpty(response))
-                LastErrorReturned = response;
+            await SetLastErrorIfAny(message, token).ConfigureAwait(false);
 
             if (message.StatusCode == HttpStatusCode.NotFound)
             {
@@ -59,5 +57,12 @@ public abstract class MicroserviceClient
     {
         var message = JsonSerializer.Serialize(dto, CommonSettings.JsonOptions);
         return new StringContent(message, Encoding.UTF8, "application/json");
+    }
+
+    protected async Task SetLastErrorIfAny(HttpResponseMessage responseMessage, CancellationToken token)
+    {
+        var response = await responseMessage.Content.ReadAsStringAsync(cancellationToken: token).ConfigureAwait(false);
+        if (!string.IsNullOrEmpty(response))
+            LastErrorReturned = response;
     }
 }

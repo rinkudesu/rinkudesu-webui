@@ -96,6 +96,7 @@ public class TagsClient : AccessTokenClient
             var response = await Client.PutAsync("tags".ToUri(), content, token).ConfigureAwait(false);
             if (response.IsSuccessStatusCode) return true;
 
+            await SetLastErrorIfAny(response, token).ConfigureAwait(false);
             Logger.LogWarning("Unable to edit tag with id {Id}. Response code was '{StatusCode}'.", id.ToString(), response.StatusCode);
             return false;
         }
