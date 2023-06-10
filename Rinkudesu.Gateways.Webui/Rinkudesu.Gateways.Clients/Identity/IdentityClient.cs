@@ -207,10 +207,10 @@ public class IdentityClient : MicroserviceClient
         return response.IsSuccessStatusCode;
     }
 
-    public async Task<List<UserAdminDetailsDto>?> GetUsersAdmin(CancellationToken cancellationToken = default)
+    public async Task<List<UserAdminDetailsDto>?> GetUsersAdmin(UserAdminIndexQueryDto queryModel, CancellationToken cancellationToken = default)
     {
         EnsureIdentityCookieSet();
-        using var request = new HttpRequestMessage(HttpMethod.Get, "accountAdmin".ToUri());
+        using var request = new HttpRequestMessage(HttpMethod.Get, $"accountAdmin{queryModel.GetQueryString()}".ToUri());
         AppendIdentityToRequest(request);
         using var response = await Client.SendAsync(request, cancellationToken: cancellationToken).ConfigureAwait(false);
         return await HandleMessageAndParseDto<List<UserAdminDetailsDto>>(response, "user list", cancellationToken).ConfigureAwait(false);
