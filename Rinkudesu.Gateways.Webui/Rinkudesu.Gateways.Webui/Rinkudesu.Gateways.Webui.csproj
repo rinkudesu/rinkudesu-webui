@@ -405,6 +405,14 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Index.pl.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\AccountAdmin\IndexContent.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>IndexContent.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\AccountAdmin\IndexContent.pl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>IndexContent.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -862,6 +870,16 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>Index.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\AccountAdmin\IndexContent.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>IndexContent.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\AccountAdmin\IndexContent.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>IndexContent.pl.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

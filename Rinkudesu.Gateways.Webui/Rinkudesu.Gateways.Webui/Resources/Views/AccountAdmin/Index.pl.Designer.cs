@@ -45,39 +45,33 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.AccountAdmin {
             }
         }
         
-        internal static string emailConfirmed {
-            get {
-                return ResourceManager.GetString("emailConfirmed", resourceCulture);
-            }
-        }
-        
         internal static string users {
             get {
                 return ResourceManager.GetString("users", resourceCulture);
             }
         }
         
-        internal static string emailNotConfirmed {
+        internal static string data_load_failed {
             get {
-                return ResourceManager.GetString("emailNotConfirmed", resourceCulture);
+                return ResourceManager.GetString("data-load-failed", resourceCulture);
             }
         }
         
-        internal static string twoFactorEnabled {
+        internal static string loading {
             get {
-                return ResourceManager.GetString("twoFactorEnabled", resourceCulture);
+                return ResourceManager.GetString("loading", resourceCulture);
             }
         }
         
-        internal static string twoFactorNotEnabled {
+        internal static string previous {
             get {
-                return ResourceManager.GetString("twoFactorNotEnabled", resourceCulture);
+                return ResourceManager.GetString("previous", resourceCulture);
             }
         }
         
-        internal static string accountLocked {
+        internal static string next {
             get {
-                return ResourceManager.GetString("accountLocked", resourceCulture);
+                return ResourceManager.GetString("next", resourceCulture);
             }
         }
     }

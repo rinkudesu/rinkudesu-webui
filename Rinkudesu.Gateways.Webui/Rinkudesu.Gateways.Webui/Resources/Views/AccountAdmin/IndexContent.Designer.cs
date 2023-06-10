@@ -14,21 +14,21 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.AccountAdmin {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Index {
+    internal class IndexContent {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Index() {
+        internal IndexContent() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Views.AccountAdmin.Index", typeof(Index).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Views.AccountAdmin.IndexContent", typeof(IndexContent).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -45,33 +45,33 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.AccountAdmin {
             }
         }
         
-        internal static string users {
+        internal static string accountLocked {
             get {
-                return ResourceManager.GetString("users", resourceCulture);
+                return ResourceManager.GetString("accountLocked", resourceCulture);
             }
         }
         
-        internal static string data_load_failed {
+        internal static string twoFactorNotEnabled {
             get {
-                return ResourceManager.GetString("data-load-failed", resourceCulture);
+                return ResourceManager.GetString("twoFactorNotEnabled", resourceCulture);
             }
         }
         
-        internal static string loading {
+        internal static string emailConfirmed {
             get {
-                return ResourceManager.GetString("loading", resourceCulture);
+                return ResourceManager.GetString("emailConfirmed", resourceCulture);
             }
         }
         
-        internal static string previous {
+        internal static string emailNotConfirmed {
             get {
-                return ResourceManager.GetString("previous", resourceCulture);
+                return ResourceManager.GetString("emailNotConfirmed", resourceCulture);
             }
         }
         
-        internal static string next {
+        internal static string twoFactorEnabled {
             get {
-                return ResourceManager.GetString("next", resourceCulture);
+                return ResourceManager.GetString("twoFactorEnabled", resourceCulture);
             }
         }
     }
