@@ -421,6 +421,14 @@
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>UserAdminIndexQueryViewModel.pl.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\AccountAdmin\_FilterPartial.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_FilterPartial.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\AccountAdmin\_FilterPartial.pl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_FilterPartial.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -898,6 +906,16 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>UserAdminIndexQueryViewModel.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\AccountAdmin\_FilterPartial.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_FilterPartial.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\AccountAdmin\_FilterPartial.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_FilterPartial.pl.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

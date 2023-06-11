@@ -10,8 +10,10 @@
 }
 
 <span hidden id="translations" data-load-failed="@Localizer["data-load-failed"]"></span>
-
 <h2>@Localizer["users"]</h2>
+
+@await Html.PartialAsync("_FilterPartial", Model)
+
 <div id="content">
     <span hidden id="query" data-value="@queryJson"></span>
     <span id="loading_notice">@Localizer["loading"]...</span>

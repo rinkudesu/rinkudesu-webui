@@ -1,0 +1,47 @@
+@model UserAdminIndexQueryViewModel
+@inject IViewLocalizer Localizer
+
+<form class="d-inline" asp-action="Index" method="get" asp-antiforgery="false">
+    <div class="row mt-4">
+        <div class="col-2 d-flex mb-2">
+            <label class="d-block flex-fill my-auto" asp-for="EmailContains"></label>
+        </div>
+        <div class="col-10 mb-2">
+            <input class="form-control" asp-for="EmailContains"/>
+        </div>
+
+        <div class="col-12 mb-2 col-sm-2 mb-sm-0 d-flex">
+            <div class="flex-fill my-auto">
+                <label class="form-check-label align-middle" asp-for="IsAdmin"></label>
+                <input class="form-check-input" type="checkbox" asp-for="IsAdmin">
+            </div>
+        </div>
+
+        <div class="col-4 col-sm-2 d-flex">
+            <label class="d-block flex-fill my-auto text-start text-sm-end" asp-for="EmailConfirmed"></label>
+        </div>
+        <div class="col-8 mb-2 col-sm-4 mb-sm-0">
+            <select asp-for="EmailConfirmed" class="form-control">
+                @if (Model.EmailConfirmed.HasValue)
+                {
+                    <option selected hidden value="@Model.EmailConfirmed?.ToString()">@Localizer[Model.GetEmailConfirmedDisplayLocalisationKey()]</option>
+                }
+                <option value="">@Localizer["emailConfirmedNull"]</option>
+                <option value="True">@Localizer["emailConfirmedTrue"]</option>
+                <option value="False">@Localizer["emailConfirmedFalse"]</option>
+            </select>
+        </div>
+
+        <div class="col-12 mb-2 col-sm-2 mb-sm-0 d-flex">
+            <div class="flex-fill my-auto">
+                <label class="form-check-label align-middle" asp-for="LockedOnly"></label>
+                <input class="form-check-input" type="checkbox" asp-for="LockedOnly">
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2 mb-4">
+        <div class="offset-0 offset-sm-10 col-12 col-sm-2 d-flex">
+            <input class="flex-fill btn btn-primary text-wrap" type="submit" value="@Localizer["search"]"/>
+        </div>
+    </div>
+</form>
