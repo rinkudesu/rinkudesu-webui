@@ -413,6 +413,14 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>IndexContent.pl.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Models\Identity\UserAdminIndexQueryViewModel.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>UserAdminIndexQueryViewModel.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Models\Identity\UserAdminIndexQueryViewModel.pl.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>UserAdminIndexQueryViewModel.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -880,6 +888,16 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>IndexContent.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Models\Identity\UserAdminIndexQueryViewModel.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>UserAdminIndexQueryViewModel.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Models\Identity\UserAdminIndexQueryViewModel.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>UserAdminIndexQueryViewModel.pl.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 
