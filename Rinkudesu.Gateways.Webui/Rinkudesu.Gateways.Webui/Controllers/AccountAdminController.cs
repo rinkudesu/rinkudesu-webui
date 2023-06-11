@@ -24,13 +24,13 @@ public class AccountAdminController : Controller
     }
 
     [HttpGet]
-    public IActionResult Index([FromQuery] UserAdminIndexQueryModel query)
+    public IActionResult Index([FromQuery] UserAdminIndexQueryViewModel query)
     {
         return View(query);
     }
 
     [HttpGet]
-    public async Task<ActionResult> IndexContent([FromQuery] UserAdminIndexQueryModel query, Uri returnUrl, CancellationToken cancellationToken)
+    public async Task<ActionResult> IndexContent([FromQuery] UserAdminIndexQueryViewModel query, Uri returnUrl, CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid)
             return BadRequest("Provided query is not valid.");

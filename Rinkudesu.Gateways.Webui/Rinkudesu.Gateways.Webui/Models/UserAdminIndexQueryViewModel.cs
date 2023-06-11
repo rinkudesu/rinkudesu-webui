@@ -7,7 +7,7 @@ namespace Rinkudesu.Gateways.Webui.Models;
 [SuppressMessage("Performance", "CA1819:Properties should not return arrays")]
 [BindProperties(SupportsGet = true)]
 [ExcludeFromCodeCoverage]
-public class UserAdminIndexQueryModel
+public class UserAdminIndexQueryViewModel
 {
     public SortOptions SortOption { get; set; }
     [Range(0, int.MaxValue)]

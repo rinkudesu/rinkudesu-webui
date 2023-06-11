@@ -3,7 +3,7 @@
 @model System.Collections.Generic.List<Rinkudesu.Gateways.Webui.Models.UserAdminDetailsViewModel>
 @inject IViewLocalizer Localizer
 @{
-    var query = (UserAdminIndexQueryModel)ViewBag.Query;
+    var query = (UserAdminIndexQueryViewModel)ViewBag.Query;
     var queryJson = JsonSerializer.Serialize(query, new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull });
 }
 
