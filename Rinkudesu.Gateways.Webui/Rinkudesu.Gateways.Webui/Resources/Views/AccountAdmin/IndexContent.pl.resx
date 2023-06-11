@@ -38,4 +38,8 @@
         <value>2FA włączone</value>
         <comment>twoFactorEnabled</comment>
     </data>
+    <data name="admin" xml:space="preserve">
+        <value>Użytkownik ma prawa administratora</value>
+        <comment>admin</comment>
+    </data>
 </root>

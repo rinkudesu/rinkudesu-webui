@@ -38,4 +38,8 @@
         <value>Two factor enabled</value>
         <comment>twoFactorEnabled</comment>
     </data>
+    <data name="admin" xml:space="preserve">
+        <value>User has admin privileges</value>
+        <comment>admin</comment>
+    </data>
 </root>

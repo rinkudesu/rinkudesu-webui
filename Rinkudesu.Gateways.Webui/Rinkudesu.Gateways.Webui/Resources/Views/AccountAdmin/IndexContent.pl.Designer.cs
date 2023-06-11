@@ -74,5 +74,11 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.AccountAdmin {
                 return ResourceManager.GetString("twoFactorEnabled", resourceCulture);
             }
         }
+        
+        internal static string admin {
+            get {
+                return ResourceManager.GetString("admin", resourceCulture);
+            }
+        }
     }
 }
