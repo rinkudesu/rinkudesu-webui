@@ -7,28 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Rinkudesu.Gateways.Webui.Resources.Views.Shared {
+namespace Rinkudesu.Gateways.Webui.Resources.Models.Identity {
     using System;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class _Layout {
+    public class UserAdminIndexQueryViewModel {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal _Layout() {
+        internal UserAdminIndexQueryViewModel() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static System.Resources.ResourceManager ResourceManager {
+        public static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Views.Shared._Layout", typeof(_Layout).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Models.Identity.UserAdminIndexQueryViewModel", typeof(UserAdminIndexQueryViewModel).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -36,7 +36,7 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Shared {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static System.Globalization.CultureInfo Culture {
+        public static System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -45,39 +45,33 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Shared {
             }
         }
         
-        internal static string privacy {
+        public static string sortOptions {
             get {
-                return ResourceManager.GetString("privacy", resourceCulture);
+                return ResourceManager.GetString("sortOptions", resourceCulture);
             }
         }
         
-        internal static string home {
+        public static string emailContains {
             get {
-                return ResourceManager.GetString("home", resourceCulture);
+                return ResourceManager.GetString("emailContains", resourceCulture);
             }
         }
         
-        internal static string links {
+        public static string isAdmin {
             get {
-                return ResourceManager.GetString("links", resourceCulture);
+                return ResourceManager.GetString("isAdmin", resourceCulture);
             }
         }
         
-        internal static string tags {
+        public static string emailConfirmed {
             get {
-                return ResourceManager.GetString("tags", resourceCulture);
+                return ResourceManager.GetString("emailConfirmed", resourceCulture);
             }
         }
         
-        internal static string accountAdmin {
+        public static string lockedOnly {
             get {
-                return ResourceManager.GetString("accountAdmin", resourceCulture);
-            }
-        }
-        
-        internal static string admin {
-            get {
-                return ResourceManager.GetString("admin", resourceCulture);
+                return ResourceManager.GetString("lockedOnly", resourceCulture);
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <root>
     <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
@@ -18,26 +18,20 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="privacy" xml:space="preserve">
-        <value>Privacy</value>
+    <data name="emailConfirmedNull" xml:space="preserve">
+        <value>Wszystkie</value>
+        <comment>emailConfirmedNull</comment>
     </data>
-    <data name="home" xml:space="preserve">
-        <value>Home</value>
+    <data name="emailConfirmedTrue" xml:space="preserve">
+        <value>Tylko potwierdzone</value>
+        <comment>emailConfirmedTrue</comment>
     </data>
-    <data name="links" xml:space="preserve">
-        <value>Links</value>
-        <comment>links</comment>
+    <data name="emailConfirmedFalse" xml:space="preserve">
+        <value>Tylko niepotwierdzone</value>
+        <comment>emailConfirmedFalse</comment>
     </data>
-    <data name="tags" xml:space="preserve">
-        <value>Tags</value>
-        <comment>tags</comment>
-    </data>
-    <data name="accountAdmin" xml:space="preserve">
-        <value>User accounts</value>
-        <comment>accountAdmin</comment>
-    </data>
-    <data name="admin" xml:space="preserve">
-        <value>Admin options</value>
-        <comment>admin</comment>
+    <data name="search" xml:space="preserve">
+        <value>Filtruj</value>
+        <comment>search</comment>
     </data>
 </root>

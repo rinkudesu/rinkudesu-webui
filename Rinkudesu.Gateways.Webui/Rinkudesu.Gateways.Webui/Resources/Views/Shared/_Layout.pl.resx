@@ -32,4 +32,12 @@
         <value>Tagi</value>
         <comment>tags</comment>
     </data>
+    <data name="accountAdmin" xml:space="preserve">
+        <value>Konta użytkowników</value>
+        <comment>accountAdmin</comment>
+    </data>
+    <data name="admin" xml:space="preserve">
+        <value>Opcje administratora</value>
+        <comment>admin</comment>
+    </data>
 </root>

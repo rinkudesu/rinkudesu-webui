@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <root>
     <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
@@ -18,26 +18,19 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="privacy" xml:space="preserve">
-        <value>Privacy</value>
+    <data name="emailConfirmed" xml:space="preserve">
+        <value>Email potwierdzony</value>
     </data>
-    <data name="home" xml:space="preserve">
-        <value>Home</value>
+    <data name="emailContains" xml:space="preserve">
+        <value>Adres email</value>
     </data>
-    <data name="links" xml:space="preserve">
-        <value>Links</value>
-        <comment>links</comment>
+    <data name="isAdmin" xml:space="preserve">
+        <value>Tylko administratorzy</value>
     </data>
-    <data name="tags" xml:space="preserve">
-        <value>Tags</value>
-        <comment>tags</comment>
+    <data name="lockedOnly" xml:space="preserve">
+        <value>Tylko zablokowane</value>
     </data>
-    <data name="accountAdmin" xml:space="preserve">
-        <value>User accounts</value>
-        <comment>accountAdmin</comment>
-    </data>
-    <data name="admin" xml:space="preserve">
-        <value>Admin options</value>
-        <comment>admin</comment>
+    <data name="sortOptions" xml:space="preserve">
+        <value>Sortowanie</value>
     </data>
 </root>

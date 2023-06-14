@@ -31,6 +31,22 @@ public abstract class RinkudesuDataFilledTest : ChromeDriverTest
         Click("link_create_submit".AsId());
     }
 
+    // Note that right now there's no way to actually remove new users, so use this method with caution until then.
+    protected void RegisterUser(string email, string password = "qwertyuiop[]")
+    {
+        LogOut();
+        GoTo("/");
+
+        Click("register_btn".AsId());
+        FillTextBox("Email".AsId(), email);
+        FillTextBox("Password".AsId(), password);
+        FillTextBox("PasswordRepeat".AsId(), password);
+        GetDriver().FindElement(By.ClassName("btn-success")).Click();
+
+        if (GetDriver().FindElement(By.TagName("h2")).Text != "Account created")
+            throw new InvalidOperationException("User creation has failed");
+    }
+
     protected void RemoveData()
     {
         // remove all links

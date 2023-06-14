@@ -1,0 +1,29 @@
+@using System.Text.Json
+@using System.Text.Json.Serialization
+@model UserAdminIndexQueryViewModel
+@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = Localizer["users"];
+    Layout = "_Layout";
+    var queryJson = JsonSerializer.Serialize(Model, new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull });
+}
+
+<span hidden id="translations" data-load-failed="@Localizer["data-load-failed"]"></span>
+<h2>@Localizer["users"]</h2>
+
+@await Html.PartialAsync("_FilterPartial", Model)
+
+<div id="content">
+    <span hidden id="query" data-value="@queryJson"></span>
+    <span id="loading_notice">@Localizer["loading"]...</span>
+</div>
+<div class="row" id="page-selection">
+    <div class="col-4">
+        <a id="page-prev" class="page-changer previous btn">@Localizer["previous"]</a>
+        <a id="page-next" class="page-changer next btn">@Localizer["next"]</a>
+    </div>
+</div>
+
+<script src="~/js/dynamicContentLoader.js" asp-append-version="true"></script>
+<script src="~/js/accountAdminContentLoader.js" asp-append-version="true"></script>

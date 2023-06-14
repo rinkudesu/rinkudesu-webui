@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.DevTools.V114.CSS;
 using OpenQA.Selenium.Support.UI;
 using Rinkudesu.SeleniumTests.Utils;
 
@@ -53,6 +54,16 @@ public abstract class ChromeDriverTest : IDisposable
         Click(By.Id("login_submit"));
     }
 
+    protected bool LogOut()
+    {
+        var logOutBtn = GetDriver().FindElements("log-out-submit".AsId()).FirstOrDefault();
+        if (logOutBtn is null)
+            return false;
+
+        logOutBtn.Click();
+        return true;
+    }
+
     protected void ScrollTo(IWebElement element) => _driver.ExecuteScript("arguments[0].scrollIntoView()", element);
 
     // controlId cannot be By as it needs to be appended before use
@@ -69,6 +80,12 @@ public abstract class ChromeDriverTest : IDisposable
             validOption?.Click();
         }
         UnfocusControls();
+    }
+
+    protected void SelectFromGenericDropdown(By element, Action<SelectElement> valueSelector)
+    {
+        var select = new SelectElement(GetDriver().FindElement(element));
+        valueSelector(select);
     }
 
     protected void WaitUntilVisible(By locator)

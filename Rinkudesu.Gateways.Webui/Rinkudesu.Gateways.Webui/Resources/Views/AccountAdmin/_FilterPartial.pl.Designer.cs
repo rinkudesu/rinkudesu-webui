@@ -7,28 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Rinkudesu.Gateways.Webui.Resources.Views.Shared {
+namespace Rinkudesu.Gateways.Webui.Resources.Views.AccountAdmin {
     using System;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class _Layout {
+    internal class _FilterPartial_pl {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal _Layout() {
+        internal _FilterPartial_pl() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Views.Shared._Layout", typeof(_Layout).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Views.AccountAdmin._FilterPartial_pl", typeof(_FilterPartial_pl).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -45,39 +45,27 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Shared {
             }
         }
         
-        internal static string privacy {
+        internal static string emailConfirmedNull {
             get {
-                return ResourceManager.GetString("privacy", resourceCulture);
+                return ResourceManager.GetString("emailConfirmedNull", resourceCulture);
             }
         }
         
-        internal static string home {
+        internal static string emailConfirmedTrue {
             get {
-                return ResourceManager.GetString("home", resourceCulture);
+                return ResourceManager.GetString("emailConfirmedTrue", resourceCulture);
             }
         }
         
-        internal static string links {
+        internal static string emailConfirmedFalse {
             get {
-                return ResourceManager.GetString("links", resourceCulture);
+                return ResourceManager.GetString("emailConfirmedFalse", resourceCulture);
             }
         }
         
-        internal static string tags {
+        internal static string search {
             get {
-                return ResourceManager.GetString("tags", resourceCulture);
-            }
-        }
-        
-        internal static string accountAdmin {
-            get {
-                return ResourceManager.GetString("accountAdmin", resourceCulture);
-            }
-        }
-        
-        internal static string admin {
-            get {
-                return ResourceManager.GetString("admin", resourceCulture);
+                return ResourceManager.GetString("search", resourceCulture);
             }
         }
     }

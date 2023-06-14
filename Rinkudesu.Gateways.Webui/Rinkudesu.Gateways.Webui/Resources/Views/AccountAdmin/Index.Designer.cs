@@ -7,28 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Rinkudesu.Gateways.Webui.Resources.Views.Shared {
+namespace Rinkudesu.Gateways.Webui.Resources.Views.AccountAdmin {
     using System;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class _Layout {
+    internal class Index {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal _Layout() {
+        internal Index() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Views.Shared._Layout", typeof(_Layout).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Rinkudesu.Gateways.Webui.Resources.Views.AccountAdmin.Index", typeof(Index).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -45,39 +45,33 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.Shared {
             }
         }
         
-        internal static string privacy {
+        internal static string users {
             get {
-                return ResourceManager.GetString("privacy", resourceCulture);
+                return ResourceManager.GetString("users", resourceCulture);
             }
         }
         
-        internal static string home {
+        internal static string data_load_failed {
             get {
-                return ResourceManager.GetString("home", resourceCulture);
+                return ResourceManager.GetString("data-load-failed", resourceCulture);
             }
         }
         
-        internal static string links {
+        internal static string loading {
             get {
-                return ResourceManager.GetString("links", resourceCulture);
+                return ResourceManager.GetString("loading", resourceCulture);
             }
         }
         
-        internal static string tags {
+        internal static string previous {
             get {
-                return ResourceManager.GetString("tags", resourceCulture);
+                return ResourceManager.GetString("previous", resourceCulture);
             }
         }
         
-        internal static string accountAdmin {
+        internal static string next {
             get {
-                return ResourceManager.GetString("accountAdmin", resourceCulture);
-            }
-        }
-        
-        internal static string admin {
-            get {
-                return ResourceManager.GetString("admin", resourceCulture);
+                return ResourceManager.GetString("next", resourceCulture);
             }
         }
     }
