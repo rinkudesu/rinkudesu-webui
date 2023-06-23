@@ -57,4 +57,15 @@ public class AccountAdminController : Controller
             return this.ReturnBadRequest(returnUrl);
         return RedirectToAction(nameof(Index), new UserAdminIndexQueryViewModel { EmailContains = model.Email });
     }
+
+    [HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteAccount(Guid userId, Uri returnUrl, CancellationToken cancellationToken)
+    {
+        if (userId == Guid.Empty)
+            return this.ReturnBadRequest(returnUrl);
+
+        var result = await _identityClient.ReadIdentityCookie(Request).AdminDeleteUser(userId, cancellationToken);
+
+        return result ? LocalRedirect(returnUrl.ToString()) : this.ReturnBadRequest(returnUrl);
+    }
 }

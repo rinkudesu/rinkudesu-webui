@@ -78,5 +78,17 @@ public abstract class RinkudesuDataFilledTest : ChromeDriverTest
             var reallyDeleteBtn = GetDriver().FindElement(By.CssSelector(".modal.fade.show")).FindElements(By.TagName("input")).First(i => i.GetAttribute("type") == "submit");
             reallyDeleteBtn?.Click();
         }
+        GoTo("AccountAdmin");
+        while (true)
+        {
+            WaitUntilNotVisible("loading_notice".AsId());
+            var deleteBtn = GetDriver().FindElements(By.ClassName("index-data-row")).FirstOrDefault(r => !r.GetAttribute("class").Contains("my-account"))?.FindElements(By.CssSelector(".btn.btn-danger")).FirstOrDefault(b => b.GetAttribute("data-bs-target").StartsWith("#delete"));
+            if (deleteBtn is null)
+                break;
+            deleteBtn.Click();
+            WaitUntilVisible(By.CssSelector(".modal.fade.show"));
+            var reallyDeleteBtn = GetDriver().FindElement(By.CssSelector(".modal.fade.show")).FindElements(By.TagName("input")).First(i => i.GetAttribute("type") == "submit");
+            reallyDeleteBtn?.Click();
+        }
     }
 }

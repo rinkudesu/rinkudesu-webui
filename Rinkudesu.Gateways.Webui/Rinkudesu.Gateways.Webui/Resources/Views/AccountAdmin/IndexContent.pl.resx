@@ -42,4 +42,16 @@
         <value>Użytkownik ma prawa administratora</value>
         <comment>admin</comment>
     </data>
+    <data name="delete" xml:space="preserve">
+        <value>Usuń</value>
+        <comment>delete</comment>
+    </data>
+    <data name="userDelete" xml:space="preserve">
+        <value>Usuń</value>
+        <comment>userDelete</comment>
+    </data>
+    <data name="confirm" xml:space="preserve">
+        <value>Potwierdzam</value>
+        <comment>confirm</comment>
+    </data>
 </root>
