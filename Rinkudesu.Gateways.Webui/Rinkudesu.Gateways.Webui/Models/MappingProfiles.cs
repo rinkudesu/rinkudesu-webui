@@ -24,6 +24,7 @@ namespace Rinkudesu.Gateways.Webui.Models
             CreateMap<ChangeEmailViewModel, ChangeEmailDto>();
             CreateMap<UserAdminIndexQueryViewModel, UserAdminIndexQueryDto>();
             CreateMap<UserAdminDetailsDto, UserAdminDetailsViewModel>();
+            CreateMap<AdminAccountCreateViewModel, AdminAccountCreateDto>();
         }
     }
 }

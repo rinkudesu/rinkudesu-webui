@@ -1,0 +1,47 @@
+@using Rinkudesu.Gateways.Webui.Utils
+@model AdminAccountCreateViewModel
+@inject IViewLocalizer Localizer
+
+<div class="row my-3">
+    <div class="col-2">
+        <button type="button" class="btn btn-dark" data-bs-toggle="modal" id="showCreateAccount" data-bs-target="#createAccount">
+            @Localizer["newUser"]
+        </button>
+    </div>
+</div>
+
+<div class="modal fade" id="createAccount" tabindex="-1" aria-labelledby="#createAccountLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createAccountLabel">@Localizer["newUser"]</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-action="CreateUser" asp-antiforgery="true">
+                <input type="hidden" name="returnUrl" value="@Context.GetCurrentUrl()"/>
+                <div class="modal-body">
+                    <div class="row my-1">
+                        <div class="col-12 col-sm-4">
+                            <label asp-for="Email"></label>
+                        </div>
+                        <div class="col-12 col-sm-8">
+                            <input class="form-control" asp-for="Email"/>
+                        </div>
+                    </div>
+
+                    <div class="row my-1">
+                        <div class="col-12 col-sm-4">
+                            <label asp-for="Password"></label>
+                        </div>
+                        <div class="col-12 col-sm-8">
+                            <input class="form-control" asp-for="Password" placeholder="@Localizer["emptyPasswordPlaceholder"]"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="@Localizer["createUser"]"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

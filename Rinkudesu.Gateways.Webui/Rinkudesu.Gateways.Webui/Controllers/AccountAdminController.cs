@@ -43,4 +43,18 @@ public class AccountAdminController : Controller
         ViewData["Query"] = query;
         return PartialView(_mapper.Map<List<UserAdminDetailsViewModel>>(users));
     }
+
+    [HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> CreateUser([Bind] AdminAccountCreateViewModel model, Uri returnUrl, CancellationToken cancellationToken)
+    {
+        if (!ModelState.IsValid)
+            return this.ReturnBadRequest(returnUrl);
+
+        var dto = _mapper.Map<AdminAccountCreateDto>(model);
+        var response = await _identityClient.ReadIdentityCookie(Request).CreateUser(dto, cancellationToken);
+
+        if (response is null)
+            return this.ReturnBadRequest(returnUrl);
+        return RedirectToAction(nameof(Index), new UserAdminIndexQueryViewModel { EmailContains = model.Email });
+    }
 }
