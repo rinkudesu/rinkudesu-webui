@@ -96,6 +96,24 @@ public class AccountAdminTests : RinkudesuDataFilledTest
         Assert.Contains(email, emails);
     }
 
+    [Fact]
+    public void DeleteUserAccount_AccountRemoved()
+    {
+        var emailToRemove = _users[0];
+        WaitForIndexLoad();
+
+        var deleteBtn = GetDriver().FindElements(By.ClassName("index-data-row")).FirstOrDefault(r => r.Text.Contains(emailToRemove))?.FindElements(By.CssSelector(".btn.btn-danger")).FirstOrDefault(b => b.GetAttribute("data-bs-target").StartsWith("#delete"));
+        Assert.NotNull(deleteBtn);
+        deleteBtn.Click();
+        WaitUntilVisible(By.CssSelector(".modal.fade.show"));
+        var reallyDeleteBtn = GetDriver().FindElement(By.CssSelector(".modal.fade.show")).FindElements(By.TagName("input")).First(i => i.GetAttribute("type") == "submit");
+        Assert.NotNull(reallyDeleteBtn);
+        reallyDeleteBtn.Click();
+
+        var emails = GetEmailsDisplayed();
+        Assert.DoesNotContain(emailToRemove, emails);
+    }
+
     private int GetUserCount()
         => GetDriver().FindElements(By.ClassName("index-data-row")).Count;
 
