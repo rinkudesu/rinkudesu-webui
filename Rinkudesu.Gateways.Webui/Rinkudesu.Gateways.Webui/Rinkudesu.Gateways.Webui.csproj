@@ -429,6 +429,22 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>_FilterPartial.pl.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Models\Identity\AdminAccountCreateViewModel.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>AdminAccountCreateViewModel.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Models\Identity\AdminAccountCreateViewModel.pl.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>AdminAccountCreateViewModel.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\AccountAdmin\_CreateAccount.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_CreateAccount.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\AccountAdmin\_CreateAccount.pl.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_CreateAccount.pl.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -916,6 +932,26 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>_FilterPartial.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Models\Identity\AdminAccountCreateViewModel.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>AdminAccountCreateViewModel.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Models\Identity\AdminAccountCreateViewModel.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>AdminAccountCreateViewModel.pl.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\AccountAdmin\_CreateAccount.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_CreateAccount.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\AccountAdmin\_CreateAccount.pl.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_CreateAccount.pl.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

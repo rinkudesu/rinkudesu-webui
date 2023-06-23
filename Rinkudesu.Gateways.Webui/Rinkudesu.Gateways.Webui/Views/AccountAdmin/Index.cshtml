@@ -12,6 +12,8 @@
 <span hidden id="translations" data-load-failed="@Localizer["data-load-failed"]"></span>
 <h2>@Localizer["users"]</h2>
 
+@await Html.PartialAsync("_CreateAccount", new AdminAccountCreateViewModel())
+
 @await Html.PartialAsync("_FilterPartial", Model)
 
 <div id="content">
