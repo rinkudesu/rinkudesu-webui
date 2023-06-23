@@ -11,7 +11,8 @@
 <span hidden id="query" data-value="@queryJson"></span>
 @foreach (var user in Model)
 {
-    <div class="row border my-2 p-1 index-data-row">
+    var selfClass = user.Email == User.Identity?.Name ? "my-account" : string.Empty;
+    <div class="row border my-2 p-1 index-data-row @selfClass">
         <div class="col-9">
             <div class="row">
                 <div class="col-12 mb-2 text-break">

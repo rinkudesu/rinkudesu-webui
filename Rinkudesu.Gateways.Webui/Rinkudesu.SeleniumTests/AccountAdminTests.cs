@@ -80,8 +80,7 @@ public class AccountAdminTests : RinkudesuDataFilledTest
         Assert.Equal("test@example.com", emails.Single());
     }
 
-    //todo: remove this skip
-    [Theory(Skip = "will fail without the ability to remove users first")]
+    [Theory]
     [InlineData("userCreationTest@localhost")]
     public void CreateUserAccount_AccountAddedAndDisplayed(string email)
     {
