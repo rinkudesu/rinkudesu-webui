@@ -80,5 +80,23 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.AccountAdmin {
                 return ResourceManager.GetString("admin", resourceCulture);
             }
         }
+        
+        internal static string delete {
+            get {
+                return ResourceManager.GetString("delete", resourceCulture);
+            }
+        }
+        
+        internal static string userDelete {
+            get {
+                return ResourceManager.GetString("userDelete", resourceCulture);
+            }
+        }
+        
+        internal static string confirm {
+            get {
+                return ResourceManager.GetString("confirm", resourceCulture);
+            }
+        }
     }
 }

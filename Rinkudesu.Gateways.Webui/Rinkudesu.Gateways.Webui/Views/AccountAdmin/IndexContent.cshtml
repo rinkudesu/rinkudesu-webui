@@ -1,5 +1,6 @@
 @using System.Text.Json
 @using System.Text.Json.Serialization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model System.Collections.Generic.List<Rinkudesu.Gateways.Webui.Models.UserAdminDetailsViewModel>
 @inject IViewLocalizer Localizer
 @{
@@ -53,16 +54,35 @@
         <div class="col-3">
             <div class="row">
                 @*todo: this is a list of placeholder buttons to handle later*@
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-6 my-1">
                     <button>Make admin</button>
                 </div>
-                <div class="col-12 col-lg-6">
-                    <button>delete</button>
+
+                <div class="col-12 col-lg-6 my-1 d-flex">
+                    <button class="btn btn-danger flex-fill" data-bs-toggle="modal" id="delete-user-@user.Id.ToString()" data-bs-target="#delete-user-modal-@user.Id.ToString()">@Localizer["delete"]</button>
+                    <div class="modal fade" id="delete-user-modal-@user.Id.ToString()" tabindex="-1" aria-labelledby="#delete-user-label-@user.Id.ToString()" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="delete-user-label-@user.Id.ToString()">@Localizer["userDelete"] @Html.DisplayFor(_ => user.Email)</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form asp-action="DeleteAccount" asp-antiforgery="true">
+                                    <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl"/>
+                                    <input type="hidden" name="userId" value="@user.Id.ToString()"/>
+                                    <div class="modal-footer">
+                                        <input id="user-@user.Id.ToString()-remove-submit" type="submit" class="btn btn-danger" value="@Localizer["confirm"]"/>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-12 col-lg-6">
+
+                <div class="col-12 col-lg-6 my-1">
                     <button>lock/unlock</button>
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-6 my-1">
                     <button>More</button>@*Re-send confirmation email, force confirm account, force disable 2fa,...*@
                 </div>
             </div>

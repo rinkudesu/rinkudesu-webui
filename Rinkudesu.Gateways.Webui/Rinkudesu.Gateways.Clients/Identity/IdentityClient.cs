@@ -228,6 +228,15 @@ public class IdentityClient : MicroserviceClient
         return await HandleMessageAndParseDto<UserAdminDetailsDto>(response, "user creation", cancellationToken).ConfigureAwait(false);
     }
 
+    public async Task<bool> AdminDeleteUser(Guid userId, CancellationToken cancellationToken = default)
+    {
+        EnsureIdentityCookieSet();
+        using var request = new HttpRequestMessage(HttpMethod.Delete, $"accountAdmin/{userId.ToString()}".ToUri());
+        AppendIdentityToRequest(request);
+        using var response = await Client.SendAsync(request, cancellationToken: cancellationToken).ConfigureAwait(false);
+        return response.IsSuccessStatusCode;
+    }
+
     private void EnsureIdentityCookieSet()
     {
         if (string.IsNullOrWhiteSpace(localIdentityCookie))

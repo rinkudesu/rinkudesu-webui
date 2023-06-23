@@ -42,4 +42,16 @@
         <value>User has admin privileges</value>
         <comment>admin</comment>
     </data>
+    <data name="delete" xml:space="preserve">
+        <value>Delete</value>
+        <comment>delete</comment>
+    </data>
+    <data name="userDelete" xml:space="preserve">
+        <value>Delete</value>
+        <comment>userDelete</comment>
+    </data>
+    <data name="confirm" xml:space="preserve">
+        <value>Confirm</value>
+        <comment>confirm</comment>
+    </data>
 </root>
