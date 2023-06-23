@@ -80,6 +80,23 @@ public class AccountAdminTests : RinkudesuDataFilledTest
         Assert.Equal("test@example.com", emails.Single());
     }
 
+    //todo: remove this skip
+    [Theory(Skip = "will fail without the ability to remove users first")]
+    [InlineData("userCreationTest@localhost")]
+    public void CreateUserAccount_AccountAddedAndDisplayed(string email)
+    {
+        Click("showCreateAccount".AsId());
+
+        WaitUntilVisible("Email".AsId());
+        FillTextBox("Email".AsId(), email);
+        Click("admin-account-create-submit".AsId());
+
+        WaitForIndexLoad();
+        var emails = GetEmailsDisplayed();
+        Assert.Single(emails);
+        Assert.Contains(email, emails);
+    }
+
     private int GetUserCount()
         => GetDriver().FindElements(By.ClassName("index-data-row")).Count;
 
