@@ -114,6 +114,29 @@ public class AccountAdminTests : RinkudesuDataFilledTest
         Assert.DoesNotContain(emailToRemove, emails);
     }
 
+    [Fact]
+    public void ToggleAdminRole_ChangesToAdminAndBack()
+    {
+        var emailToModify = _users[0];
+        WaitForIndexLoad();
+
+        var adminBtn = GetDriver().FindElements(By.ClassName("index-data-row")).FirstOrDefault(r => r.Text.Contains(emailToModify))?.FindElements(By.CssSelector(".btn.btn-warning")).FirstOrDefault(b => b.GetAttribute("value").Contains("Admin toggle"));
+        Assert.NotNull(adminBtn);
+        adminBtn.Click();
+        WaitForIndexLoad();
+
+        var changedAccount = GetDriver().FindElements(By.ClassName("index-data-row")).FirstOrDefault(r => r.Text.Contains(emailToModify));
+        Assert.NotNull(changedAccount?.FindElements(By.TagName("i")).FirstOrDefault());
+
+        adminBtn = GetDriver().FindElements(By.ClassName("index-data-row")).FirstOrDefault(r => r.Text.Contains(emailToModify))?.FindElements(By.CssSelector(".btn.btn-warning")).FirstOrDefault(b => b.GetAttribute("value").Contains("Admin toggle"));
+        Assert.NotNull(adminBtn);
+        adminBtn.Click();
+        WaitForIndexLoad();
+
+        changedAccount = GetDriver().FindElements(By.ClassName("index-data-row")).FirstOrDefault(r => r.Text.Contains(emailToModify));
+        Assert.Null(changedAccount?.FindElements(By.TagName("i")).FirstOrDefault());
+    }
+
     private int GetUserCount()
         => GetDriver().FindElements(By.ClassName("index-data-row")).Count;
 
