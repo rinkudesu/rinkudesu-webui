@@ -54,4 +54,8 @@
         <value>Confirm</value>
         <comment>confirm</comment>
     </data>
+    <data name="adminToggle" xml:space="preserve">
+        <value>Admin toggle</value>
+        <comment>adminToggle</comment>
+    </data>
 </root>

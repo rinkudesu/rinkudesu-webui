@@ -68,4 +68,16 @@ public class AccountAdminController : Controller
 
         return result ? LocalRedirect(returnUrl.ToString()) : this.ReturnBadRequest(returnUrl);
     }
+
+    [HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> ToggleAdmin(Guid userId, bool assignAdmin, Uri returnUrl, CancellationToken cancellationToken)
+    {
+        if (userId == Guid.Empty)
+            return this.ReturnBadRequest(returnUrl);
+
+        var result = await _identityClient.ReadIdentityCookie(Request)
+            .ModifyUser(userId, new AdminUserModificationDto { Admin = assignAdmin }, cancellationToken);
+
+        return result is null ? this.ReturnBadRequest(returnUrl) : LocalRedirect(returnUrl.ToString());
+    }
 }

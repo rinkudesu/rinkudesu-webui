@@ -98,5 +98,11 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.AccountAdmin {
                 return ResourceManager.GetString("confirm", resourceCulture);
             }
         }
+        
+        internal static string adminToggle {
+            get {
+                return ResourceManager.GetString("adminToggle", resourceCulture);
+            }
+        }
     }
 }

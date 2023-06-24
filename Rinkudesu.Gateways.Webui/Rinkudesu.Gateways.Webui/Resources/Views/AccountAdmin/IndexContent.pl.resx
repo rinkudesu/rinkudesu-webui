@@ -54,4 +54,8 @@
         <value>Potwierdzam</value>
         <comment>confirm</comment>
     </data>
+    <data name="adminToggle" xml:space="preserve">
+        <value>Przełącz admina</value>
+        <comment>adminToggle</comment>
+    </data>
 </root>
