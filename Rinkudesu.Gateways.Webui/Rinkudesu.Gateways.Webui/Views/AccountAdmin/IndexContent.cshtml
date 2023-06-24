@@ -55,8 +55,13 @@
         <div class="col-3">
             <div class="row">
                 @*todo: this is a list of placeholder buttons to handle later*@
-                <div class="col-12 col-lg-6 my-1">
-                    <button>Make admin</button>
+                <div class="col-12 col-lg-6 my-1 d-flex">
+                    <form class="flex-fill d-flex" asp-action="ToggleAdmin" asp-antiforgery="true">
+                        <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl"/>
+                        <input type="hidden" name="assignAdmin" value="@((!user.IsAdmin).ToString())"/>
+                        <input type="hidden" name="userId" value="@user.Id.ToString()"/>
+                        <input type="submit" class="btn btn-warning flex-fill" value="@Localizer["adminToggle"]"/>
+                    </form>
                 </div>
 
                 <div class="col-12 col-lg-6 my-1 d-flex">

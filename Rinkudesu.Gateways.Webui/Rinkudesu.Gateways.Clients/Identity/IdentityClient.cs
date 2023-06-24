@@ -237,6 +237,18 @@ public class IdentityClient : MicroserviceClient
         return response.IsSuccessStatusCode;
     }
 
+    public async Task<UserAdminDetailsDto?> ModifyUser(Guid userId, AdminUserModificationDto userModification, CancellationToken cancellationToken = default)
+    {
+        EnsureIdentityCookieSet();
+        using var request = new HttpRequestMessage(HttpMethod.Put, $"accountAdmin/{userId.ToString()}".ToUri())
+        {
+            Content = JsonContent.Create(userModification),
+        };
+        AppendIdentityToRequest(request);
+        using var response = await Client.SendAsync(request, cancellationToken).ConfigureAwait(false);
+        return await HandleMessageAndParseDto<UserAdminDetailsDto>(response, userId.ToString(), cancellationToken).ConfigureAwait(false);
+    }
+
     private void EnsureIdentityCookieSet()
     {
         if (string.IsNullOrWhiteSpace(localIdentityCookie))
