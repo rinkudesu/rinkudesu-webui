@@ -104,5 +104,11 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.AccountAdmin {
                 return ResourceManager.GetString("adminToggle", resourceCulture);
             }
         }
+        
+        internal static string lockedToggle {
+            get {
+                return ResourceManager.GetString("lockedToggle", resourceCulture);
+            }
+        }
     }
 }

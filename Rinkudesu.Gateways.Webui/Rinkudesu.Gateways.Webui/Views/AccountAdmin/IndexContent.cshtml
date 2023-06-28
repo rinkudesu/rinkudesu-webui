@@ -45,7 +45,7 @@
                 </div>
                 @if (user.AccountLockedOut)
                 {
-                    <div class="col-12 col-lg-4 d-flex">
+                    <div class="col-12 col-lg-4 d-flex" id="account-locked-box">
                         <div class="flex-fill bg-warning text-center text-break"><span>@Localizer["accountLocked"]</span></div>
                     </div>
                 }
@@ -85,9 +85,15 @@
                     </div>
                 </div>
 
-                <div class="col-12 col-lg-6 my-1">
-                    <button>lock/unlock</button>
+                <div class="col-12 col-lg-6 my-1 d-flex">
+                    <form class="flex-fill d-flex" asp-action="ToggleLockedState" asp-antiforgery="true">
+                        <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl"/>
+                        <input type="hidden" name="locked" value="@((!user.AccountLockedOut).ToString())"/>
+                        <input type="hidden" name="userId" value="@user.Id.ToString()"/>
+                        <input type="submit" class="btn btn-dark flex-fill" value="@Localizer["lockedToggle"]"/>
+                    </form>
                 </div>
+
                 <div class="col-12 col-lg-6 my-1">
                     <button>More</button>@*Re-send confirmation email, force confirm account, force disable 2fa,...*@
                 </div>

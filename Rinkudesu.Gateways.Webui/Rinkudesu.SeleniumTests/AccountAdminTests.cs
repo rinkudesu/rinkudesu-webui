@@ -137,6 +137,29 @@ public class AccountAdminTests : RinkudesuDataFilledTest
         Assert.Null(changedAccount?.FindElements(By.TagName("i")).FirstOrDefault());
     }
 
+    [Fact]
+    public void ToggleLocked_AccountLocksAndUnlocks()
+    {
+        var emailToModify = _users[0];
+        WaitForIndexLoad();
+
+        var lockBtn = GetDriver().FindElements(By.ClassName("index-data-row")).FirstOrDefault(r => r.Text.Contains(emailToModify))?.FindElements(By.CssSelector(".btn.btn-dark")).FirstOrDefault(b => b.GetAttribute("value").Contains("Locked toggle"));
+        Assert.NotNull(lockBtn);
+        lockBtn.Click();
+        WaitForIndexLoad();
+
+        var changedAccount = GetDriver().FindElements(By.ClassName("index-data-row")).FirstOrDefault(r => r.Text.Contains(emailToModify));
+        Assert.NotNull(changedAccount?.FindElements("account-locked-box".AsId()).FirstOrDefault());
+
+        lockBtn = GetDriver().FindElements(By.ClassName("index-data-row")).FirstOrDefault(r => r.Text.Contains(emailToModify))?.FindElements(By.CssSelector(".btn.btn-dark")).FirstOrDefault(b => b.GetAttribute("value").Contains("Locked toggle"));
+        Assert.NotNull(lockBtn);
+        lockBtn.Click();
+        WaitForIndexLoad();
+
+        changedAccount = GetDriver().FindElements(By.ClassName("index-data-row")).FirstOrDefault(r => r.Text.Contains(emailToModify));
+        Assert.Null(changedAccount?.FindElements("account-locked-box".AsId()).FirstOrDefault());
+    }
+
     private int GetUserCount()
         => GetDriver().FindElements(By.ClassName("index-data-row")).Count;
 
@@ -146,6 +169,6 @@ public class AccountAdminTests : RinkudesuDataFilledTest
     private void SubmitFilter()
         => Click("filter-submit".AsId());
 
-    private HashSet<string> GetEmailsDisplayed()
-        => GetDriver().FindElements(By.TagName("strong")).Select(s => s.Text).ToHashSet();
+        private HashSet<string> GetEmailsDisplayed()
+            => GetDriver().FindElements(By.TagName("strong")).Select(s => s.Text).ToHashSet();
 }

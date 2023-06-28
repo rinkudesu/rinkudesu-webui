@@ -80,4 +80,16 @@ public class AccountAdminController : Controller
 
         return result is null ? this.ReturnBadRequest(returnUrl) : LocalRedirect(returnUrl.ToString());
     }
+
+    [HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> ToggleLockedState(Guid userId, bool locked, Uri returnUrl, CancellationToken cancellationToken)
+    {
+        if (userId == Guid.Empty)
+            return this.ReturnBadRequest(returnUrl);
+
+        var result = await _identityClient.ReadIdentityCookie(Request)
+            .ModifyUser(userId, new AdminUserModificationDto { Locked = locked }, cancellationToken).ConfigureAwait(false);
+
+        return result is null ? this.ReturnBadRequest(returnUrl) : LocalRedirect(returnUrl.ToString());
+    }
 }
