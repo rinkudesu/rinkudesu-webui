@@ -58,4 +58,8 @@
         <value>Admin toggle</value>
         <comment>adminToggle</comment>
     </data>
+    <data name="lockedToggle" xml:space="preserve">
+        <value>Locked toggle</value>
+        <comment>lockedToggle</comment>
+    </data>
 </root>

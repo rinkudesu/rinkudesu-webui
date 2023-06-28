@@ -58,4 +58,8 @@
         <value>Przełącz admina</value>
         <comment>adminToggle</comment>
     </data>
+    <data name="lockedToggle" xml:space="preserve">
+        <value>Przełącz zablokowanie</value>
+        <comment>lockedToggle</comment>
+    </data>
 </root>

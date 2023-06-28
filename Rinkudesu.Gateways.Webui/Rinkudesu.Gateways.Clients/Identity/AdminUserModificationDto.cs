@@ -6,4 +6,5 @@ namespace Rinkudesu.Gateways.Clients.Identity;
 public class AdminUserModificationDto
 {
     public bool? Admin { get; set; }
+    public bool? Locked { get; set; }
 }
