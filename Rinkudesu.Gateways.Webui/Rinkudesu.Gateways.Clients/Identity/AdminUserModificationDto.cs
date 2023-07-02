@@ -7,4 +7,5 @@ public class AdminUserModificationDto
 {
     public bool? Admin { get; set; }
     public bool? Locked { get; set; }
+    public bool? EmailConfirmed { get; set; }
 }

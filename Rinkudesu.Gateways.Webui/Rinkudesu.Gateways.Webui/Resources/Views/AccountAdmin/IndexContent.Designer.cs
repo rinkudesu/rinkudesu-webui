@@ -110,5 +110,17 @@ namespace Rinkudesu.Gateways.Webui.Resources.Views.AccountAdmin {
                 return ResourceManager.GetString("lockedToggle", resourceCulture);
             }
         }
+        
+        internal static string emailConfirmedToggle {
+            get {
+                return ResourceManager.GetString("emailConfirmedToggle", resourceCulture);
+            }
+        }
+        
+        internal static string more {
+            get {
+                return ResourceManager.GetString("more", resourceCulture);
+            }
+        }
     }
 }

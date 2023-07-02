@@ -54,7 +54,6 @@
 
         <div class="col-3">
             <div class="row">
-                @*todo: this is a list of placeholder buttons to handle later*@
                 <div class="col-12 col-lg-6 my-1 d-flex">
                     <form class="flex-fill d-flex" asp-action="ToggleAdmin" asp-antiforgery="true">
                         <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl"/>
@@ -94,8 +93,22 @@
                     </form>
                 </div>
 
-                <div class="col-12 col-lg-6 my-1">
-                    <button>More</button>@*Re-send confirmation email, force confirm account, force disable 2fa,...*@
+                <div class="col-12 col-lg-6 my-1 d-flex">
+                    <div class="dropdown d-flex flex-fill">
+                        <button class="btn btn-secondary dropdown-toggle flex-fill" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            @Localizer["more"]
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <form class="flex-fill d-flex" asp-action="ToggleEmailConfirmed" asp-antiforgery="true">
+                                    <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl"/>
+                                    <input type="hidden" name="confirmed" value="@((!user.EmailConfirmed).ToString())"/>
+                                    <input type="hidden" name="userId" value="@user.Id.ToString()"/>
+                                    <input type="submit" class="dropdown-item" value="@Localizer["emailConfirmedToggle"]"/>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
