@@ -62,4 +62,12 @@
         <value>Locked toggle</value>
         <comment>lockedToggle</comment>
     </data>
+    <data name="emailConfirmedToggle" xml:space="preserve">
+        <value>Toggle email confirmed</value>
+        <comment>emailConfirmedToggle</comment>
+    </data>
+    <data name="more" xml:space="preserve">
+        <value>More</value>
+        <comment>more</comment>
+    </data>
 </root>

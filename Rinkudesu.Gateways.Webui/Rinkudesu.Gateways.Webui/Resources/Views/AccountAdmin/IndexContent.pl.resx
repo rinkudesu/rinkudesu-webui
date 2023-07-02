@@ -62,4 +62,12 @@
         <value>Przełącz zablokowanie</value>
         <comment>lockedToggle</comment>
     </data>
+    <data name="emailConfirmedToggle" xml:space="preserve">
+        <value>Przełącz potwierdzenie maila</value>
+        <comment>emailConfirmedToggle</comment>
+    </data>
+    <data name="more" xml:space="preserve">
+        <value>Więcej</value>
+        <comment>more</comment>
+    </data>
 </root>
