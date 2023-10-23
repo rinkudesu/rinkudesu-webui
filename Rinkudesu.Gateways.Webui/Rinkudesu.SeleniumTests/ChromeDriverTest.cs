@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.DevTools.V114.CSS;
 using OpenQA.Selenium.Support.UI;
 using Rinkudesu.SeleniumTests.Utils;
 
