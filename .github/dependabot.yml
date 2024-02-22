@@ -1,12 +1,12 @@
-version: 2
-updates:
-  - package-ecosystem: "nuget" # See documentation for possible values
-    directory: "/Rinkudesu.Gateways.Webui" # Location of package manifests
-    schedule:
-      interval: "monthly"
+#version: 2
+#updates:
+#  - package-ecosystem: "nuget" # See documentation for possible values
+#    directory: "/Rinkudesu.Gateways.Webui" # Location of package manifests
+#    schedule:
+#      interval: "monthly"
 
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
+#  - package-ecosystem: "github-actions"
+#    directory: "/"
+#    schedule:
       # Check for updates to GitHub Actions every weekday
-      interval: "monthly"
+#      interval: "monthly"
